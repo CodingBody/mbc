@@ -5,6 +5,7 @@ import MenuBookIcon from "@material-ui/icons/MenuBook";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import { withRouter } from "react-router-dom";
+import { Button } from "./../../styled-component/Button";
 
 const Container = styled.div`
   height: 100vh;
@@ -107,27 +108,6 @@ const TextField = styled.div`
     :focus {
       border: 2px solid #5a56c1d6;
       outline: none;
-    }
-  }
-`;
-
-const Button = styled.div`
-  margin: 8px 0;
-
-  button {
-    padding: 13px;
-    font-size: 1.5rem;
-    width: 100%;
-    background-color: ${(props) => props.color};
-    transition: background-color 0.3s;
-    color: ${(props) => (props.color ? "#fff" : null)};
-    border: none;
-    outline: none;
-    cursor: pointer;
-
-    :hover {
-      background-color: ${(props) =>
-        props.color === "#505f6d" ? "#485663" : "#dcdcdc"};
     }
   }
 `;
@@ -293,11 +273,15 @@ const HomePage = ({ history }) => {
             </CheckBox>
           </Form>
         </form>
-        <Button onClick={handleSubmit} color="#505f6d">
-          <button>Sign In</button>
+        <Button
+          onClick={() => history.push("/dashboard/mbc")}
+          bg="#505f6d"
+          color="#fff"
+        >
+          Sign In
         </Button>
-        <Button>
-          <button color="#eee">Don't have any service? Sign Up</button>
+        <Button bg="#fff" color="#000">
+          Don't have any service? Sign Up
         </Button>
       </FormContainer>
     </Container>

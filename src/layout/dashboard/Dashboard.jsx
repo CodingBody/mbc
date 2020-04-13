@@ -2,27 +2,22 @@ import React from "react";
 import styled from "styled-components";
 import Navbar from "../../component/navbar/Navbar";
 import Header from "./../../component/header/Header";
+import Board from "./../../component/board/Board";
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: repeat(11, 1fr);
+  grid-template-columns: ${(props) =>
+    props.shrink ? "25px 25px 50px" : "repeat(13, 1fr)"};
   grid-template-rows: 50px calc(100vh - 50px);
-  /* grid-template-areas:
-    "header header header header header header header header header"
-    "navbar board board board board board board board board"; */
-`;
-
-const Board = styled.div`
-  background: #d9d9d9;
-  grid-column: 3 / 12;
 `;
 
 const Dashboard = () => {
+  const [shrink, setShrink] = React.useState(false);
   return (
-    <Container>
-      <Header />
-      <Navbar />
-      <Board>ddddddd</Board>
+    <Container shrink={shrink ? "shrink" : null}>
+      <Header shrink={shrink} setShrink={setShrink} />
+      <Navbar shrink={shrink} />
+      <Board />
     </Container>
   );
 };

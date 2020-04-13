@@ -1,19 +1,65 @@
+import React from "react";
+import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
+import VideocamIcon from "@material-ui/icons/Videocam";
+import LanguageIcon from "@material-ui/icons/Language";
+import ControlCameraIcon from "@material-ui/icons/ControlCamera";
+import CategoryIcon from "@material-ui/icons/Category";
+import MovieFilterIcon from "@material-ui/icons/MovieFilter";
+import DateRangeIcon from "@material-ui/icons/DateRange";
+import { v4 as uuidv4 } from "uuid";
+
 export const navbarItem = [
-  { link: "Home", subLink: ["CP Present Condition"] },
-  { link: "CP", subLink: ["Store Present Condition"] },
-  { link: "Store", subLink: null },
-  { link: "Machine", subLink: null },
-  { link: "Category", subLink: null },
-  { link: "Content", subLink: null },
-  { link: "Program Table", subLink: null },
-  { link: "App User", subLink: null },
-  { link: "App Manage", subLink: ["Event Banner", "Notice", "Artist"] },
-  { link: "Asset Upload", subLink: ["Asset VOD", "Asset Image", "Asset File"] },
+  {
+    link: "Home",
+    icon: <HomeOutlinedIcon />,
+    id: uuidv4(),
+  },
+  {
+    link: "CP",
+    icon: <VideocamIcon />,
+    id: uuidv4(),
+    subLink: ["CP Present Condition"],
+  },
+  {
+    link: "Store",
+    icon: <LanguageIcon />,
+    id: uuidv4(),
+    subLink: ["Store Present Condition"],
+  },
+  { link: "Machine", icon: <ControlCameraIcon />, id: uuidv4(), subLink: null },
+  { link: "Category", icon: <CategoryIcon />, id: uuidv4(), subLink: null },
+  { link: "Content", icon: <MovieFilterIcon />, id: uuidv4(), subLink: null },
+  {
+    link: "Program Table",
+    icon: <DateRangeIcon />,
+    id: uuidv4(),
+    subLink: null,
+  },
+  { link: "App User", icon: <DateRangeIcon />, id: uuidv4(), subLink: null },
+  {
+    link: "App Manage",
+    icon: <DateRangeIcon />,
+    id: uuidv4(),
+    subLink: ["Event Banner", "Notice", "Artist"],
+  },
+  {
+    link: "Asset Upload",
+    icon: <DateRangeIcon />,
+    id: uuidv4(),
+    subLink: ["Asset VOD", "Asset Image", "Asset File"],
+  },
   {
     link: "Statistics",
+    icon: <DateRangeIcon />,
+    id: uuidv4(),
+
     subLink: ["Rack", "Login Statistics", "Content Statistics"],
   },
-  { link: "Log Manage", subLink: null },
-  { link: "Admonistration", subLink: null },
-  { link: "Home", subLink: null },
+  { link: "Log Manage", icon: <DateRangeIcon />, id: uuidv4(), subLink: null },
+  {
+    link: "Administration",
+    icon: <DateRangeIcon />,
+    id: uuidv4(),
+    subLink: null,
+  },
 ];

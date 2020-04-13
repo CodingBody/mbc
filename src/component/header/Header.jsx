@@ -1,22 +1,61 @@
 import React from "react";
 import styled from "styled-components";
 import MenuIcon from "@material-ui/icons/Menu";
+import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
+import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
+import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 
 const Container = styled.div`
-  background: #0c3252;
-  grid-column: 1 / 12;
+  background: #fff;
+  grid-column: 1 / 14;
+  border-bottom: 1px solid black;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
-const ItemBox = styled.div`
-  padding: 10px;
+const ItemBoxLeft = styled.div`
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   div {
     color: white;
     display: flex;
     align-items: center;
+    justify-content: center;
+    padding: 10px;
+    h1 {
+      font-size: 2rem;
+      color: #000;
+    }
 
+    svg {
+      font-size: 3rem;
+      background-color: #fff;
+      padding: 3px;
+      color: #000;
+      margin-top: 3px;
+      border: 1px solid #000;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+  }
+`;
+
+const ItemBoxRight = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-right: 20px;
+  div {
+    padding: 20px;
+    color: #000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
     h1 {
       font-size: 2rem;
     }
@@ -24,29 +63,35 @@ const ItemBox = styled.div`
       font-size: 1.2rem;
     }
     svg {
-      font-size: 2.5rem;
-      background-color: #1f2844;
-      padding: 3px;
-      margin-right: 6px;
-      margin-top: 3px;
+      font-size: 2rem;
     }
   }
 `;
 
-const Header = () => {
+const Header = ({ setShrink, shrink }) => {
+  console.log(shrink);
   return (
     <Container>
-      <ItemBox>
+      <ItemBoxLeft>
+        <div onClick={() => setShrink(!shrink)}>
+          <MenuIcon />
+        </div>
         <div>
-          <MenuIcon varient="contained" />
           <h1>DEV 통합 CMS</h1>
         </div>
-      </ItemBox>
-      <ItemBox>
+      </ItemBoxLeft>
+      <ItemBoxRight>
         <div>
+          <ChatBubbleOutlineIcon />
+        </div>
+        <div>
+          <HelpOutlineIcon />
+        </div>
+        <div>
+          <PersonOutlineIcon />
           <p>admin </p>
         </div>
-      </ItemBox>
+      </ItemBoxRight>
     </Container>
   );
 };
