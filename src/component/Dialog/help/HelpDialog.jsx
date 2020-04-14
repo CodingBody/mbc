@@ -10,6 +10,7 @@ import SentimentSatisfiedIcon from "@material-ui/icons/SentimentSatisfied";
 import { MuiButton } from "../../../styled-component/Button";
 import { HeadTwo, Close } from "../../../styled-component/Text";
 import { Text } from "../../../styled-component/Text";
+import { openHelpModal } from "../../../redux/actions-types/modalActions";
 
 const Container = styled.div`
   display: flex;
@@ -116,36 +117,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-const HelpDialog = () => {
-  const [open, setOpen] = React.useState(false);
-  const [emoji, setEmoji] = React.useState(1);
-
-  const [feedback, setFeedback] = React.useState("");
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleChange = (e) => {
-    setFeedback(e.target.value);
-  };
-
-  const handleSubmit = () => {};
-  console.log(emoji, "emoji");
+const HelpDialog = ({ open, setOpen }) => {
   return (
     <div>
-      <Button onClick={handleClickOpen}>
-        <ChatBubbleOutlineIcon />
-      </Button>
       <Dialog
         open={open}
         TransitionComponent={Transition}
         keepMounted
-        onClose={handleClose}
+        onClose={() => setOpen()}
       >
         <Container selectedEmoji={emoji}>
           <div className="header">
@@ -178,30 +157,18 @@ const HelpDialog = () => {
               cols="55"
             ></textarea>
           </div>
-          <div className="buttonGroup">
-            <MuiButton
-              bg="inherit"
-              size="large"
-              cr="#eee"
-              border="#000"
-              onClick={handleClose}
-            >
-              Cancel
-            </MuiButton>
-            <MuiButton
-              bg="inherit"
-              size="large"
-              cr="#eee"
-              border="#000"
-              onClick={handleClose}
-            >
-              Submit Feedback
-            </MuiButton>
-          </div>
         </Container>
       </Dialog>
     </div>
   );
 };
 
-export default HelpDialog;
+const mapStateToProps = (state) => ({
+  open: state.modal.openHelp,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setOpen: () => dispatch(openHelpModal()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HelpDialog);

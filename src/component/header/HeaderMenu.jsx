@@ -8,8 +8,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
+import { openHelpModal } from "../../redux/actions-types/modalActions";
+import { connect } from "react-redux";
 
-export default function HeaderMenu({ admin = false }) {
+function HeaderMenu({ admin = false, openHelpModal }) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
@@ -41,6 +43,11 @@ export default function HeaderMenu({ admin = false }) {
 
     prevOpen.current = open;
   }, [open]);
+
+  const handleHelpOpen = (e) => {
+    handleClose(e);
+    openHelpModal();
+  };
 
   return (
     <div>
@@ -85,7 +92,7 @@ export default function HeaderMenu({ admin = false }) {
                     <MenuItem onClick={handleClose}>SignOut</MenuItem>
                   ) : (
                     <React.Fragment>
-                      <MenuItem onClick={handleClose}>Page Help</MenuItem>
+                      <MenuItem onClick={handleHelpOpen}>Page Help</MenuItem>
                       <MenuItem onClick={handleClose}>About Page</MenuItem>
                     </React.Fragment>
                   )}
@@ -98,3 +105,9 @@ export default function HeaderMenu({ admin = false }) {
     </div>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  openHelpModal: () => dispatch(openHelpModal()),
+});
+
+export default connect(null, mapDispatchToProps)(HeaderMenu);

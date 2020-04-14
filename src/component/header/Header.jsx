@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import MenuIcon from "@material-ui/icons/Menu";
 import HeaderMunu from "./HeaderMenu";
-import FeedBackDialog from "../Dialog/Dialog";
+import FeedBackDialog from "../Dialog/feedback/FeedbackDialog";
 
 const Container = styled.div`
   background: #fff;
