@@ -2,7 +2,6 @@ import React from "react";
 import HomePage from "./layout/homepage/HomePage";
 import Dashboard from "./layout/dashboard/Dashboard";
 import { Route } from "react-router-dom";
-import Category from "./component/category/Category";
 
 function App() {
   return (

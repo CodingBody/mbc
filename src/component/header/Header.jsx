@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import MenuIcon from "@material-ui/icons/Menu";
-import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
-import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
-import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
+import HeaderMunu from "./HeaderMenu";
+import FeedBackDialog from "../Dialog/Dialog";
 
 const Container = styled.div`
   background: #fff;
@@ -50,7 +49,7 @@ const ItemBoxRight = styled.div`
   justify-content: space-evenly;
   padding-right: 20px;
   div {
-    padding: 20px;
+    padding: 0 10px;
     color: #000;
 
     display: flex;
@@ -69,7 +68,6 @@ const ItemBoxRight = styled.div`
 `;
 
 const Header = ({ setShrink, shrink }) => {
-  console.log(shrink);
   return (
     <Container>
       <ItemBoxLeft>
@@ -81,16 +79,9 @@ const Header = ({ setShrink, shrink }) => {
         </div>
       </ItemBoxLeft>
       <ItemBoxRight>
-        <div>
-          <ChatBubbleOutlineIcon />
-        </div>
-        <div>
-          <HelpOutlineIcon />
-        </div>
-        <div>
-          <PersonOutlineIcon />
-          <p>admin </p>
-        </div>
+        <FeedBackDialog />
+        <HeaderMunu />
+        <HeaderMunu admin={true} />
       </ItemBoxRight>
     </Container>
   );

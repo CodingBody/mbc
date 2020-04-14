@@ -185,7 +185,7 @@ const Navbar = ({ history, shrink }) => {
               <SubLink>
                 {!shrink &&
                   item.subLink &&
-                  renderSubLink == item.id &&
+                  renderSubLink === item.id &&
                   item.subLink.map((link) => (
                     <li key={link}>
                       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;

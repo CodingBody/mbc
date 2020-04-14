@@ -6,6 +6,9 @@ import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import { withRouter } from "react-router-dom";
 import { Button } from "./../../styled-component/Button";
+import { HeadOne, HeadTwo } from "./../../styled-component/Text";
+import { connect } from "react-redux";
+import { checkIfUserLogin } from "../../redux/actions-types/authActions";
 
 const Container = styled.div`
   height: 100vh;
@@ -53,17 +56,6 @@ const TitleBox = styled.div`
   }
 `;
 
-const HeadOne = styled.h1`
-  font-weight: 400;
-  color: ${(props) => props.color};
-  font-size: ${(props) => `${props.size}rem`};
-`;
-
-const HeadTwo = styled.h2`
-  font-weight: 400;
-  color: ${(props) => props.color};
-  font-size: ${(props) => `${props.size}rem`};
-`;
 const Form = styled.div`
   display: flex;
   flex-direction: column;
@@ -168,13 +160,15 @@ const CheckBox = styled.div`
   }
 `;
 
-const HomePage = ({ history }) => {
+const HomePage = ({ history, checkUser, user }) => {
   const [form, setForm] = useState({
     serviceName: "MBC",
     username: "admin",
     password: "",
     remember: false,
   });
+
+  console.log(user, "user");
 
   const handleChange = (e) => {
     console.log(e);
@@ -192,8 +186,8 @@ const HomePage = ({ history }) => {
   };
 
   const handleSubmit = () => {
-    console.log("object");
     history.push("/dashboard/mbc");
+    checkUser();
   };
 
   return (
@@ -273,11 +267,7 @@ const HomePage = ({ history }) => {
             </CheckBox>
           </Form>
         </form>
-        <Button
-          onClick={() => history.push("/dashboard/mbc")}
-          bg="#505f6d"
-          color="#fff"
-        >
+        <Button onClick={handleSubmit} bg="#505f6d" color="#fff">
           Sign In
         </Button>
         <Button bg="#fff" color="#000">
@@ -288,4 +278,14 @@ const HomePage = ({ history }) => {
   );
 };
 
-export default withRouter(HomePage);
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  checkUser: () => dispatch(checkIfUserLogin()),
+});
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(HomePage)
+);
