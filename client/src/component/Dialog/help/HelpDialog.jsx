@@ -1,16 +1,14 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import Slide from "@material-ui/core/Slide";
-import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import styled from "styled-components";
 import MoodIcon from "@material-ui/icons/Mood";
 import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
 import SentimentSatisfiedIcon from "@material-ui/icons/SentimentSatisfied";
-import { MuiButton } from "../../../styled-component/Button";
 import { HeadTwo, Close } from "../../../styled-component/Text";
 import { Text } from "../../../styled-component/Text";
 import { openHelpModal } from "../../../redux/actions-types/modalActions";
+import { connect } from "react-redux";
 
 const Container = styled.div`
   display: flex;
@@ -126,37 +124,17 @@ const HelpDialog = ({ open, setOpen }) => {
         keepMounted
         onClose={() => setOpen()}
       >
-        <Container selectedEmoji={emoji}>
+        <Container>
           <div className="header">
             <HeadTwo color="#eee">Feedback</HeadTwo>
-            <Close onClick={handleClose}>x</Close>
+            <Close onClick={() => setOpen()}>x</Close>
           </div>
           <div className="iconBox">
             <div>
               <Text size="">Experience</Text>
             </div>
-            <div>
-              <div onClick={() => setEmoji(1)}>
-                <MoodIcon />
-              </div>
-              <div onClick={() => setEmoji(2)}>
-                <SentimentSatisfiedIcon />
-              </div>
-              <div onClick={() => setEmoji(3)}>
-                <SentimentVeryDissatisfiedIcon />
-              </div>
-            </div>
           </div>
-          <div className="feedback-input">
-            <textarea
-              value={feedback}
-              onChange={handleChange}
-              placeholder="feedback"
-              id="w3mission"
-              rows="8"
-              cols="55"
-            ></textarea>
-          </div>
+          <div className="feedback-input"></div>
         </Container>
       </Dialog>
     </div>

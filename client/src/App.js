@@ -2,6 +2,7 @@ import React from "react";
 import HomePage from "./layout/homepage/HomePage";
 import Dashboard from "./layout/dashboard/Dashboard";
 import { Route } from "react-router-dom";
+import HelpDialog from "./component/Dialog/help/HelpDialog";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         render={() => (
           <React.Fragment>
             <Dashboard />
+            <HelpDialog />
           </React.Fragment>
         )}
       />

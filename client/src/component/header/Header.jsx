@@ -3,6 +3,7 @@ import styled from "styled-components";
 import MenuIcon from "@material-ui/icons/Menu";
 import HeaderMunu from "./HeaderMenu";
 import FeedBackDialog from "../Dialog/feedback/FeedbackDialog";
+import HelpDialog from "./../Dialog/help/HelpDialog";
 
 const Container = styled.div`
   background: #fff;

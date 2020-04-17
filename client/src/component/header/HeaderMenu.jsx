@@ -83,20 +83,24 @@ function HeaderMenu({ admin = false, openHelpModal }) {
           >
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
-                <MenuList
-                  autoFocusItem={open}
-                  id="menu-list-grow"
-                  onKeyDown={handleListKeyDown}
-                >
-                  {admin ? (
+                {admin ? (
+                  <MenuList
+                    autoFocusItem={open}
+                    id="menu-list-grow"
+                    onKeyDown={handleListKeyDown}
+                  >
                     <MenuItem onClick={handleClose}>SignOut</MenuItem>
-                  ) : (
-                    <React.Fragment>
-                      <MenuItem onClick={handleHelpOpen}>Page Help</MenuItem>
-                      <MenuItem onClick={handleClose}>About Page</MenuItem>
-                    </React.Fragment>
-                  )}
-                </MenuList>
+                  </MenuList>
+                ) : (
+                  <MenuList
+                    autoFocusItem={open}
+                    id="menu-list-grow"
+                    onKeyDown={handleListKeyDown}
+                  >
+                    <MenuItem onClick={handleHelpOpen}>Page Help</MenuItem>
+                    <MenuItem onClick={handleClose}>About Page</MenuItem>
+                  </MenuList>
+                )}
               </ClickAwayListener>
             </Paper>
           </Grow>
