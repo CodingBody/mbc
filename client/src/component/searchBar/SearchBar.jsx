@@ -8,7 +8,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    width: "1500px",
+    width: "100%",
     boxShadow: "none",
     border: "1px solid #cecece73",
     background: "#eee",
@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchAppBar() {
+const SearchBar = ({ input, handleSubmit, handleChange }) => {
   const classes = useStyles();
 
   return (
@@ -83,6 +83,8 @@ export default function SearchAppBar() {
           </div>
           <InputBase
             placeholder="Search…"
+            value={input}
+            onChange={handleChange}
             classes={{
               root: classes.inputRoot,
               input: classes.inputInput,
@@ -90,10 +92,16 @@ export default function SearchAppBar() {
             inputProps={{ "aria-label": "search" }}
           />
         </div>
-        <Button className={classes.menuButton} variant="contained">
+        <Button
+          onClick={handleSubmit}
+          className={classes.menuButton}
+          variant="contained"
+        >
           Go
         </Button>
       </Toolbar>
     </div>
   );
-}
+};
+
+export default SearchBar;

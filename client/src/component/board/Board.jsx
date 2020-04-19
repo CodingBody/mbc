@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Switch, Route } from "react-router-dom";
-import Category from "./../category/Category";
+import Category from "../table/Table";
 
 const Container = styled.div`
   background: #eee;
@@ -14,7 +14,7 @@ const Board = () => {
   return (
     <Container>
       <Switch>
-        <Route exact path="/dashboard/mbc/Category" component={Category} />
+        <Route exact path="/dashboard/mbc/:category" component={Category} />
       </Switch>
     </Container>
   );

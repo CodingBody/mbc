@@ -134,8 +134,6 @@ export default function FeedBackDialog() {
     setFeedback(e.target.value);
   };
 
-  const handleSubmit = () => {};
-  console.log(emoji, "emoji");
   return (
     <div>
       <Button onClick={handleClickOpen}>
