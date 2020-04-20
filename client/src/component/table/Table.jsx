@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Button } from "../../styled-component/Button";
+import { MuiButton } from "../../styled-component/Button";
 import {
   TableBody,
   TableContainer,
@@ -14,6 +14,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchUserStart } from "../../redux/actions-types/appUserActions";
 import uuid4 from "uuid4";
+import { Button } from "@material-ui/core";
 
 const Container = styled.div`
   display: grid;
@@ -31,7 +32,7 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 10px 20px;
 `;
 
 const Main = styled.div`
@@ -49,14 +50,26 @@ const Main = styled.div`
 `;
 
 const Table = ({ match, fetchUser, users, tableHeader }) => {
-  // React.useEffect(() => {
-  // console.log(user);
-  // }, [user]);
-
   const [input, setInput] = React.useState("");
   const handleChange = (e) => {
     setInput(e.target.value);
     console.log(input);
+  };
+
+  const myFn = (user) => {
+    const userPropsArray = Object.values(user);
+    console.log(user);
+
+    return (
+      <TableBody>
+        <td>
+          <EditIcon />
+        </td>
+        {userPropsArray.map((props) => (
+          <td key={uuid4()}>{props}</td>
+        ))}
+      </TableBody>
+    );
   };
 
   const handleSubmit = (e) => {
@@ -64,6 +77,7 @@ const Table = ({ match, fetchUser, users, tableHeader }) => {
     console.log(input);
     fetchUser(input);
   };
+  console.log(users, "users");
   if (users)
     return (
       <Container>
@@ -72,7 +86,7 @@ const Table = ({ match, fetchUser, users, tableHeader }) => {
             <HeadTwo>Category</HeadTwo>
           </div>
           <div>
-            <Button bg="#fff" color="#000">
+            <Button size="large" variant="contained">
               Create
             </Button>
           </div>
@@ -93,18 +107,20 @@ const Table = ({ match, fetchUser, users, tableHeader }) => {
               </tr>
             </TableHeader>
             <tbody>
-              {users
-                .map((user) => (
-                  <TableBody key={uuid4()}>
-                    <td>
-                      <EditIcon />
-                    </td>
-                    {user.map((u) => (
-                      <td key={uuid4()}>{u}</td>
-                    ))}
-                  </TableBody>
-                ))
-                .slice(0, 10)}
+              {Array.isArray(users)
+                ? users
+                    .map((user) => (
+                      <TableBody key={uuid4()}>
+                        <td>
+                          <EditIcon />
+                        </td>
+                        {user.map((u) => (
+                          <td key={uuid4()}>{u}</td>
+                        ))}
+                      </TableBody>
+                    ))
+                    .slice(0, 10)
+                : myFn(users)}
             </tbody>
           </TableContainer>
           <Info>
@@ -121,7 +137,7 @@ const Table = ({ match, fetchUser, users, tableHeader }) => {
           <HeadTwo>Category</HeadTwo>
         </div>
         <div>
-          <Button bg="#fff" color="#000">
+          <Button size="large" variant="contained">
             Create
           </Button>
         </div>
@@ -132,7 +148,7 @@ const Table = ({ match, fetchUser, users, tableHeader }) => {
           handleChange={handleChange}
           input={input}
         />
-        <TableContainer style={{}} cellspacing="0">
+        <TableContainer cellspacing="0">
           <TableHeader>
             <tr>
               <th></th>
@@ -148,48 +164,6 @@ const Table = ({ match, fetchUser, users, tableHeader }) => {
             </tr>
           </TableHeader>
           <tbody>
-            <TableBody>
-              <td>
-                <EditIcon />
-              </td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-            </TableBody>
-            <TableBody>
-              <td>
-                <EditIcon />
-              </td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-            </TableBody>
-            <TableBody>
-              <td>
-                <EditIcon />
-              </td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-              <td>ddddddd</td>
-            </TableBody>
             <TableBody>
               <td>
                 <EditIcon />

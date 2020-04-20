@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { navbarItem } from "../../data/Data";
 import { withRouter } from "react-router-dom";
 import StopRoundedIcon from "@material-ui/icons/StopRounded";
+import { Button } from "@material-ui/core";
 
 const Container = styled.div`
   background: #2c2c2c;
@@ -22,6 +23,10 @@ const LinkBox = styled.li`
 
   :hover {
     background-color: #353535;
+  }
+
+  :active {
+    background-color: #5f5f5fbf;
   }
 
   div {
@@ -106,6 +111,9 @@ const SubLink = styled.ul`
 
     :hover {
       background-color: #525252;
+    }
+    :active {
+      background-color: #848484bf;
     }
     p {
       font-size: 1.2rem;

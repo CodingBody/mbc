@@ -23,12 +23,13 @@ function initialize() {
       })
     );
 
-    //
+    // If extended is false, you can not post "nested object"
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
 
     // Mount the router at /api so all its routes start with /api
     app.use("/api", router);
+    // app.use("/api/auth", require("../controllers/auth"));
 
     httpServer
       .listen(webServerConfig.port)

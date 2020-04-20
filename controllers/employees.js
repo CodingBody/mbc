@@ -2,6 +2,7 @@ const employees = require("../db_apis/employees.js");
 
 async function get(req, res, next) {
   try {
+    console.log("runned ! ");
     const context = {};
 
     context.id = parseInt(req.params.id, 10);

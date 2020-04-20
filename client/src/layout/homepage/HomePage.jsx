@@ -8,7 +8,7 @@ import { withRouter } from "react-router-dom";
 import { Button } from "./../../styled-component/Button";
 import { HeadOne, HeadTwo } from "./../../styled-component/Text";
 import { connect } from "react-redux";
-import { checkIfUserLogin } from "../../redux/actions-types/authActions";
+import { userLoginStart } from "./../../redux/actions-types/authActions";
 
 const Container = styled.div`
   height: 100vh;
@@ -160,7 +160,7 @@ const CheckBox = styled.div`
   }
 `;
 
-const HomePage = ({ history, checkUser, user }) => {
+const HomePage = ({ history, login, user }) => {
   const [form, setForm] = useState({
     serviceName: "MBC",
     username: "admin",
@@ -168,10 +168,7 @@ const HomePage = ({ history, checkUser, user }) => {
     remember: false,
   });
 
-  console.log(user, "user");
-
   const handleChange = (e) => {
-    console.log(e);
     setForm({
       ...form,
       [e.target.name]: e.target.value,
@@ -187,7 +184,7 @@ const HomePage = ({ history, checkUser, user }) => {
 
   const handleSubmit = () => {
     history.push("/dashboard/mbc");
-    checkUser();
+    login(form);
   };
 
   return (
@@ -267,7 +264,7 @@ const HomePage = ({ history, checkUser, user }) => {
             </CheckBox>
           </Form>
         </form>
-        <Button onClick={handleSubmit} bg="#505f6d" color="#fff">
+        <Button onClick={handleSubmit} bg="#2c2c2c" color="#fff">
           Sign In
         </Button>
         <Button bg="#fff" color="#000">
@@ -283,7 +280,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  checkUser: () => dispatch(checkIfUserLogin()),
+  login: (form) => dispatch(userLoginStart(form)),
 });
 
 export default withRouter(

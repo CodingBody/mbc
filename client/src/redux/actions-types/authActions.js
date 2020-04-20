@@ -1,7 +1,25 @@
 export const authActionTypes = {
   CHECK_IF_USER_LOGIN: "CHECK_IF_USER_LOGIN",
+  USER_LOGIN_START: "USER_LOGIN_START",
+  USER_LOGIN_SUCCESS: "USER_LOGIN_SUCCESS",
+  USER_LOGIN_FAILURE: "USER_LOGIN_FAILURE",
 };
 
 export const checkIfUserLogin = () => ({
   type: authActionTypes.CHECK_IF_USER_LOGIN,
+});
+
+export const userLoginStart = (user) => ({
+  type: authActionTypes.USER_LOGIN_START,
+  payload: user,
+});
+
+export const userLoginSuccess = (user) => ({
+  type: authActionTypes.USER_LOGIN_SUCCESS,
+  payload: user,
+});
+
+export const userLoginfailure = (error) => ({
+  type: authActionTypes.USER_LOGIN_FAILURE,
+  payload: error,
 });

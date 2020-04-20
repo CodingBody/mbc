@@ -5,13 +5,22 @@ import { fetchUserSuccess } from "../actions-types/appUserActions";
 
 // api
 export function* fetchUserFromDb({ payload }) {
-  console.log(payload, "payload");
-  const res = yield axios.get("/api/employees/");
-  const data = res.data;
-  const tableHeader = Object.keys(data[0]);
-  const user = data.map((d) => Object.values(d));
+  const userId = payload;
 
-  yield put(fetchUserSuccess({ user, tableHeader }));
+  const res = yield axios.get(`/api/employees/${userId}`);
+  const data = res.data;
+
+  if (Array.isArray(data)) {
+    const tableHeader = Object.keys(data[0]);
+    const user = data.map((d) => Object.values(d));
+
+    yield put(fetchUserSuccess({ user, tableHeader }));
+  } else {
+    const tableHeader = Object.keys(data);
+    const user = data;
+    console.log(tableHeader, user, data, "user");
+    yield put(fetchUserSuccess({ user, tableHeader }));
+  }
 }
 
 // listeners
