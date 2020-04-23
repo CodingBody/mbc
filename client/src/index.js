@@ -10,6 +10,14 @@ import store from "./redux/Store";
 import { Provider } from "react-redux";
 
 const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#2c2c2c",
+    },
+    secondary: {
+      main: "#87ceeb",
+    },
+  },
   overrides: {
     MuiButton: {
       contained: {

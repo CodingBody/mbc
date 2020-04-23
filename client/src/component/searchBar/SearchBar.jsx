@@ -5,6 +5,8 @@ import InputBase from "@material-ui/core/InputBase";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import SettingsIcon from "@material-ui/icons/Settings";
+import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -65,9 +67,14 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  action: {
+    margin: "0 10px",
+    backgroundColor: "#eee",
+    border: "1px solid #cecece73",
+  },
 }));
 
-const SearchBar = ({ input, handleSubmit, handleChange }) => {
+const SearchBar = ({ input, handleSearchSubmit, handleSeachbarChange }) => {
   const classes = useStyles();
 
   return (
@@ -84,7 +91,7 @@ const SearchBar = ({ input, handleSubmit, handleChange }) => {
           <InputBase
             placeholder="Search…"
             value={input}
-            onChange={handleChange}
+            onChange={handleSeachbarChange}
             classes={{
               root: classes.inputRoot,
               input: classes.inputInput,
@@ -93,11 +100,18 @@ const SearchBar = ({ input, handleSubmit, handleChange }) => {
           />
         </div>
         <Button
-          onClick={handleSubmit}
+          onClick={handleSearchSubmit}
           className={classes.menuButton}
           variant="contained"
         >
           Go
+        </Button>
+        <Button
+          className={classes.action}
+          variant="contained"
+          endIcon={<ArrowDownwardIcon />}
+        >
+          Action
         </Button>
       </Toolbar>
     </div>

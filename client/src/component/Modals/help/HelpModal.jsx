@@ -4,7 +4,7 @@ import Slide from "@material-ui/core/Slide";
 import styled from "styled-components";
 import { HeadTwo, Close } from "../../../styled-component/Text";
 import { Text } from "../../../styled-component/Text";
-import { openHelpModal } from "../../../redux/actions-types/modalActions";
+import { toggleHelpModal } from "../../../redux/modal/modalActions";
 import { connect } from "react-redux";
 
 const Container = styled.div`
@@ -112,7 +112,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-const HelpDialog = ({ open, setOpen }) => {
+const HelpModal = ({ open, setOpen }) => {
   return (
     <div>
       <Dialog
@@ -143,7 +143,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setOpen: () => dispatch(openHelpModal()),
+  setOpen: () => dispatch(toggleHelpModal()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(HelpDialog);
+export default connect(mapStateToProps, mapDispatchToProps)(HelpModal);

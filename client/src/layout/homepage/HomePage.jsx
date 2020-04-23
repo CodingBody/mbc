@@ -8,7 +8,7 @@ import { withRouter } from "react-router-dom";
 import { Button } from "./../../styled-component/Button";
 import { HeadOne, HeadTwo } from "./../../styled-component/Text";
 import { connect } from "react-redux";
-import { userLoginStart } from "./../../redux/actions-types/authActions";
+import { userLoginStart } from "../../redux/auth/authActions";
 
 const Container = styled.div`
   height: 100vh;

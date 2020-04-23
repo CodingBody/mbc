@@ -1,4 +1,4 @@
-import { authActionTypes } from "../actions-types/authActions";
+import { authActionTypes } from "./authActions";
 
 const initialState = {
   user: null,

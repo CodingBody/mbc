@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import MenuIcon from "@material-ui/icons/Menu";
 import HeaderMunu from "./HeaderMenu";
-import FeedBackDialog from "../Dialog/feedback/FeedbackDialog";
+import FeedBackModal from "../Modals/feedback/FeedbackModal";
 
 const Container = styled.div`
   background: #fff;
@@ -79,7 +79,7 @@ const Header = ({ setShrink, shrink }) => {
         </div>
       </ItemBoxLeft>
       <ItemBoxRight>
-        <FeedBackDialog />
+        <FeedBackModal />
         <HeaderMunu />
         <HeaderMunu admin={true} />
       </ItemBoxRight>

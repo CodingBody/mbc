@@ -4,7 +4,7 @@ import {
   authActionTypes,
   userLoginSuccess,
   userLoginfailure,
-} from "./../actions-types/authActions";
+} from "./authActions";
 
 // api
 export function* logUserIn({ payload }) {

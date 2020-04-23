@@ -145,9 +145,9 @@ const Navbar = ({ history, shrink }) => {
     }
   };
 
-  const handleClickLink = (linkName, id) => {
+  const handleClickLink = (params, id) => {
     setRenderSubLink(id);
-    history.push(`/dashboard/mbc/${linkName}`);
+    history.push(`/dashboard/mbc/${params}`);
   };
   return (
     <Container>
@@ -156,7 +156,7 @@ const Navbar = ({ history, shrink }) => {
           navbarItem.map((item) => (
             <React.Fragment key={item.id}>
               <LinkBox>
-                <div onClick={() => handleClickLink(item.link, item.id)}>
+                <div onClick={() => handleClickLink(item.params, item.id)}>
                   {item.icon}
                   {shrink ? null : <Text>{item.link}</Text>}
                 </div>

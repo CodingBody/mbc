@@ -11,53 +11,101 @@ import { v4 as uuidv4 } from "uuid";
 export const navbarItem = [
   {
     link: "Home",
+    params: "Home",
     icon: <HomeOutlinedIcon />,
     id: uuidv4(),
   },
   {
     link: "CP",
+    params: "CP",
+
     icon: <VideocamIcon />,
     id: uuidv4(),
     subLink: ["CP Present Condition"],
   },
   {
     link: "Store",
+    params: "Store",
+
     icon: <LanguageIcon />,
     id: uuidv4(),
     subLink: ["Store Present Condition"],
   },
-  { link: "Machine", icon: <ControlCameraIcon />, id: uuidv4(), subLink: null },
-  { link: "Category", icon: <CategoryIcon />, id: uuidv4(), subLink: null },
-  { link: "Content", icon: <MovieFilterIcon />, id: uuidv4(), subLink: null },
+  {
+    link: "Machine",
+    params: "Machine",
+
+    icon: <ControlCameraIcon />,
+    id: uuidv4(),
+    subLink: null,
+  },
+  {
+    link: "Category",
+    params: "Category",
+
+    icon: <CategoryIcon />,
+    id: uuidv4(),
+    subLink: null,
+  },
+  {
+    link: "Content",
+    params: "Content",
+
+    icon: <MovieFilterIcon />,
+    id: uuidv4(),
+    subLink: null,
+  },
   {
     link: "Program Table",
+    params: "ProgramTable",
     icon: <DateRangeIcon />,
     id: uuidv4(),
     subLink: null,
   },
-  { link: "App User", icon: <DateRangeIcon />, id: uuidv4(), subLink: null },
+  {
+    link: "App User",
+    params: "AppUser",
+
+    icon: <DateRangeIcon />,
+    id: uuidv4(),
+    subLink: null,
+  },
   {
     link: "App Manage",
+    params: "AppManage",
     icon: <DateRangeIcon />,
     id: uuidv4(),
     subLink: ["Event Banner", "Notice", "Artist"],
   },
   {
     link: "Asset Upload",
+    params: "AssetUpload",
+
     icon: <DateRangeIcon />,
     id: uuidv4(),
     subLink: ["Asset VOD", "Asset Image", "Asset File"],
   },
   {
     link: "Statistics",
+    params: "Statistics",
+
     icon: <DateRangeIcon />,
     id: uuidv4(),
 
     subLink: ["Rack", "Login Statistics", "Content Statistics"],
   },
-  { link: "Log Manage", icon: <DateRangeIcon />, id: uuidv4(), subLink: null },
+  {
+    link: "Log Manage",
+    params: "LogManage",
+
+    icon: <DateRangeIcon />,
+    id: uuidv4(),
+    subLink: null,
+  },
   {
     link: "Administration",
+    params: "Administration",
+
     icon: <DateRangeIcon />,
     id: uuidv4(),
     subLink: null,

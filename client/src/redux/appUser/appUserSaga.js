@@ -1,7 +1,6 @@
-import { all, call, takeLatest, select, put } from "redux-saga/effects";
-import { appUserActionTypes } from "./../actions-types/appUserActions";
+import { all, call, takeLatest, put } from "redux-saga/effects";
+import { appUserActionTypes, fetchUserSuccess } from "./appUserActions";
 import axios from "axios";
-import { fetchUserSuccess } from "../actions-types/appUserActions";
 
 // api
 export function* fetchUserFromDb({ payload }) {
@@ -13,6 +12,9 @@ export function* fetchUserFromDb({ payload }) {
   if (Array.isArray(data)) {
     const tableHeader = Object.keys(data[0]);
     const user = data.map((d) => Object.values(d));
+    console.log("data in saga", data);
+    console.log("tableHeader in saga", tableHeader);
+    console.log("user in saga", user);
 
     yield put(fetchUserSuccess({ user, tableHeader }));
   } else {

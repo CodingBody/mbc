@@ -8,10 +8,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
-import { openHelpModal } from "../../redux/actions-types/modalActions";
+import { toggleHelpModal } from "../../redux/modal/modalActions";
 import { connect } from "react-redux";
 
-function HeaderMenu({ admin = false, openHelpModal }) {
+function HeaderMenu({ admin = false, toggleHelpModal }) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
@@ -46,7 +46,11 @@ function HeaderMenu({ admin = false, openHelpModal }) {
 
   const handleHelpOpen = (e) => {
     handleClose(e);
-    openHelpModal();
+    toggleHelpModal();
+  };
+
+  const what = (test) => {
+    console.log(test);
   };
 
   return (
@@ -77,8 +81,7 @@ function HeaderMenu({ admin = false, openHelpModal }) {
           <Grow
             {...TransitionProps}
             style={{
-              transformOrigin:
-                placement === "bottom" ? "center top" : "center bottom",
+              transformOrigin: placement === "top",
             }}
           >
             <Paper>
@@ -111,7 +114,7 @@ function HeaderMenu({ admin = false, openHelpModal }) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  openHelpModal: () => dispatch(openHelpModal()),
+  toggleHelpModal: () => dispatch(toggleHelpModal()),
 });
 
 export default connect(null, mapDispatchToProps)(HeaderMenu);
