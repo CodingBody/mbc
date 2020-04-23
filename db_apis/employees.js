@@ -59,8 +59,6 @@ const createSql = `insert into employees (
 async function create(emp) {
   // to prevent direct modification
   const employee = Object.assign({}, emp);
-  console.log("object assign", emp);
-
   employee.employee_id = {
     dir: oracledb.BIND_OUT,
     type: oracledb.NUMBER,

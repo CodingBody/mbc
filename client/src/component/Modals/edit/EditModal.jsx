@@ -17,7 +17,6 @@ const EditModal = ({ open, setOpen, category, record = false }) => {
   const [form, setForm] = React.useState(null);
 
   React.useEffect(() => {
-    console.log("rrrrr");
     if (record !== false) setForm(record);
     for (let property in record) {
       if (record[property] === null) {
