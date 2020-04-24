@@ -1,14 +1,14 @@
-import auth from "./auth/authReducer";
 import { combineReducers } from "redux";
-import modal from "./modal/modalReducer";
-import appUser from "./appUser/appUserReducer";
-import cud from "./cud/cudReducer";
+import auth from "./auth/reducer";
+import modal from "./modal/reducer";
+import cud from "./cud/reducer";
+import main from "./main/reducer";
 
 const rootReducer = combineReducers({
   auth,
   modal,
-  appUser,
   cud,
+  main,
 });
 
 export default rootReducer;

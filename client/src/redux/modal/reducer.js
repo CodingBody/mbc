@@ -1,4 +1,4 @@
-import { modalActionTypes } from "./modalActions";
+import { modalActionTypes } from "./actions";
 
 const initialState = {
   openHelp: false,

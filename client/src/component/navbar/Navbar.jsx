@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { navbarItem } from "../../data/Data";
+import { navbarItem } from "../../utils/Data";
 import { withRouter } from "react-router-dom";
 import StopRoundedIcon from "@material-ui/icons/StopRounded";
-import { Button } from "@material-ui/core";
 
 const Container = styled.div`
   background: #2c2c2c;

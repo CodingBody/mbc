@@ -3,17 +3,18 @@ import Dialog from "@material-ui/core/Dialog";
 import Slide from "@material-ui/core/Slide";
 import { HeadTwo, Close } from "../../../styled-component/Text";
 import { connect } from "react-redux";
-import { toggleCreateModal } from "../../../redux/modal/modalActions";
+import { toggleCreateModal } from "../../../redux/modal/actions";
 import { EditModalContainer } from "./../../../styled-component/ModalContainer";
 import { MuiButton } from "../../../styled-component/Button";
 import AppUserForm from "../../form/AppUserForm";
 import CategoryForm from "./../../form/CategoryForm";
+import { createRecordStart } from "../../../redux/main/actions";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-const CreateModal = ({ open, setOpen, category, record }) => {
+const CreateModal = ({ open, setOpen, create, category, record }) => {
   const [form, setForm] = React.useState(null);
   // const inputRef = useRef();
 
@@ -29,12 +30,19 @@ const CreateModal = ({ open, setOpen, category, record }) => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    create({ form, category });
+  };
+
   if (!record) return <React.Fragment> </React.Fragment>;
   return (
     <div>
       <Dialog
         open={open}
         TransitionComponent={Transition}
+        record
         keepMounted
         onClose={() => setOpen()}
       >
@@ -59,7 +67,13 @@ const CreateModal = ({ open, setOpen, category, record }) => {
               Cancel
             </MuiButton>
 
-            <MuiButton bg="inherit" size="large" cr="#87ceeb" border="#000">
+            <MuiButton
+              onClick={handleSubmit}
+              bg="inherit"
+              size="large"
+              cr="#87ceeb"
+              border="#000"
+            >
               Save
             </MuiButton>
           </div>
@@ -76,6 +90,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setOpen: () => dispatch(toggleCreateModal()),
+  create: (data) => dispatch(createRecordStart(data)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateModal);

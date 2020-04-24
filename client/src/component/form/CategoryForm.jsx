@@ -12,18 +12,11 @@ const CategoryForm = ({ handleChange, form }) => {
         value={form.title}
       />
       <StyledTextField
-        name="titleEng"
-        onChange={handleChange}
-        label="title Eng"
-        variant="outlined"
-        value={form.titleEng}
-      />
-      <StyledTextField
-        name="genreList"
+        name="genre_list"
         onChange={handleChange}
         label="Genre List"
         variant="outlined"
-        value={form.genreList}
+        value={form.genre_list}
       />
       <StyledTextField
         name="usageyn"
@@ -38,34 +31,6 @@ const CategoryForm = ({ handleChange, form }) => {
         label="Priority"
         variant="outlined"
         value={form.priority}
-      />
-      <StyledTextField
-        name="created"
-        onChange={handleChange}
-        label="Created"
-        variant="outlined"
-        value={form.created}
-      />
-      <StyledTextField
-        name="createdBy"
-        onChange={handleChange}
-        label="Created By"
-        variant="outlined"
-        value={form.createdBy}
-      />
-      <StyledTextField
-        name="updated"
-        onChange={handleChange}
-        label="Updated"
-        variant="outlined"
-        value={form.updated}
-      />
-      <StyledTextField
-        name="updatedBy"
-        onChange={handleChange}
-        label="Updated By"
-        variant="outlined"
-        value={form.updatedBy}
       />
     </form>
   );

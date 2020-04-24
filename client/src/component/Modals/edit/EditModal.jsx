@@ -3,7 +3,7 @@ import Dialog from "@material-ui/core/Dialog";
 import Slide from "@material-ui/core/Slide";
 import { HeadTwo, Close } from "../../../styled-component/Text";
 import { connect } from "react-redux";
-import { toggleEditModal } from "../../../redux/modal/modalActions";
+import { toggleEditModal } from "../../../redux/modal/actions";
 import { EditModalContainer } from "../../../styled-component/ModalContainer";
 import { MuiButton } from "../../../styled-component/Button";
 import AppUserForm from "../../form/AppUserForm";
@@ -15,7 +15,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const EditModal = ({ open, setOpen, category, record = false }) => {
   const [form, setForm] = React.useState(null);
-
+  console.log(record, "record");
   React.useEffect(() => {
     if (record !== false) setForm(record);
     for (let property in record) {

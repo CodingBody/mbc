@@ -1,7 +1,8 @@
 import { all, call } from "redux-saga/effects";
-import { appUserSaga } from "./appUser/appUserSaga";
-import { authSaga } from "./auth/authSaga";
+import { appUserSaga } from "./appUser/saga";
+import { authSaga } from "./auth/saga";
+import { mainSaga } from "./main/saga";
 
 export default function* rootSage() {
-  yield all([call(appUserSaga), call(authSaga)]);
+  yield all([call(authSaga), call(mainSaga)]);
 }

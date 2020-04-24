@@ -25,20 +25,18 @@ function simpleExecute(statement, binds = [], opts = {}) {
     try {
       conn = await oracledb.getConnection();
       console.log(statement, binds, "statement and binds");
-      console.log(conn, "conn");
 
       const result = await conn.execute(statement, binds, opts);
-
       resolve(result);
     } catch (err) {
-      reject(err);
+      reject(err, "rejected in db");
     } finally {
       if (conn) {
         // conn assignment worked, need to close
         try {
           await conn.close();
         } catch (err) {
-          console.log(err);
+          console.log(err, "catched err in db");
         }
       }
     }

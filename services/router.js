@@ -40,14 +40,14 @@ router
     auth.loginPost
   );
 
-router.route("/category").post(category.post);
+router.route("/category").post(category.post).get(category.get);
 
-// router
-//   .route("/employees/:id?")
-//   .get(employees.get)
-//   .post(employees.post)
-//   .put(employees.put)
-//   .delete(employees.delete);
+router
+  .route("/employees/:id?")
+  .get(employees.get)
+  .post(employees.post)
+  .put(employees.put)
+  .delete(employees.delete);
 
 // router
 //   .route("/login/oculus")

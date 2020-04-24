@@ -2,7 +2,7 @@ const employees = require("../db_apis/employees.js");
 
 async function get(req, res, next) {
   try {
-    console.log("runned ! ");
+    console.log("runned ! in emp");
     const context = {};
 
     context.id = parseInt(req.params.id, 10);
@@ -49,7 +49,7 @@ async function post(req, res, next) {
 
     res.status(201).json(employee);
   } catch (err) {
-    next(err);
+    next(err, "err");
   }
 }
 

@@ -1,4 +1,4 @@
-import { crdActionTypes } from "./cudActions";
+import { crdActionTypes } from "./actions";
 const initialState = {
   edit: {
     record: null,

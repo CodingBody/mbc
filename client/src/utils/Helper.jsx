@@ -20,7 +20,7 @@ export const columnNamesInCategory = () => {
 const mapCNinCategoryToObj = {
   title: "",
   titleEng: "",
-  genreList: "",
+  genre_list: "",
   usageyn: "",
   priority: "",
 };

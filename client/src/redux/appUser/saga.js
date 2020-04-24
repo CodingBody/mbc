@@ -1,5 +1,5 @@
 import { all, call, takeLatest, put } from "redux-saga/effects";
-import { appUserActionTypes, fetchUserSuccess } from "./appUserActions";
+import { appUserActionTypes, fetchUserSuccess } from "./actions";
 import axios from "axios";
 
 // api

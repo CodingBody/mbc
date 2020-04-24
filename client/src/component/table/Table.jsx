@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {
   TableBody,
   TableContainer,
-  TableHeader,
+  ColumnNames,
   Info,
 } from "../../styled-component/Table";
 import EditIcon from "@material-ui/icons/Edit";
@@ -11,18 +11,15 @@ import SearchBar from "../searchBar/SearchBar";
 import { HeadTwo } from "../../styled-component/Text";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchUserStart } from "../../redux/appUser/appUserActions";
 import uuid4 from "uuid4";
 import { Button } from "@material-ui/core";
-import {
-  toggleCreateModal,
-  toggleEditModal,
-} from "../../redux/modal/modalActions";
-import { populateRecordOnEdit } from "../../redux/cud/cudActions";
+import { toggleCreateModal, toggleEditModal } from "../../redux/modal/actions";
+import { populateRecordOnEdit } from "../../redux/cud/actions";
 import { renderTableHeader, getColumns } from "../../utils/Helper";
-import { populateColumnNamesOnCreete } from "./../../redux/cud/cudActions";
+import { populateColumnNamesOnCreete } from "../../redux/cud/actions";
 import CreateModal from "../Modals/create/CreateModal";
 import EditModal from "../Modals/edit/EditModal";
+import { fetchRecordStart } from "../../redux/main/actions";
 
 const Container = styled.div`
   display: grid;
@@ -62,9 +59,9 @@ const SdEditIcon = styled(EditIcon)`
 
 const Table = ({
   match,
-  fetchUser,
-  users,
-  tableHeader,
+  fetchRecord,
+  data,
+  columnNames,
   toggleCreate,
   toggleEdit,
   populateRecordOnEdit,
@@ -76,14 +73,14 @@ const Table = ({
     setInput(e.target.value);
   };
 
-  const showOneRecord = (user, tableHeader) => {
+  const showOneRecord = (user, columnNames) => {
     const userPropsArray = Object.values(user);
 
     return (
       <TableBody>
         <td>
           <SdEditIcon
-            onClick={() => handleEditClick(userPropsArray, tableHeader)}
+            onClick={() => handleEditClick(userPropsArray, columnNames)}
           />
         </td>
         {userPropsArray.map((props) => (
@@ -95,11 +92,11 @@ const Table = ({
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    fetchUser(input);
+    fetchRecord({ input, category });
   };
 
-  const handleEditClick = (record, tableHeader) => {
-    const formattedRecord = tableHeader.reduce((acc, value) => {
+  const handleEditClick = (record, columnNames) => {
+    const formattedRecord = columnNames.reduce((acc, value) => {
       acc[value] = "";
       return acc;
     }, {});
@@ -123,10 +120,10 @@ const Table = ({
   const { category } = match.params;
 
   if (!category) return <div>dd</div>;
-  if (users)
+  if (data)
     return (
       <React.Fragment>
-        <CreateModal categor={category} />
+        <CreateModal category={category} />
         <EditModal category={category} />
         <Container>
           <Header>
@@ -150,22 +147,22 @@ const Table = ({
               input={input}
             />
             <TableContainer cellspacing="0">
-              <TableHeader>
+              <ColumnNames category={category}>
                 <tr>
                   <th></th>
-                  {tableHeader.map((header) => (
+                  {columnNames.map((header) => (
                     <th key={uuid4()}>{header}</th>
                   ))}
                 </tr>
-              </TableHeader>
+              </ColumnNames>
               <tbody>
-                {Array.isArray(users)
-                  ? users
+                {Array.isArray(data)
+                  ? data
                       .map((user) => (
-                        <TableBody key={uuid4()}>
+                        <TableBody category={category} key={uuid4()}>
                           <td>
                             <SdEditIcon
-                              onClick={() => handleEditClick(user, tableHeader)}
+                              onClick={() => handleEditClick(user, columnNames)}
                             />
                           </td>
                           {user.map((u) => (
@@ -174,7 +171,7 @@ const Table = ({
                         </TableBody>
                       ))
                       .slice(0, 10)
-                  : showOneRecord(users, tableHeader)}
+                  : showOneRecord(data, columnNames)}
               </tbody>
             </TableContainer>
             <Info>
@@ -188,8 +185,8 @@ const Table = ({
 
   return (
     <React.Fragment>
-      <CreateModal />
-      <EditModal />
+      <CreateModal category={category} />
+      <EditModal category={category} />
       <Container>
         <Header>
           <div>
@@ -212,7 +209,7 @@ const Table = ({
             input={input}
           />
           <TableContainer cellspacing="0">
-            <TableHeader>{renderTableHeader(category)}</TableHeader>
+            <ColumnNames>{renderTableHeader(category)}</ColumnNames>
           </TableContainer>
           <Info>
             <div>1 row selected </div>
@@ -225,12 +222,13 @@ const Table = ({
 };
 
 const mapStateToProps = (state) => ({
-  users: state.appUser.user,
-  tableHeader: state.appUser.tableHeader,
+  data: state.main.data,
+  columnNames: state.main.columnNames,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchUser: (userId) => dispatch(fetchUserStart(userId)),
+  fetchRecord: ({ id, category }) =>
+    dispatch(fetchRecordStart({ id, category })),
   toggleCreate: () => dispatch(toggleCreateModal()),
   toggleEdit: () => dispatch(toggleEditModal()),
   populateRecordOnEdit: (record) => dispatch(populateRecordOnEdit(record)),

@@ -1,10 +1,6 @@
 import { all, call, takeLatest, put } from "redux-saga/effects";
 import axios from "axios";
-import {
-  authActionTypes,
-  userLoginSuccess,
-  userLoginfailure,
-} from "./authActions";
+import { authActionTypes, userLoginSuccess, userLoginfailure } from "./actions";
 
 // api
 export function* logUserIn({ payload }) {

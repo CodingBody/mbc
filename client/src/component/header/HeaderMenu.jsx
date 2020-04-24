@@ -8,7 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
-import { toggleHelpModal } from "../../redux/modal/modalActions";
+import { toggleHelpModal } from "../../redux/modal/actions";
 import { connect } from "react-redux";
 
 function HeaderMenu({ admin = false, toggleHelpModal }) {

@@ -1,4 +1,4 @@
-import { appUserActionTypes } from "./appUserActions";
+import { appUserActionTypes } from "./actions";
 
 const initialState = {
   user: null,

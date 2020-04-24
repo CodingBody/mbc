@@ -22,11 +22,15 @@ export const TableContainer = styled.table`
   border-collapse: collapse;
 `;
 
-export const TableHeader = styled.thead`
+export const ColumnNames = styled.thead`
+
   tr {
     /* display: flex; */
     display: grid;
-    grid-template-columns: repeat(10, 1fr);
+    grid-template-columns: ${(props) =>
+      props.category === "Category" ? `repeat(6, 1fr)` : `repeat(10, 1fr)`};
+    }
+    
   }
 
   th {
@@ -39,7 +43,10 @@ export const TableHeader = styled.thead`
 
 export const TableBody = styled.tr`
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: ${(props) =>
+    props.category === "Category" ? `repeat(6, 1fr)` : `repeat(10, 1fr)`};
+    }
+    
 
   td:first-child {
     border: 1px solid #cecece73;

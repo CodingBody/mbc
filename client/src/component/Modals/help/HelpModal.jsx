@@ -4,7 +4,7 @@ import Slide from "@material-ui/core/Slide";
 import styled from "styled-components";
 import { HeadTwo, Close } from "../../../styled-component/Text";
 import { Text } from "../../../styled-component/Text";
-import { toggleHelpModal } from "../../../redux/modal/modalActions";
+import { toggleHelpModal } from "../../../redux/modal/actions";
 import { connect } from "react-redux";
 
 const Container = styled.div`
