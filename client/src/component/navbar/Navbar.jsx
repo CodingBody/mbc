@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import StopRoundedIcon from "@material-ui/icons/StopRounded";
 
 const Container = styled.div`
-  background: #2c2c2c;
+  background: #efefef;
   grid-column: 1 / 3;
 `;
 
@@ -21,7 +21,7 @@ const LinkBox = styled.li`
   transition: background-color 0.3s ease;
 
   :hover {
-    background-color: #353535;
+    background-color: #fff;
   }
 
   :active {
@@ -29,14 +29,18 @@ const LinkBox = styled.li`
   }
 
   div {
-    padding: 9px 0 9px 10px;
+    padding: 2rem 0 2rem 10px;
     flex-grow: 4;
     display: flex;
     justify-content: flex-start;
     svg {
       font-size: 2.3rem;
       margin-right: 1rem;
-      color: #fff;
+      color: #0e1a6f;
+    }
+
+    p {
+      color: #0e1a6f;
     }
   }
 
@@ -51,7 +55,7 @@ const LinkBox = styled.li`
       align-items: center;
       margin-bottom: -3px;
       i {
-        border: solid #ffffff94;
+        border: solid #0e1a6f;
         border-width: 0 3px 3px 0;
         display: inline-block;
         padding: 4px;
@@ -104,7 +108,7 @@ const SubLink = styled.ul`
     transition: background-color 0.3s ease;
     align-items: center;
     justify-content: flex-start;
-    color: white;
+    color: #0e1a6f;
     height: 33px;
     display: flex;
 

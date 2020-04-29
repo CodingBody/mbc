@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import Table from "../table/Table";
 
 const Container = styled.div`
-  background: #eee;
+  background: #fff;
   /* !to do  */
   padding: 20px;
   grid-column: 3 / 14;
