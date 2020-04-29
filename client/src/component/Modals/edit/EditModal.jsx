@@ -8,14 +8,25 @@ import { EditModalContainer } from "../../../styled-component/ModalContainer";
 import { MuiButton } from "../../../styled-component/Button";
 import AppUserForm from "../../form/AppUserForm";
 import CategoryForm from "./../../form/CategoryForm";
+import {
+  deleteRecordStart,
+  updateRecordStart,
+} from "./../../../redux/main/actions";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-const EditModal = ({ open, setOpen, category, record = false }) => {
+const EditModal = ({
+  open,
+  updateRecordStart,
+  setOpen,
+  deleteRecordStart,
+  category,
+  record = false,
+}) => {
   const [form, setForm] = React.useState(null);
-  console.log(record, "record");
+  console.log(record, "record in edit");
   React.useEffect(() => {
     if (record !== false) setForm(record);
     for (let property in record) {
@@ -25,6 +36,13 @@ const EditModal = ({ open, setOpen, category, record = false }) => {
     }
   }, [record]);
 
+  const handleDelete = () => {
+    if (record.id) {
+      let id = record.id;
+      deleteRecordStart({ id, category });
+    }
+  };
+
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -32,6 +50,7 @@ const EditModal = ({ open, setOpen, category, record = false }) => {
     });
   };
 
+  console.log(form, "form");
   if (!record) return <React.Fragment></React.Fragment>;
   return (
     <div>
@@ -63,12 +82,26 @@ const EditModal = ({ open, setOpen, category, record = false }) => {
               >
                 Cancel
               </MuiButton>
-              <MuiButton bg="inherit" size="large" cr="#fb3333bf" border="#000">
+              <MuiButton
+                onClick={handleDelete}
+                bg="inherit"
+                size="large"
+                cr="#fb3333bf"
+                border="#000"
+              >
                 Delete
               </MuiButton>
             </div>
             <div>
-              <MuiButton bg="inherit" size="large" cr="#87ceeb" border="#000">
+              <MuiButton
+                onClick={() =>
+                  updateRecordStart({ id: record.id, category, form })
+                }
+                bg="inherit"
+                size="large"
+                cr="#87ceeb"
+                border="#000"
+              >
                 Save
               </MuiButton>
             </div>
@@ -81,11 +114,13 @@ const EditModal = ({ open, setOpen, category, record = false }) => {
 
 const mapStateToProps = (state) => ({
   open: state.modal.openEdit,
-  record: state.cud.edit.record,
+  record: state.main.edit.record,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setOpen: () => dispatch(toggleEditModal()),
+  deleteRecordStart: (record) => dispatch(deleteRecordStart(record)),
+  updateRecordStart: (record) => dispatch(updateRecordStart(record)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditModal);

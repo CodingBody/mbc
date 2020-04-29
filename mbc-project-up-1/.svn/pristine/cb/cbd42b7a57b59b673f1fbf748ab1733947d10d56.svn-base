@@ -1,0 +1,19 @@
+코드리뷰
+
+in index.js, webserver, db start, 
+
+
+in web server, express router eable 하는 로직 작성
+
+all routers lives in router.js 
+
+each router reacts for get post delete put request
+ will create fns for each
+그에 따른 fn 은 controllers folder 에 있다
+
+in controllar, will call db_apis
+
+in db_apis, wil query to db and return to controllar
+then controller will give data to front-end
+
+user click -> action -> redux -> redux saga -> express.router through axios -> oracle db

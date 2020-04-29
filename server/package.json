@@ -1,0 +1,32 @@
+{
+  "name": "mbc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "cd .. && cd client && npm start",
+    "server": "nodemon index.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodingBody/mbc.git"
+  },
+  "author": "Minsung Kim, Platform Team, Salin",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^5.1.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "oracledb": "^4.2.0",
+    "body-parser": "^1.19.0",
+    "morgan": "^1.9.1",
+    "uuid4": "^1.1.4",
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.1",
+    "express-validator": "^6.4.0",
+    "jsonwebtoken": "^8.5.1"
+  }
+}

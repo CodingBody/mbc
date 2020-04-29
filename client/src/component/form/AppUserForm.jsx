@@ -5,67 +5,57 @@ function AppUserForm({ handleChange, form }) {
   return (
     <form noValidate autoComplete="off" className="form">
       <StyledTextField
-        name="empno"
+        name="username"
         onChange={handleChange}
-        label="empno"
+        label="username"
         variant="outlined"
-        value={form.empno}
+        value={form.username}
       />
       <StyledTextField
-        name="ename"
+        name="account"
         onChange={handleChange}
-        label="ename"
+        label="account"
         variant="outlined"
-        value={form.ename}
+        value={form.account}
       />
       <StyledTextField
-        name="job"
+        name="password"
         onChange={handleChange}
-        label="job"
+        label="password"
+        type="password"
         variant="outlined"
-        value={form.job}
+        value={form.password ? form.password : ""}
       />
       <StyledTextField
-        name="mgr"
+        name="password_check"
         onChange={handleChange}
-        label="mgr"
+        label="password_check"
         variant="outlined"
-        value={form.mgr}
+        type="password"
+        value={form.password_check ? form.password_check : ""}
+      />
+
+      <StyledTextField
+        name="status"
+        onChange={handleChange}
+        label="status"
+        variant="outlined"
+        value={form.status}
       />
       <StyledTextField
-        name="hiredate"
+        name="sex"
         onChange={handleChange}
-        label="hiredate"
+        label="sex"
         variant="outlined"
-        value={form.hiredate}
+        value={form.sex}
       />
+
       <StyledTextField
-        name="sal"
+        name="tag"
         onChange={handleChange}
-        label="sal"
+        label="tag"
         variant="outlined"
-        value={form.sal}
-      />
-      <StyledTextField
-        name="comm"
-        onChange={handleChange}
-        label="comm"
-        variant="outlined"
-        value={form.comm}
-      />
-      <StyledTextField
-        name="deptno"
-        onChange={handleChange}
-        label="deptno"
-        variant="outlined"
-        value={form.deptno}
-      />
-      <StyledTextField
-        name="seq"
-        onChange={handleChange}
-        label="seq"
-        variant="outlined"
-        value={form.seq}
+        value={form.tag}
       />
     </form>
   );

@@ -1,63 +1,74 @@
 import React from "react";
+import CategoryForm from "./../component/form/CategoryForm";
+import AppUserForm from "../component/form/AppUserForm";
+import { v4 as uuid4 } from "uuid";
 
-export const columnNamesInCategory = () => {
-  return (
-    <tr>
-      <th></th>
-      <th>Title</th>
-      <th>Title Eng</th>
-      <th>Genre List</th>
-      <th>usageyn</th>
-      <th>Priority</th>
-      <th>Created</th>
-      <th>Created By</th>
-      <th>Updated</th>
-      <th>Updated By</th>
-    </tr>
-  );
+// !! optimazation, distructuring
+// alter when number of columns has changed
+export const checkFormType = ({ category, form }) => {
+  console.log(category, "category");
+  switch (category) {
+    case "category":
+      const { title, priority, genre_list, usageyn } = form;
+      return JSON.stringify({
+        title,
+        priority,
+        genre_list,
+        usageyn,
+      });
+    case "appuser":
+      const {
+        username,
+        account,
+        password,
+        password_check,
+        status,
+        sex,
+        tag,
+      } = form;
+      if (password !== password_check) {
+        alert("your passwords are not equal");
+      }
+      return JSON.stringify({
+        username,
+        account,
+        password,
+        status,
+        sex,
+        tag,
+      });
+    default:
+      return;
+  }
 };
 
-const mapCNinCategoryToObj = {
-  title: "",
-  titleEng: "",
-  genre_list: "",
-  usageyn: "",
-  priority: "",
+export const renderForm = ({ category, form, handleChange }) => {
+  switch (category) {
+    case "category":
+      return <CategoryForm form={form} handleChange={handleChange} />;
+    case "appuser":
+      return <AppUserForm form={form} handleChange={handleChange} />;
+    default:
+      return;
+  }
 };
 
-export const columnNamesInAppUser = () => {
-  return (
-    <tr>
-      <th></th>
-      <th>empno</th>
-      <th>ename</th>
-      <th>job</th>
-      <th>mgr</th>
-      <th>hiredate</th>
-      <th>sal</th>
-      <th>comm</th>
-      <th>deptno</th>
-      <th>seq</th>
-    </tr>
-  );
-};
-const mapCNinAppUserToObj = {
-  empno: "",
-  ename: "",
-  job: "",
-  mgr: "",
-  hiredate: "",
-  sal: "",
-  comm: "",
-  deptno: "",
-  seq: "",
+export const renderCells = (category) => {
+  switch (category) {
+    case "category":
+      return `repeat(5, 1fr)`;
+    case "appuser":
+      return `repeat(6, 1fr)`;
+    default:
+      return `repeat(8, 1fr)`;
+  }
 };
 
 export const renderTableHeader = (category) => {
   switch (category) {
-    case "Category":
+    case "category":
       return columnNamesInCategory();
-    case "AppUser":
+    case "appuser":
       return columnNamesInAppUser();
     default:
       return;
@@ -66,42 +77,81 @@ export const renderTableHeader = (category) => {
 
 export const getColumns = (category) => {
   switch (category) {
-    case "Category":
+    case "category":
       return mapCNinCategoryToObj;
-    case "AppUser":
+    case "appuser":
       return mapCNinAppUserToObj;
     default:
       return;
   }
 };
 
-//  currently not using
-// const mapForm = () => {
-//   let arr = [];
+const columnNamesInCategory = () => {
+  return (
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Genre List</th>
+      <th>usageyn</th>
+      <th>Priority</th>
+    </tr>
+  );
+};
 
-//   for (let property in form) {
-//     if (property === "hiredate")
-//       arr.push(
-//         <StyledTextField
-//           name={`${property}`}
-//           label={property}
-//           onChange={handleChange}
-//           variant="outlined"
-//           value={form[property]}
-//         />
-//       );
-//     else {
-//       arr.push(
-//         <StyledTextField
-//           name={`${property}`}
-//           onChange={handleChange}
-//           label={property}
-//           type="text"
-//           variant="outlined"
-//           value={form[property]}
-//         />
-//       );
-//     }
-//   }
-//   return arr;
-// };
+const mapCNinCategoryToObj = {
+  title: "",
+  genre_list: "",
+  usageyn: "",
+  priority: "",
+};
+
+// omitted password, avatar_index
+const columnNamesInAppUser = () => {
+  return (
+    <tr>
+      <th></th>
+      <th>username</th>
+      <th>account</th>
+      <th>status</th>
+      <th>sex</th>
+      <th>tag</th>
+    </tr>
+  );
+};
+const mapCNinAppUserToObj = {
+  username: "",
+  account: "",
+  password: "",
+  password_check: "",
+  status: "",
+  sex: "",
+  tag: "",
+};
+
+export const removeLastItemInArr = (arr, category) => {
+  if (arr) {
+    switch (category) {
+      case "category":
+        const res = arr.map((ar) => <th key={uuid4()}>{ar}</th>).slice(0, 4);
+        return res;
+      case "appuser":
+        return arr.map((ar) => <th key={uuid4()}>{ar}</th>).slice(0, 5);
+      default:
+        return;
+    }
+  }
+};
+
+export const removeLast = (arr, category) => {
+  if (arr) {
+    switch (category) {
+      case "category":
+        const res = arr.map((ar) => <td key={uuid4()}>{ar}</td>).slice(0, 4);
+        return res;
+      case "appuser":
+        return arr.map((ar) => <td key={uuid4()}>{ar}</td>).slice(0, 5);
+      default:
+        return;
+    }
+  }
+};

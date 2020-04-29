@@ -1,4 +1,37 @@
 import styled from "styled-components";
+import { renderCells } from "../utils/Helper";
+
+export const Container = styled.div`
+  display: grid;
+  border-radius: 10px;
+  grid-template-rows: auto auto;
+`;
+
+export const Header = styled.div`
+  background: #2c2c2c;
+  color: skyblue;
+
+  letter-spacing: 0.1rem;
+  border: 2px groove #cecece73;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+`;
+
+export const Main = styled.div`
+  background: #fff;
+  padding: 1.5rem;
+  border-left: 2px groove #cecece73;
+  border-right: 2px groove #cecece73;
+  border-bottom: 2px groove #cecece73;
+
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const SearchBarBox = styled.div`
   display: flex;
@@ -23,14 +56,10 @@ export const TableContainer = styled.table`
 `;
 
 export const ColumnNames = styled.thead`
-
   tr {
     /* display: flex; */
     display: grid;
-    grid-template-columns: ${(props) =>
-      props.category === "Category" ? `repeat(6, 1fr)` : `repeat(10, 1fr)`};
-    }
-    
+    grid-template-columns: ${(props) => renderCells(props.category)};
   }
 
   th {
@@ -43,10 +72,7 @@ export const ColumnNames = styled.thead`
 
 export const TableBody = styled.tr`
   display: grid;
-  grid-template-columns: ${(props) =>
-    props.category === "Category" ? `repeat(6, 1fr)` : `repeat(10, 1fr)`};
-    }
-    
+  grid-template-columns: ${(props) => renderCells(props.category)};
 
   td:first-child {
     border: 1px solid #cecece73;

@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 export const navbarItem = [
   {
     link: "Home",
-    params: "Home",
+    params: "home",
     icon: <HomeOutlinedIcon />,
     id: uuidv4(),
   },
@@ -25,7 +25,7 @@ export const navbarItem = [
   },
   {
     link: "Store",
-    params: "Store",
+    params: "store",
 
     icon: <LanguageIcon />,
     id: uuidv4(),
@@ -33,7 +33,7 @@ export const navbarItem = [
   },
   {
     link: "Machine",
-    params: "Machine",
+    params: "machine",
 
     icon: <ControlCameraIcon />,
     id: uuidv4(),
@@ -41,7 +41,7 @@ export const navbarItem = [
   },
   {
     link: "Category",
-    params: "Category",
+    params: "category",
 
     icon: <CategoryIcon />,
     id: uuidv4(),
@@ -49,7 +49,7 @@ export const navbarItem = [
   },
   {
     link: "Content",
-    params: "Content",
+    params: "content",
 
     icon: <MovieFilterIcon />,
     id: uuidv4(),
@@ -57,14 +57,14 @@ export const navbarItem = [
   },
   {
     link: "Program Table",
-    params: "ProgramTable",
+    params: "programTable",
     icon: <DateRangeIcon />,
     id: uuidv4(),
     subLink: null,
   },
   {
     link: "App User",
-    params: "AppUser",
+    params: "appuser",
 
     icon: <DateRangeIcon />,
     id: uuidv4(),
@@ -72,14 +72,14 @@ export const navbarItem = [
   },
   {
     link: "App Manage",
-    params: "AppManage",
+    params: "appmanage",
     icon: <DateRangeIcon />,
     id: uuidv4(),
     subLink: ["Event Banner", "Notice", "Artist"],
   },
   {
     link: "Asset Upload",
-    params: "AssetUpload",
+    params: "assetupload",
 
     icon: <DateRangeIcon />,
     id: uuidv4(),
@@ -87,7 +87,7 @@ export const navbarItem = [
   },
   {
     link: "Statistics",
-    params: "Statistics",
+    params: "statistics",
 
     icon: <DateRangeIcon />,
     id: uuidv4(),
@@ -96,7 +96,7 @@ export const navbarItem = [
   },
   {
     link: "Log Manage",
-    params: "LogManage",
+    params: "logmanage",
 
     icon: <DateRangeIcon />,
     id: uuidv4(),
@@ -104,7 +104,7 @@ export const navbarItem = [
   },
   {
     link: "Administration",
-    params: "Administration",
+    params: "administration",
 
     icon: <DateRangeIcon />,
     id: uuidv4(),

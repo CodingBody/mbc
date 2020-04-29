@@ -11,47 +11,24 @@ import SearchBar from "../searchBar/SearchBar";
 import { HeadTwo } from "../../styled-component/Text";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import uuid4 from "uuid4";
+import { v4 as uuid4 } from "uuid";
 import { Button } from "@material-ui/core";
 import { toggleCreateModal, toggleEditModal } from "../../redux/modal/actions";
-import { populateRecordOnEdit } from "../../redux/cud/actions";
-import { renderTableHeader, getColumns } from "../../utils/Helper";
-import { populateColumnNamesOnCreete } from "../../redux/cud/actions";
+import {
+  renderTableHeader,
+  getColumns,
+  removeLast,
+  removeLastItemInArr,
+} from "../../utils/Helper";
 import CreateModal from "../Modals/create/CreateModal";
 import EditModal from "../Modals/edit/EditModal";
-import { fetchRecordStart } from "../../redux/main/actions";
-
-const Container = styled.div`
-  display: grid;
-  border-radius: 10px;
-  grid-template-rows: auto auto;
-`;
-
-const Header = styled.div`
-  background: #2c2c2c;
-  color: skyblue;
-
-  letter-spacing: 0.1rem;
-  border: 2px groove #cecece73;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-`;
-
-const Main = styled.div`
-  background: #fff;
-  padding: 1.5rem;
-  border-left: 2px groove #cecece73;
-  border-right: 2px groove #cecece73;
-  border-bottom: 2px groove #cecece73;
-
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
+import {
+  fetchRecordStart,
+  populateRecordOnEdit,
+  populateColumnNamesOnCreate,
+  clearTableOnRouteChange,
+} from "../../redux/main/actions";
+import { Container, Header, Main } from "./../../styled-component/Table";
 
 const SdEditIcon = styled(EditIcon)`
   cursor: pointer;
@@ -64,30 +41,23 @@ const Table = ({
   columnNames,
   toggleCreate,
   toggleEdit,
+  clearTableOnRouteChange,
   populateRecordOnEdit,
   populateColumnNames,
 }) => {
   const [input, setInput] = React.useState("");
 
+  const { category } = match.params;
+
+  React.useEffect(() => {
+    if (category !== null) {
+      console.log("runed");
+      clearTableOnRouteChange();
+    }
+  }, [category]);
+
   const handleSeachbarChange = (e) => {
     setInput(e.target.value);
-  };
-
-  const showOneRecord = (user, columnNames) => {
-    const userPropsArray = Object.values(user);
-
-    return (
-      <TableBody>
-        <td>
-          <SdEditIcon
-            onClick={() => handleEditClick(userPropsArray, columnNames)}
-          />
-        </td>
-        {userPropsArray.map((props) => (
-          <td key={uuid4()}>{props}</td>
-        ))}
-      </TableBody>
-    );
   };
 
   const handleSearchSubmit = (e) => {
@@ -96,6 +66,8 @@ const Table = ({
   };
 
   const handleEditClick = (record, columnNames) => {
+    console.log(record, "record in table");
+    console.log(columnNames, "cnames in table");
     const formattedRecord = columnNames.reduce((acc, value) => {
       acc[value] = "";
       return acc;
@@ -117,9 +89,10 @@ const Table = ({
     toggleCreate(obj);
   };
 
-  const { category } = match.params;
+  console.log(data, "data");
 
   if (!category) return <div>dd</div>;
+
   if (data)
     return (
       <React.Fragment>
@@ -128,7 +101,7 @@ const Table = ({
         <Container>
           <Header>
             <div>
-              <HeadTwo>{category}</HeadTwo>
+              <HeadTwo>{category.toUpperCase()}</HeadTwo>
             </div>
             <div>
               <Button
@@ -150,28 +123,23 @@ const Table = ({
               <ColumnNames category={category}>
                 <tr>
                   <th></th>
-                  {columnNames.map((header) => (
-                    <th key={uuid4()}>{header}</th>
-                  ))}
+                  {removeLastItemInArr(columnNames, category)}
                 </tr>
               </ColumnNames>
               <tbody>
-                {Array.isArray(data)
-                  ? data
-                      .map((user) => (
-                        <TableBody category={category} key={uuid4()}>
-                          <td>
-                            <SdEditIcon
-                              onClick={() => handleEditClick(user, columnNames)}
-                            />
-                          </td>
-                          {user.map((u) => (
-                            <td key={uuid4()}>{u}</td>
-                          ))}
-                        </TableBody>
-                      ))
-                      .slice(0, 10)
-                  : showOneRecord(data, columnNames)}
+                {data &&
+                  data
+                    .map((record) => (
+                      <TableBody category={category} key={uuid4()}>
+                        <td>
+                          <SdEditIcon
+                            onClick={() => handleEditClick(record, columnNames)}
+                          />
+                        </td>
+                        {removeLast(record, category)}
+                      </TableBody>
+                    ))
+                    .slice(0, 10)}
               </tbody>
             </TableContainer>
             <Info>
@@ -190,7 +158,7 @@ const Table = ({
       <Container>
         <Header>
           <div>
-            <HeadTwo>{category}</HeadTwo>
+            <HeadTwo>{category.toUpperCase()}</HeadTwo>
           </div>
           <div>
             <Button
@@ -209,7 +177,9 @@ const Table = ({
             input={input}
           />
           <TableContainer cellspacing="0">
-            <ColumnNames>{renderTableHeader(category)}</ColumnNames>
+            <ColumnNames category={category}>
+              {renderTableHeader(category)}
+            </ColumnNames>
           </TableContainer>
           <Info>
             <div>1 row selected </div>
@@ -233,7 +203,8 @@ const mapDispatchToProps = (dispatch) => ({
   toggleEdit: () => dispatch(toggleEditModal()),
   populateRecordOnEdit: (record) => dispatch(populateRecordOnEdit(record)),
   populateColumnNames: (record) =>
-    dispatch(populateColumnNamesOnCreete(record)),
+    dispatch(populateColumnNamesOnCreate(record)),
+  clearTableOnRouteChange: () => dispatch(clearTableOnRouteChange()),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Table));
