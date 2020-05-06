@@ -11,6 +11,8 @@ export const mainActionTypes = {
   UPDATE_RECORD_START: "UPDATE_RECORD_START",
   UPDATE_RECORD_SUCCESS: "UPDATE_RECORD_SUCCESS",
   CLEAR_TABLE: "CLEAR_TABLE",
+  LOADING_START: "LOADING_START",
+  LOADING_FINISH: "LOADING_FINISH",
 };
 
 export const clearTableOnRouteChange = () => ({
@@ -70,4 +72,12 @@ export const updateRecordStart = (record) => ({
 export const updateRecordSuccess = (record) => ({
   type: mainActionTypes.UPDATE_RECORD_SUCCESS,
   payload: record,
+});
+
+export const loadingStart = () => ({
+  type: mainActionTypes.LOADING_START,
+});
+
+export const loadingFinish = () => ({
+  type: mainActionTypes.LOADING_FINISH,
 });

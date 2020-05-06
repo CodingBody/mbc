@@ -8,6 +8,15 @@ import { EditModalContainer } from "./../../../styled-component/ModalContainer";
 import { MuiButton } from "../../../styled-component/Button";
 import { createRecordStart } from "../../../redux/main/actions";
 import { renderForm } from "./../../../utils/Helper";
+import {
+  SpaceBetween,
+  ColumnDirection,
+} from "../../../styled-component/Layout";
+import {
+  white,
+  textPrimary,
+  primaryHover,
+} from "./../../../styled-component/Variable";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -46,19 +55,18 @@ const CreateModal = ({ open, setOpen, create, category, record }) => {
         keepMounted
         onClose={() => setOpen()}
       >
-        <EditModalContainer>
-          <div className="header">
-            <HeadTwo color="#eee">Create {category}</HeadTwo>
+        <ColumnDirection width="49rem">
+          <SpaceBetween p={2} mt={1} mb={1} cr={textPrimary}>
+            <HeadTwo>Create {category}</HeadTwo>
             <Close onClick={() => setOpen()}>x</Close>
-          </div>
+          </SpaceBetween>
           {category && renderForm({ category, form, handleChange })}
-          <div className="buttonGroup">
+          <SpaceBetween p={2}>
             <MuiButton
               bg="inherit"
               onClick={() => setOpen()}
-              size="large"
-              cr="#eee"
-              border="#000"
+              size="1.2rem"
+              cr={textPrimary}
             >
               Cancel
             </MuiButton>
@@ -66,14 +74,13 @@ const CreateModal = ({ open, setOpen, create, category, record }) => {
             <MuiButton
               onClick={handleSubmit}
               bg="inherit"
-              size="large"
+              size="1.2rem"
               cr="#87ceeb"
-              border="#000"
             >
               Save
             </MuiButton>
-          </div>
-        </EditModalContainer>
+          </SpaceBetween>
+        </ColumnDirection>
       </Dialog>
     </div>
   );

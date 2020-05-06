@@ -1,24 +1,24 @@
 import React from "react";
-import { StyledTextField } from "./../../styled-component/ModalContainer";
+import { StdTextFieldOne } from "./../../styled-component/Input";
 
 function AppUserForm({ handleChange, form }) {
   return (
     <form noValidate autoComplete="off" className="form">
-      <StyledTextField
+      <StdTextFieldOne
         name="username"
         onChange={handleChange}
         label="username"
         variant="outlined"
         value={form.username}
       />
-      <StyledTextField
+      <StdTextFieldOne
         name="account"
         onChange={handleChange}
         label="account"
         variant="outlined"
         value={form.account}
       />
-      <StyledTextField
+      <StdTextFieldOne
         name="password"
         onChange={handleChange}
         label="password"
@@ -26,7 +26,7 @@ function AppUserForm({ handleChange, form }) {
         variant="outlined"
         value={form.password ? form.password : ""}
       />
-      <StyledTextField
+      <StdTextFieldOne
         name="password_check"
         onChange={handleChange}
         label="password_check"
@@ -35,14 +35,14 @@ function AppUserForm({ handleChange, form }) {
         value={form.password_check ? form.password_check : ""}
       />
 
-      <StyledTextField
+      <StdTextFieldOne
         name="status"
         onChange={handleChange}
         label="status"
         variant="outlined"
         value={form.status}
       />
-      <StyledTextField
+      <StdTextFieldOne
         name="sex"
         onChange={handleChange}
         label="sex"
@@ -50,7 +50,7 @@ function AppUserForm({ handleChange, form }) {
         value={form.sex}
       />
 
-      <StyledTextField
+      <StdTextFieldOne
         name="tag"
         onChange={handleChange}
         label="tag"

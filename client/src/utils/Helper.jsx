@@ -90,10 +90,10 @@ const columnNamesInCategory = () => {
   return (
     <tr>
       <th></th>
-      <th>Title</th>
-      <th>Genre List</th>
+      <th>title</th>
+      <th>priority</th>
+      <th>genre List</th>
       <th>usageyn</th>
-      <th>Priority</th>
     </tr>
   );
 };

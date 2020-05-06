@@ -3,15 +3,14 @@ import HomePage from "./layout/homepage/HomePage";
 import Dashboard from "./layout/dashboard/Dashboard";
 import { Route } from "react-router-dom";
 import HelpModal from "./component/Modals/help/HelpModal";
-import { withRouter } from "react-router-dom";
 
-function App({ match }) {
+function App() {
   return (
     <div>
       <Route path exact path="/" component={HomePage} />
 
       <Route
-        path="/dashboard/mbc/"
+        path="/dashboard/mbc/:category"
         render={() => (
           <React.Fragment>
             <Dashboard />
@@ -23,4 +22,4 @@ function App({ match }) {
   );
 }
 
-export default withRouter(App);
+export default App;

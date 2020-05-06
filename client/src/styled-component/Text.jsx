@@ -7,7 +7,7 @@ export const HeadOne = styled.h1`
 `;
 
 export const HeadTwo = styled.h2`
-  font-weight: 400;
+  font-weight: bold;
   color: ${(props) => props.color};
   font-size: ${(props) => (props.size ? `${props.size}rem` : "1.6rem")};
 `;
@@ -19,7 +19,8 @@ export const Text = styled.p`
 `;
 
 export const Close = styled.p`
-  font-size: 1.6rem;
-  color: ${(props) => (props.color ? props.color : "white")};
+  font-size: 1.7rem;
+  color: ${(props) => props.color};
   cursor: pointer;
+  font-weight: bold;
 `;

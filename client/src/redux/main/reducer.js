@@ -9,17 +9,30 @@ const initialState = {
   create: {
     record: null,
   },
+  loading: false,
 };
 
 const main = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
+    case mainActionTypes.LOADING_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case mainActionTypes.LOADING_FINISH:
+      return {
+        ...state,
+        loading: false,
+      };
+
     case mainActionTypes.FETCH_RECORD_SUCCESS:
       return {
         ...state,
         data: payload.record,
         columnNames: payload.columnNames,
       };
+
     case mainActionTypes.CREATE_RECORD_SUCCESS:
       return {
         ...state,

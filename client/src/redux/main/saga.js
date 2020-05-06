@@ -6,6 +6,8 @@ import {
   noRecordInRedux,
   deleteRecordSuccess,
   updateRecordSuccess,
+  loadingStart,
+  loadingFinish,
 } from "./actions";
 import axios from "axios";
 import { checkFormType } from "./../../utils/Helper";
@@ -14,8 +16,8 @@ import { checkFormType } from "./../../utils/Helper";
 export function* createRecord({ payload }) {
   const data = (state) => state.main.data;
   try {
+    yield put(loadingStart());
     const { form, category } = payload;
-    console.log(form, category, "form cre");
 
     let ctg = category.toLowerCase();
 
@@ -40,6 +42,8 @@ export function* createRecord({ payload }) {
       const res = yield Object.values(record);
 
       yield put(createRecordSuccess({ columnNames, record: res }));
+      yield put(loadingFinish());
+
       return;
     }
 
@@ -47,10 +51,12 @@ export function* createRecord({ payload }) {
       const res = yield Object.values(record);
 
       yield put(noRecordInRedux({ columnNames, record: res }));
+      yield put(loadingFinish());
       return;
     }
   } catch (err) {
     console.error(err);
+    yield put(loadingFinish());
   }
 }
 
@@ -58,6 +64,8 @@ export function* createRecord({ payload }) {
 // @@ coming value: array or object
 export function* fetchDataFromDb({ payload }) {
   try {
+    yield put(loadingStart());
+
     const { id, category } = payload;
     let ctg = category.toLowerCase();
     let res;
@@ -74,14 +82,17 @@ export function* fetchDataFromDb({ payload }) {
       const record = data.map((d) => Object.values(d));
 
       yield put(fetchRecordSuccess({ record, columnNames }));
+      yield put(loadingFinish());
     } else {
       const columnNames = Object.keys(data);
       const record = Object.values(data);
 
       yield put(fetchRecordSuccess({ record: [record], columnNames }));
+      yield put(loadingFinish());
     }
   } catch (err) {
     console.error(err);
+    yield put(loadingFinish());
   }
 }
 
@@ -92,6 +103,7 @@ export function* deleteRecord({ payload }) {
 
   try {
     if (window.confirm("Are you sure? This can Not be undone!")) {
+      yield put(loadingStart());
       const res = yield axios.delete(`/api/${category}/${id}`);
       for (let i = 0; i < record.length; i++) {
         for (let x = 0; x < record[i].length; x++) {
@@ -102,14 +114,18 @@ export function* deleteRecord({ payload }) {
         }
       }
     }
+    yield put(loadingFinish());
   } catch (err) {
     console.log(err);
+    yield put(loadingFinish());
   }
 }
 
 export function* updateRecord({ payload }) {
   try {
     if (window.confirm("Are you sure? previous record will be removed!")) {
+      yield put(loadingStart());
+
       const record = yield select((state) => state.main.data);
       const { id, category, form } = payload;
       // !! todo add switch statement
@@ -138,8 +154,10 @@ export function* updateRecord({ payload }) {
         }
       }
     }
+    yield put(loadingFinish());
   } catch (err) {
     console.log(err);
+    yield put(loadingFinish());
   }
 }
 

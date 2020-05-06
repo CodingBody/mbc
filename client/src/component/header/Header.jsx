@@ -3,11 +3,12 @@ import styled from "styled-components";
 import MenuIcon from "@material-ui/icons/Menu";
 import HeaderMunu from "./HeaderMenu";
 import FeedBackModal from "../Modals/feedback/FeedbackModal";
+import { textPrimary } from "../../styled-component/Variable";
 
 const Container = styled.div`
   background: #fff;
-  grid-column: 1 / 14;
-  border-bottom: 1px solid black;
+  grid-column: 3 / 14;
+  /* border-bottom: 5px solid #dff2ff; */
 
   display: flex;
   justify-content: space-between;
@@ -27,7 +28,7 @@ const ItemBoxLeft = styled.div`
     padding: 10px;
     h1 {
       font-size: 2rem;
-      color: #000;
+      color: ${textPrimary};
     }
 
     svg {
@@ -71,9 +72,9 @@ const Header = ({ setShrink, shrink }) => {
   return (
     <Container>
       <ItemBoxLeft>
-        <div onClick={() => setShrink(!shrink)}>
+        {/* <div onClick={() => setShrink(!shrink)}>
           <MenuIcon />
-        </div>
+        </div> */}
         <div>
           <h1>DEV 통합 CMS</h1>
         </div>

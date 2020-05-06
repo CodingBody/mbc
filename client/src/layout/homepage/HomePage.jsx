@@ -183,7 +183,7 @@ const HomePage = ({ history, login, user }) => {
   };
 
   const handleSubmit = () => {
-    history.push("/dashboard/mbc");
+    history.push("/dashboard/mbc/home");
     login(form);
   };
 

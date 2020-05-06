@@ -1,36 +1,25 @@
 import styled from "styled-components";
 import { renderCells } from "../utils/Helper";
-
-export const Container = styled.div`
-  display: grid;
-  border-radius: 10px;
-  grid-template-rows: auto auto;
-`;
+import { textPrimary, primary } from "./Variable";
+import { Box } from "@material-ui/core";
 
 export const Header = styled.div`
-  background: #2c2c2c;
-  color: skyblue;
+  color: ${textPrimary};
 
   letter-spacing: 0.1rem;
-  border: 2px groove #cecece73;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+  margin-bottom: 2rem;
 `;
 
-export const Main = styled.div`
-  background: #fff;
-  padding: 1.5rem;
-  border-left: 2px groove #cecece73;
-  border-right: 2px groove #cecece73;
-  border-bottom: 2px groove #cecece73;
-
-  overflow: hidden;
+export const HeaderLeft = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  svg {
+    font-size: 2.5rem;
+    margin-right: 2rem;
+  }
 `;
 
 export const SearchBarBox = styled.div`
@@ -46,6 +35,27 @@ export const SearchBar = styled.div`
   div {
   }
 `;
+
+export const MainBox = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const Main = styled(Box)`
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+`;
+// export const Main = styled.div`
+// background: #fff;
+// padding: 1.5rem;
+
+// overflow: hidden;
+// display: flex;
+// flex-direction: column;
+// justify-content: center;
+// align-items: center;
+// `;
 
 export const TableContainer = styled.table`
   /* display: grid;
@@ -63,8 +73,10 @@ export const ColumnNames = styled.thead`
   }
 
   th {
+    color: ${textPrimary};
+    font-size: 1.2rem;
     border: 1px solid #cecece73;
-    background: #eee;
+    background: ${primary};
     padding: 10px 0;
     flex-grow: 1;
   }

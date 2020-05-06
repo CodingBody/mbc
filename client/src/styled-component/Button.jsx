@@ -24,4 +24,5 @@ export const MuiButton = styled(Bt)`
   background-color: ${(props) => props.bg};
   color: ${(props) => props.cr};
   border: ${(props) => ` 1px solid ${props.border}`};
+  font-size: ${(props) => props.size};
 `;

@@ -12,6 +12,11 @@ import {
   deleteRecordStart,
   updateRecordStart,
 } from "./../../../redux/main/actions";
+import { textPrimary } from "../../../styled-component/Variable";
+import {
+  SpaceBetween,
+  ColumnDirection,
+} from "../../../styled-component/Layout";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -50,7 +55,6 @@ const EditModal = ({
     });
   };
 
-  console.log(form, "form");
   if (!record) return <React.Fragment></React.Fragment>;
   return (
     <div>
@@ -60,34 +64,33 @@ const EditModal = ({
         keepMounted
         onClose={() => setOpen()}
       >
-        <EditModalContainer>
-          <div className="header">
-            <HeadTwo color="#eee">Edit {category} </HeadTwo>
+        <ColumnDirection width="49rem">
+          <SpaceBetween p={2} mt={1} mb={1} cr={textPrimary}>
+            <HeadTwo>Edit {category} </HeadTwo>
             <Close onClick={() => setOpen()}>x</Close>
-          </div>
-          {category === "Category" ? (
+          </SpaceBetween>
+
+          {category === "category" ? (
             <CategoryForm form={form} handleChange={handleChange} />
           ) : (
             <AppUserForm handleChange={handleChange} form={form} />
           )}
 
-          <div className="buttonGroup">
+          <SpaceBetween p={2}>
             <div>
               <MuiButton
                 onClick={() => setOpen()}
                 bg="inherit"
-                size="large"
-                cr="#eee"
-                border="#000"
+                size="1.2rem"
+                cr={textPrimary}
               >
                 Cancel
               </MuiButton>
               <MuiButton
                 onClick={handleDelete}
                 bg="inherit"
-                size="large"
+                size="1.2rem"
                 cr="#fb3333bf"
-                border="#000"
               >
                 Delete
               </MuiButton>
@@ -98,15 +101,14 @@ const EditModal = ({
                   updateRecordStart({ id: record.id, category, form })
                 }
                 bg="inherit"
-                size="large"
+                size="1.2rem"
                 cr="#87ceeb"
-                border="#000"
               >
                 Save
               </MuiButton>
             </div>
-          </div>
-        </EditModalContainer>
+          </SpaceBetween>
+        </ColumnDirection>
       </Dialog>
     </div>
   );

@@ -3,13 +3,22 @@ import styled from "styled-components";
 import { navbarItem } from "../../utils/Data";
 import { withRouter } from "react-router-dom";
 import StopRoundedIcon from "@material-ui/icons/StopRounded";
+import {
+  textPrimary,
+  primaryLight,
+  primaryHover,
+  primaryDark,
+} from "../../styled-component/Variable";
 
 const Container = styled.div`
-  background: #efefef;
+  background: ${primaryLight};
   grid-column: 1 / 3;
+  grid-row: 1 / 3;
+  justify-content: center;
 `;
 
 const SubContainer = styled.ul`
+  margin-top: 5rem;
   display: flex;
   flex-direction: column;
   list-style: none;
@@ -21,77 +30,36 @@ const LinkBox = styled.li`
   transition: background-color 0.3s ease;
 
   :hover {
-    background-color: #fff;
+    background-color: ${primaryHover};
+    div {
+      svg {
+        color: ${textPrimary};
+      }
+      p {
+        color: ${textPrimary};
+        font-weight: bold;
+      }
+    }
   }
 
   :active {
-    background-color: #5f5f5fbf;
+    background-color: ${primaryDark};
   }
 
   div {
-    padding: 2rem 0 2rem 10px;
+    padding: 1.5rem 0 1.5rem 4rem;
     flex-grow: 4;
     display: flex;
     justify-content: flex-start;
     svg {
       font-size: 2.3rem;
-      margin-right: 1rem;
-      color: #0e1a6f;
+      margin-right: 2rem;
+      color: ${(props) => (props.selected ? textPrimary : "#02106f94")};
     }
 
     p {
-      color: #0e1a6f;
-    }
-  }
-
-  .arrowDown {
-    flex-grow: 1;
-    display: flex;
-    padding: 0 15px 0 0;
-
-    div {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      margin-bottom: -3px;
-      i {
-        border: solid #0e1a6f;
-        border-width: 0 3px 3px 0;
-        display: inline-block;
-        padding: 4px;
-        transform: rotate(45deg);
-        -webkit-transform: rotate(45deg);
-      }
-      :hover i {
-        border: solid #fffffff0;
-        border-width: 0 3px 3px 0;
-      }
-    }
-  }
-
-  .arrowUp {
-    flex-grow: 1;
-    display: flex;
-    padding: 0 15px 0 0;
-
-    div {
-      display: flex;
-      justify-content: flex-end;
-
-      align-items: center;
-      margin-bottom: -3px;
-      i {
-        border: solid #ffffff94;
-        border-width: 0 3px 3px 0;
-        display: inline-block;
-        padding: 4px;
-        transform: rotate(225deg);
-        -webkit-transform: rotate(225deg);
-      }
-      :hover i {
-        border: solid #fffffff0;
-        border-width: 0 3px 3px 0;
-      }
+      color: ${(props) => (props.selected ? textPrimary : "#02106fb5")};
+      font-weight: ${(props) => (props.selected ? "bold" : "400")};
     }
   }
 `;
@@ -104,19 +72,19 @@ const SubLink = styled.ul`
   cursor: pointer;
 
   li {
-    background-color: #353535;
     transition: background-color 0.3s ease;
     align-items: center;
     justify-content: flex-start;
-    color: #0e1a6f;
+    color: ${textPrimary};
     height: 33px;
     display: flex;
+    padding: 0 0 0 5rem;
 
     :hover {
-      background-color: #525252;
+      background-color: ${primaryHover};
     }
     :active {
-      background-color: #848484bf;
+      background-color: ${primaryDark}f;
     }
     p {
       font-size: 1.2rem;
@@ -135,63 +103,34 @@ const Text = styled.p`
   margin-top: 4px;
 `;
 
-const Navbar = ({ history, shrink }) => {
+const Navbar = ({ history, shrink, category }) => {
   const [renderSubLink, setRenderSubLink] = useState(null);
 
-  const handleClickDropDown = (id) => {
-    if (renderSubLink === null) {
-      setRenderSubLink(id);
-    } else if (renderSubLink === id) {
-      setRenderSubLink(null);
-    } else if (renderSubLink && renderSubLink !== id) {
-      setRenderSubLink(id);
+  // !! brilliant
+  React.useEffect(() => {
+    if (category) {
+      const currentLink = navbarItem.filter((item) => item.params === category);
+
+      setRenderSubLink(currentLink[0].id);
     }
-  };
+  }, []);
 
   const handleClickLink = (params, id) => {
     setRenderSubLink(id);
     history.push(`/dashboard/mbc/${params}`);
   };
+
   return (
     <Container>
       <SubContainer>
         {navbarItem &&
           navbarItem.map((item) => (
             <React.Fragment key={item.id}>
-              <LinkBox>
+              <LinkBox selected={category === item.params ? "selected" : null}>
                 <div onClick={() => handleClickLink(item.params, item.id)}>
                   {item.icon}
                   {shrink ? null : <Text>{item.link}</Text>}
                 </div>
-                {item.subLink && (
-                  <React.Fragment>
-                    {!shrink ? (
-                      renderSubLink === item.id ? (
-                        <div
-                          className="arrowUp"
-                          onClick={() =>
-                            handleClickDropDown(item.id, item.link)
-                          }
-                        >
-                          <div>
-                            <i></i>
-                          </div>
-                        </div>
-                      ) : (
-                        <div
-                          className="arrowDown"
-                          onClick={() =>
-                            handleClickDropDown(item.id, item.link)
-                          }
-                        >
-                          <div>
-                            <i></i>
-                          </div>
-                        </div>
-                      )
-                    ) : null}
-                  </React.Fragment>
-                )}
               </LinkBox>
               <SubLink>
                 {!shrink &&
@@ -199,7 +138,6 @@ const Navbar = ({ history, shrink }) => {
                   renderSubLink === item.id &&
                   item.subLink.map((link) => (
                     <li key={link}>
-                      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                       <StopRoundedIcon />
                       <p>{link}</p>
                     </li>

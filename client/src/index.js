@@ -11,11 +11,10 @@ import { Provider } from "react-redux";
 
 const theme = createMuiTheme({
   palette: {
-    primary: {
-      main: "#2c2c2c",
-    },
     secondary: {
-      main: "#87ceeb",
+      light: "#fafdff",
+      main: "#f3f8ff",
+      dark: "#e1e9ff",
     },
   },
   overrides: {

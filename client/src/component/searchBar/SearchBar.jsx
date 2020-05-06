@@ -1,120 +1,64 @@
 import React from "react";
-import { Button } from "@material-ui/core";
-import Toolbar from "@material-ui/core/Toolbar";
-import InputBase from "@material-ui/core/InputBase";
-import { fade, makeStyles } from "@material-ui/core/styles";
+import { Box } from "@material-ui/core";
+import styled from "styled-components";
+import { HeadTwo } from "./../../styled-component/Text";
+import { MainBox, Main } from "./../../styled-component/Table";
+import { StdTextFieldTwo } from "./../../styled-component/Input";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import { MuiButton } from "../../styled-component/Button";
+import {
+  textPrimary,
+  primaryDark,
+  primaryHover,
+} from "../../styled-component/Variable";
+import { ContentLeft } from "./../../styled-component/Layout";
 import SearchIcon from "@material-ui/icons/Search";
-import SettingsIcon from "@material-ui/icons/Settings";
-import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    width: "100%",
-    boxShadow: "none",
-    border: "1px solid #cecece73",
-    background: "#eee",
-    marginBottom: "-2px",
-  },
-  menuButton: {
-    backgroundColor: "#eee",
-    border: "1px solid #cecece73",
-  },
-  title: {
-    flexGrow: 1,
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "block",
-    },
-  },
-  search: {
-    position: "relative",
-    border: "1px solid #cecece73",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.6),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.9),
-    },
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(1),
-      width: "auto",
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  inputRoot: {
-    color: "inherit",
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
-  action: {
-    margin: "0 10px",
-    backgroundColor: "#eee",
-    border: "1px solid #cecece73",
-  },
-}));
+const Container = styled.div`
+  width: 100%;
+`;
 
-const SearchBar = ({ input, handleSearchSubmit, handleSeachbarChange }) => {
-  const classes = useStyles();
-
+const SearchBar = ({
+  input,
+  renderIcon,
+  handleSearchSubmit,
+  handleSeachbarChange,
+  category,
+}) => {
   return (
-    <div className={classes.root}>
-      <Toolbar>
-        <Button className={classes.menuButton} variant="contained">
-          <SettingsIcon />
-        </Button>
-
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
-            <SearchIcon />
-          </div>
-          <InputBase
-            placeholder="Search…"
-            value={input}
-            onChange={handleSeachbarChange}
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-            inputProps={{ "aria-label": "search" }}
-          />
-        </div>
-        <Button
-          onClick={handleSearchSubmit}
-          className={classes.menuButton}
-          variant="contained"
-        >
-          Go
-        </Button>
-        <Button
-          className={classes.action}
-          variant="contained"
-          endIcon={<ArrowDownwardIcon />}
-        >
-          Action
-        </Button>
-      </Toolbar>
-    </div>
+    <React.Fragment>
+      <MainBox>
+        <Main border={10} borderColor="secondary.dark">
+          <Box p={2} mb={2}>
+            <HeadTwo> {renderIcon(category)} Search Title ... </HeadTwo>
+          </Box>
+          <Box p={2} mb={2}>
+            <Container>
+              <StdTextFieldTwo
+                fullWidth
+                value={input}
+                label="Title..."
+                name="search"
+                onChange={handleSeachbarChange}
+              />
+            </Container>
+          </Box>
+          <ContentLeft p={2} mb={2}>
+            <MuiButton
+              startIcon={<SearchIcon />}
+              onClick={handleSearchSubmit}
+              variant="contained"
+              cr={textPrimary}
+              bg={primaryDark}
+              border={primaryHover}
+              size="1.5rem"
+            >
+              Search
+            </MuiButton>
+          </ContentLeft>
+        </Main>
+      </MainBox>
+    </React.Fragment>
   );
 };
 
