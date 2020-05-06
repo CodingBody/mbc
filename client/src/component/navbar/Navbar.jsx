@@ -9,6 +9,7 @@ import {
   primaryHover,
   primaryDark,
 } from "../../styled-component/Variable";
+import { LinkText } from "./../../styled-component/Text";
 
 const Container = styled.div`
   background: ${primaryLight};
@@ -97,12 +98,6 @@ const SubLink = styled.ul`
   }
 `;
 
-const Text = styled.p`
-  font-size: 1.3rem;
-  color: #fff;
-  margin-top: 4px;
-`;
-
 const Navbar = ({ history, shrink, category }) => {
   const [renderSubLink, setRenderSubLink] = useState(null);
 
@@ -129,7 +124,7 @@ const Navbar = ({ history, shrink, category }) => {
               <LinkBox selected={category === item.params ? "selected" : null}>
                 <div onClick={() => handleClickLink(item.params, item.id)}>
                   {item.icon}
-                  {shrink ? null : <Text>{item.link}</Text>}
+                  {shrink ? null : <LinkText>{item.link}</LinkText>}
                 </div>
               </LinkBox>
               <SubLink>

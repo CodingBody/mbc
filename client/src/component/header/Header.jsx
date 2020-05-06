@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import MenuIcon from "@material-ui/icons/Menu";
 import HeaderMunu from "./HeaderMenu";
 import FeedBackModal from "../Modals/feedback/FeedbackModal";
 import { textPrimary } from "../../styled-component/Variable";
@@ -16,22 +15,14 @@ const Container = styled.div`
 `;
 
 const ItemBoxLeft = styled.div`
-  padding: 0 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  div {
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    h1 {
-      font-size: 2rem;
-      color: ${textPrimary};
-    }
+  padding: 0 30px;
 
-    svg {
+  h1 {
+    font-size: 2rem;
+    color: ${textPrimary};
+  }
+
+  /* svg {
       font-size: 3rem;
       background-color: #fff;
       padding: 3px;
@@ -40,8 +31,7 @@ const ItemBoxLeft = styled.div`
       border: 1px solid #000;
       border-radius: 2px;
       cursor: pointer;
-    }
-  }
+    } */
 `;
 
 const ItemBoxRight = styled.div`
@@ -51,8 +41,6 @@ const ItemBoxRight = styled.div`
   padding-right: 20px;
   div {
     padding: 0 10px;
-    color: #000;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -75,9 +63,7 @@ const Header = ({ setShrink, shrink }) => {
         {/* <div onClick={() => setShrink(!shrink)}>
           <MenuIcon />
         </div> */}
-        <div>
-          <h1>DEV 통합 CMS</h1>
-        </div>
+        <h1>DEV 통합 CMS</h1>
       </ItemBoxLeft>
       <ItemBoxRight>
         <FeedBackModal />

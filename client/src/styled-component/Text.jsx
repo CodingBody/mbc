@@ -24,3 +24,8 @@ export const Close = styled.p`
   cursor: pointer;
   font-weight: bold;
 `;
+
+export const LinkText = styled.p`
+  font-size: 1.3rem;
+  margin-top: 4px;
+`;
