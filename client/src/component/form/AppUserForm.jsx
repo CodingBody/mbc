@@ -1,63 +1,90 @@
 import React from "react";
-import { StdTextFieldOne } from "./../../styled-component/Input";
+import { StdTextFieldTwo } from "./../../styled-component/Input";
+import { Box } from "@material-ui/core";
+import { Form } from "./../../styled-component/Layout";
 
 function AppUserForm({ handleChange, form }) {
   return (
-    <form noValidate autoComplete="off" className="form">
-      <StdTextFieldOne
-        name="username"
-        onChange={handleChange}
-        label="username"
-        variant="outlined"
-        value={form.username}
-      />
-      <StdTextFieldOne
-        name="account"
-        onChange={handleChange}
-        label="account"
-        variant="outlined"
-        value={form.account}
-      />
-      <StdTextFieldOne
-        name="password"
-        onChange={handleChange}
-        label="password"
-        type="password"
-        variant="outlined"
-        value={form.password ? form.password : ""}
-      />
-      <StdTextFieldOne
-        name="password_check"
-        onChange={handleChange}
-        label="password_check"
-        variant="outlined"
-        type="password"
-        value={form.password_check ? form.password_check : ""}
-      />
+    <Form mb="20px" p="2rem" noValidate autoComplete="off">
+      <Box mb={2}>
+        <StdTextFieldTwo
+          name="username"
+          onChange={handleChange}
+          label="username"
+          fullWidth
+          size="1.3rem"
+          value={form.username}
+        />
+      </Box>
 
-      <StdTextFieldOne
-        name="status"
-        onChange={handleChange}
-        label="status"
-        variant="outlined"
-        value={form.status}
-      />
-      <StdTextFieldOne
-        name="sex"
-        onChange={handleChange}
-        label="sex"
-        variant="outlined"
-        value={form.sex}
-      />
+      <Box mb={2}>
+        <StdTextFieldTwo
+          name="account"
+          onChange={handleChange}
+          label="account"
+          fullWidth
+          size="1.3rem"
+          value={form.account}
+        />
+      </Box>
 
-      <StdTextFieldOne
-        name="tag"
-        onChange={handleChange}
-        label="tag"
-        variant="outlined"
-        value={form.tag}
-      />
-    </form>
+      <Box mb={2}>
+        <StdTextFieldTwo
+          name="password"
+          onChange={handleChange}
+          label="password"
+          type="password"
+          fullWidth
+          size="1.3rem"
+          value={form.password ? form.password : ""}
+        />
+      </Box>
+
+      <Box mb={2}>
+        <StdTextFieldTwo
+          name="password_check"
+          onChange={handleChange}
+          label="password_check"
+          fullWidth
+          size="1.3rem"
+          type="password"
+          value={form.password_check ? form.password_check : ""}
+        />
+      </Box>
+
+      <Box mb={2}>
+        <StdTextFieldTwo
+          name="status"
+          onChange={handleChange}
+          label="status"
+          fullWidth
+          size="1.3rem"
+          value={form.status}
+        />
+      </Box>
+
+      <Box mb={2}>
+        <StdTextFieldTwo
+          name="sex"
+          onChange={handleChange}
+          label="sex"
+          fullWidth
+          size="1.3rem"
+          value={form.sex}
+        />
+      </Box>
+
+      <Box mb={2}>
+        <StdTextFieldTwo
+          name="tag"
+          onChange={handleChange}
+          label="tag"
+          fullWidth
+          size="1.3rem"
+          value={form.tag}
+        />
+      </Box>
+    </Form>
   );
 }
 

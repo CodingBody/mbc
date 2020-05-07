@@ -14,6 +14,11 @@ export const SpaceBetween = styled(Box)`
   width: ${(props) => props.width};
 `;
 
+export const ContentCenter = styled(Box)`
+  display: flex;
+  justify-content: center;
+`;
+
 export const Form = styled.form`
   /* !! if no props, it will be just null */
   margin-bottom: ${(props) => props.mb};
@@ -23,10 +28,6 @@ export const Form = styled.form`
   flex-direction: column;
   align-items: space-between;
   justify-content: center;
-
-  div {
-    margin: 0 0 10px 0;
-  }
 `;
 
 export const ColumnDirection = styled(Box)`
@@ -34,5 +35,9 @@ export const ColumnDirection = styled(Box)`
   flex-direction: column;
   align-items: space-between;
   justify-content: center;
+  width: ${(props) => props.width};
+`;
+
+export const BasicForm = styled.form`
   width: ${(props) => props.width};
 `;

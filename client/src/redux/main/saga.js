@@ -8,6 +8,7 @@ import {
   updateRecordSuccess,
   loadingStart,
   loadingFinish,
+  showTable,
 } from "./actions";
 import axios from "axios";
 import { checkFormType } from "./../../utils/Helper";
@@ -43,6 +44,7 @@ export function* createRecord({ payload }) {
 
       yield put(createRecordSuccess({ columnNames, record: res }));
       yield put(loadingFinish());
+      yield put(showTable());
 
       return;
     }
@@ -52,6 +54,8 @@ export function* createRecord({ payload }) {
 
       yield put(noRecordInRedux({ columnNames, record: res }));
       yield put(loadingFinish());
+      yield put(showTable());
+
       return;
     }
   } catch (err) {
@@ -66,12 +70,14 @@ export function* fetchDataFromDb({ payload }) {
   try {
     yield put(loadingStart());
 
-    const { id, category } = payload;
+    const { params, category } = payload;
+    console.log(payload, "payload");
     let ctg = category.toLowerCase();
     let res;
-    if (id !== undefined) {
-      res = yield axios.get(`/api/${ctg}/${id}`);
+    if (params !== "") {
+      res = yield axios.get(`/api/${ctg}/${params}`);
     } else {
+      console.log("runnned!! ");
       res = yield axios.get(`/api/${ctg}/`);
     }
     const data = res.data;
@@ -83,12 +89,14 @@ export function* fetchDataFromDb({ payload }) {
 
       yield put(fetchRecordSuccess({ record, columnNames }));
       yield put(loadingFinish());
+      yield put(showTable());
     } else {
       const columnNames = Object.keys(data);
       const record = Object.values(data);
 
       yield put(fetchRecordSuccess({ record: [record], columnNames }));
       yield put(loadingFinish());
+      yield put(showTable());
     }
   } catch (err) {
     console.error(err);

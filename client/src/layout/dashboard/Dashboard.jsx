@@ -16,7 +16,7 @@ const Container = styled.div`
   grid-template-rows: 50px calc(100vh - 50px);
 `;
 
-const Dashboard = ({ match, clearTableOnRouteChange }) => {
+const Dashboard = ({ match, loading, clearTableOnRouteChange }) => {
   const { category } = match.params;
 
   React.useEffect(() => {
@@ -33,14 +33,20 @@ const Dashboard = ({ match, clearTableOnRouteChange }) => {
       <Header shrink={shrink} setShrink={setShrink} />
       <Navbar category={category} shrink={shrink} />
       <Board category={category} />
-      <CreateModal category={category} />
-      <EditModal category={category} />
+      <CreateModal loading={loading} category={category} />
+      <EditModal loading={loading} category={category} />
     </Container>
   );
 };
+
+const mapStateToProps = (state) => ({
+  loading: state.main.loading,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   clearTableOnRouteChange: () => dispatch(clearTableOnRouteChange()),
 });
 
-export default withRouter(connect(null, mapDispatchToProps)(Dashboard));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Dashboard)
+);

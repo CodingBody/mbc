@@ -16,7 +16,7 @@ import { v4 as uuid4 } from "uuid";
 import { toggleCreateModal, toggleEditModal } from "../../redux/modal/actions";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import {
-  getColumns,
+  getFormFields,
   removeLast,
   removeLastItemInArr,
 } from "../../utils/Helper";
@@ -33,6 +33,8 @@ import {
   primaryHover,
 } from "./../../styled-component/Variable";
 import { MuiButton } from "./../../styled-component/Button";
+import HeaderSearchBar from "./../searchBar/HeaderSearchBar";
+import { SpaceBetween } from "../../styled-component/Layout";
 
 const SdEditIcon = styled(EditIcon)`
   cursor: pointer;
@@ -42,11 +44,13 @@ const Table = ({
   fetchRecord,
   data,
   columnNames,
+  showTable,
   toggleCreate,
   toggleEdit,
   populateRecordOnEdit,
   populateColumnNames,
   category,
+  loading,
 }) => {
   const [input, setInput] = React.useState("");
 
@@ -56,7 +60,7 @@ const Table = ({
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    fetchRecord({ input, category });
+    fetchRecord({ params: input, category });
   };
 
   const handleEditClick = (record, columnNames) => {
@@ -75,8 +79,7 @@ const Table = ({
   };
 
   const handleClickCreate = (category) => {
-    const obj = getColumns(category);
-    console.log(obj, "obj");
+    const obj = getFormFields(category);
     populateColumnNames(obj);
     toggleCreate(obj);
   };
@@ -84,7 +87,7 @@ const Table = ({
   const renderHeader = (category) => {
     if (category) {
       const res = navbarItem.filter((item) => item.params === category);
-      if (!res) return <React.Fragment>ddd</React.Fragment>;
+      if (!res) return <React.Fragment> </React.Fragment>;
       return (
         <React.Fragment>
           {res[0].icon}
@@ -105,12 +108,19 @@ const Table = ({
   return (
     <React.Fragment>
       <Header>
-        <HeaderLeft>{renderHeader(category)}</HeaderLeft>
+        <SpaceBetween>{renderHeader(category)}</SpaceBetween>
+        {showTable && (
+          <HeaderSearchBar
+            handleSearchSubmit={handleSearchSubmit}
+            handleSeachbarChange={handleSeachbarChange}
+            input={input}
+            category={category}
+          />
+        )}
         <div>
           <MuiButton
             startIcon={<AddCircleOutlineIcon />}
             onClick={() => handleClickCreate(category)}
-            size="large"
             variant="contained"
             cr={textPrimary}
             bg={primaryDark}
@@ -121,14 +131,16 @@ const Table = ({
           </MuiButton>
         </div>
       </Header>
-
-      <SearchBar
-        renderIcon={renderIcon}
-        handleSearchSubmit={handleSearchSubmit}
-        handleSeachbarChange={handleSeachbarChange}
-        input={input}
-        category={category}
-      />
+      {!showTable && (
+        <SearchBar
+          loading={loading}
+          renderIcon={renderIcon}
+          handleSearchSubmit={handleSearchSubmit}
+          handleSeachbarChange={handleSeachbarChange}
+          input={input}
+          category={category}
+        />
+      )}
 
       {data && (
         <React.Fragment>
@@ -161,11 +173,6 @@ const Table = ({
           </Info>
         </React.Fragment>
       )}
-      {/* <TableContainer cellspacing="0">
-          <ColumnNames category={category}>
-            {renderTableHeader(category)}
-          </ColumnNames>
-        </TableContainer> */}
     </React.Fragment>
   );
 };
@@ -173,11 +180,12 @@ const Table = ({
 const mapStateToProps = (state) => ({
   data: state.main.data,
   columnNames: state.main.columnNames,
+  showTable: state.main.showTable,
+  loading: state.main.loading,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchRecord: ({ id, category }) =>
-    dispatch(fetchRecordStart({ id, category })),
+  fetchRecord: (form) => dispatch(fetchRecordStart(form)),
   toggleCreate: () => dispatch(toggleCreateModal()),
   toggleEdit: () => dispatch(toggleEditModal()),
   populateRecordOnEdit: (record) => dispatch(populateRecordOnEdit(record)),

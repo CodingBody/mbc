@@ -13,7 +13,13 @@ export const mainActionTypes = {
   CLEAR_TABLE: "CLEAR_TABLE",
   LOADING_START: "LOADING_START",
   LOADING_FINISH: "LOADING_FINISH",
+
+  SHOW_TABLE: "SHOW_TABLE",
 };
+
+export const showTable = () => ({
+  type: mainActionTypes.SHOW_TABLE,
+});
 
 export const clearTableOnRouteChange = () => ({
   type: mainActionTypes.CLEAR_TABLE,

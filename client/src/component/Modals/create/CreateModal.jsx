@@ -22,7 +22,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-const CreateModal = ({ open, setOpen, create, category, record }) => {
+const CreateModal = ({ loading, open, setOpen, create, category, record }) => {
   const [form, setForm] = React.useState(null);
   // const inputRef = useRef();
 
@@ -76,6 +76,7 @@ const CreateModal = ({ open, setOpen, create, category, record }) => {
               bg="inherit"
               size="1.2rem"
               cr="#87ceeb"
+              disabled={loading}
             >
               Save
             </MuiButton>

@@ -75,12 +75,23 @@ export const renderTableHeader = (category) => {
   }
 };
 
-export const getColumns = (category) => {
+export const getFormFields = (category) => {
   switch (category) {
     case "category":
       return mapCNinCategoryToObj;
     case "appuser":
       return mapCNinAppUserToObj;
+    default:
+      return;
+  }
+};
+
+export const getSearchBarTitle = (category) => {
+  switch (category) {
+    case "category":
+      return "Title";
+    case "appuser":
+      return "Username";
     default:
       return;
   }

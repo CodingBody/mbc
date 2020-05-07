@@ -26,6 +26,8 @@ const EditModal = ({
   open,
   updateRecordStart,
   setOpen,
+  loading,
+
   deleteRecordStart,
   category,
   record = false,
@@ -91,6 +93,7 @@ const EditModal = ({
                 bg="inherit"
                 size="1.2rem"
                 cr="#fb3333bf"
+                disabled={loading}
               >
                 Delete
               </MuiButton>
@@ -103,6 +106,7 @@ const EditModal = ({
                 bg="inherit"
                 size="1.2rem"
                 cr="#87ceeb"
+                disabled={loading}
               >
                 Save
               </MuiButton>

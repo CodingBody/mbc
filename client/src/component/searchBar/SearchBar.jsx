@@ -1,22 +1,21 @@
 import React from "react";
 import { Box } from "@material-ui/core";
-import styled from "styled-components";
 import { HeadTwo } from "./../../styled-component/Text";
-import { MainBox, Main } from "./../../styled-component/Table";
 import { StdTextFieldTwo } from "./../../styled-component/Input";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import { MuiButton } from "../../styled-component/Button";
 import {
   textPrimary,
   primaryDark,
   primaryHover,
 } from "../../styled-component/Variable";
-import { ContentLeft } from "./../../styled-component/Layout";
+import {
+  ContentLeft,
+  ContentCenter,
+  ColumnDirection,
+  BasicForm,
+} from "./../../styled-component/Layout";
 import SearchIcon from "@material-ui/icons/Search";
-
-const Container = styled.div`
-  width: 100%;
-`;
+import { getSearchBarTitle } from "../../utils/Helper";
 
 const SearchBar = ({
   input,
@@ -24,24 +23,28 @@ const SearchBar = ({
   handleSearchSubmit,
   handleSeachbarChange,
   category,
+  loading,
 }) => {
   return (
     <React.Fragment>
-      <MainBox>
-        <Main border={10} borderColor="secondary.dark">
+      <ContentCenter>
+        <ColumnDirection width="50%" border={10} borderColor="secondary.dark">
           <Box p={2} mb={2}>
-            <HeadTwo> {renderIcon(category)} Search Title ... </HeadTwo>
+            <HeadTwo>
+              {" "}
+              {renderIcon(category)} Search {getSearchBarTitle(category)} ...{" "}
+            </HeadTwo>
           </Box>
           <Box p={2} mb={2}>
-            <Container>
+            <BasicForm width="100%" onSubmit={handleSearchSubmit}>
               <StdTextFieldTwo
                 fullWidth
                 value={input}
                 label="Title..."
-                name="search"
+                size="1.4rem"
                 onChange={handleSeachbarChange}
               />
-            </Container>
+            </BasicForm>
           </Box>
           <ContentLeft p={2} mb={2}>
             <MuiButton
@@ -51,13 +54,14 @@ const SearchBar = ({
               cr={textPrimary}
               bg={primaryDark}
               border={primaryHover}
+              disabled={loading}
               size="1.5rem"
             >
               Search
             </MuiButton>
           </ContentLeft>
-        </Main>
-      </MainBox>
+        </ColumnDirection>
+      </ContentCenter>
     </React.Fragment>
   );
 };

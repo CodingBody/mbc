@@ -36,27 +36,6 @@ export const SearchBar = styled.div`
   }
 `;
 
-export const MainBox = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-export const Main = styled(Box)`
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-`;
-// export const Main = styled.div`
-// background: #fff;
-// padding: 1.5rem;
-
-// overflow: hidden;
-// display: flex;
-// flex-direction: column;
-// justify-content: center;
-// align-items: center;
-// `;
-
 export const TableContainer = styled.table`
   /* display: grid;
   flex-direction: column; */

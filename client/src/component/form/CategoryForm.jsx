@@ -1,38 +1,52 @@
 import React from "react";
-import { StdTextFieldOne } from "./../../styled-component/Input";
+import { StdTextFieldTwo } from "./../../styled-component/Input";
 import { Form } from "./../../styled-component/Layout";
+import { TextField } from "@material-ui/core/";
+import { Box } from "@material-ui/core";
 
 const CategoryForm = ({ handleChange, form }) => {
   return (
     <Form mb="20px" p="2rem" noValidate autoComplete="off">
-      <StdTextFieldOne
-        name="title"
-        onChange={handleChange}
-        label="Title"
-        variant="outlined"
-        value={form.title}
-      />
-      <StdTextFieldOne
-        name="priority"
-        onChange={handleChange}
-        label="Priority"
-        variant="outlined"
-        value={form.priority}
-      />
-      <StdTextFieldOne
-        name="genre_list"
-        onChange={handleChange}
-        label="Genre List"
-        variant="outlined"
-        value={form.genre_list}
-      />
-      <StdTextFieldOne
-        name="usageyn"
-        onChange={handleChange}
-        label="Usageyn"
-        variant="outlined"
-        value={form.usageyn}
-      />
+      <Box mb={2}>
+        <StdTextFieldTwo
+          name="title"
+          onChange={handleChange}
+          label="Title"
+          fullWidth
+          size="1.3rem"
+          value={form.title}
+        />
+      </Box>
+      <Box mb={2}>
+        <StdTextFieldTwo
+          name="priority"
+          onChange={handleChange}
+          label="Priority"
+          fullWidth
+          size="1.3rem"
+          value={form.priority}
+        />
+      </Box>
+      <Box mb={2}>
+        <StdTextFieldTwo
+          name="genre_list"
+          onChange={handleChange}
+          label="Genre List"
+          fullWidth
+          size="1.3rem"
+          value={form.genre_list}
+        />
+      </Box>
+      <Box mb={2}>
+        <StdTextFieldTwo
+          name="usageyn"
+          onChange={handleChange}
+          label="Usageyn"
+          fullWidth
+          size="1.3rem"
+          value={form.usageyn}
+        />
+      </Box>
     </Form>
   );
 };

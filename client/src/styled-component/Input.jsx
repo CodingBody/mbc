@@ -17,12 +17,12 @@ export const StdTextFieldOne = styled(TextField)`
 // on search bar
 export const StdTextFieldTwo = styled(TextField)`
   .MuiInputLabel-root {
-    font-size: 1.4rem;
+    font-size: ${(props) => props.size};
   }
   .MuiInputLabel-formControl {
     transform: translate(0, 20px) scale(1);
   }
   .MuiInputLabel-shrink {
-    transform: translate(0, -6px) scale(0.85);
+    transform: translate(0, -6px) scale(0.8);
   }
 `;

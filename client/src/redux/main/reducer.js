@@ -3,6 +3,7 @@ import { mainActionTypes } from "./actions";
 const initialState = {
   data: null,
   columnNames: null,
+  showTable: false,
   edit: {
     record: null,
   },
@@ -31,6 +32,7 @@ const main = (state = initialState, action) => {
         ...state,
         data: payload.record,
         columnNames: payload.columnNames,
+        showTable: true,
       };
 
     case mainActionTypes.CREATE_RECORD_SUCCESS:
@@ -38,12 +40,14 @@ const main = (state = initialState, action) => {
         ...state,
         data: [...state.data, payload.record],
         columnNames: payload.columnNames,
+        showTable: true,
       };
     case mainActionTypes.NO_RECORD_IN_REDUX:
       return {
         ...state,
         data: [payload.record],
         columnNames: payload.columnNames,
+        showTable: true,
       };
     case mainActionTypes.DELETE_RECORD_SUCCESS:
       return {
@@ -87,6 +91,7 @@ const main = (state = initialState, action) => {
         create: {
           record: null,
         },
+        showTable: false,
       };
     default:
       return state;
