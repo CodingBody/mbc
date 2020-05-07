@@ -72,18 +72,13 @@ id "id"
 FROM react.app_user`;
 
 // returns objects from db
-async function find(context) {
+async function find(params) {
   let query = baseQuery;
   const binds = {};
-  // !!Using bind variables with Oracle Database
-  // is very important for security and performance reasons.
-
-  if (context.id) {
-    binds.id = context.id;
-
-    query += `\nwhere id = :id`;
+  if (params) {
+    // params is username here
+    query += `\nwhere username like '%${params}%'`;
   }
-
   const result = await database.simpleExecute(query, binds);
   // !! report
   console.log(result, "result");
@@ -104,7 +99,6 @@ const deleteQuery = `DELETE FROM react.app_user`;
 async function deleteInOcl(context) {
   let query = deleteQuery;
   const binds = {};
-  console.log(context, "context");
 
   if (context.id) {
     binds.id = context.id;
@@ -132,7 +126,6 @@ module.exports.deleteInOcl = deleteInOcl;
 const updateSql = `update app_user
   set username = :username,
     account = :account,
-    password = :password,
     status = :status,
     tag = :tag,
     sex = :sex,
@@ -142,7 +135,7 @@ const updateSql = `update app_user
 
 async function update(obj, req) {
   try {
-    obj.id = req.params.id;
+    obj.id = req.params.params;
     //   Object.assign is just copy for checking
     // to prevent direct modification
     const record = Object.assign({}, obj);

@@ -54,21 +54,16 @@ id "id"
 FROM react.category`;
 
 // returns objects from db
-async function find(context) {
+async function find(params) {
   let query = baseQuery;
   const binds = {};
-  // !!Using bind variables with Oracle Database
-  // is very important for security and performance reasons.
-
-  if (context.id) {
-    binds.id = context.id;
-
-    query += `\nwhere seq = :employee_id`;
+  if (params) {
+    // params is title here
+    query += `\nwhere title like '%${params}%'`;
   }
 
   const result = await database.simpleExecute(query, binds);
   // !! report
-  console.log(result, "result");
   if (Array.isArray(result.rows)) {
     return result.rows;
   } else {
@@ -86,7 +81,6 @@ const deleteQuery = `DELETE FROM react.category`;
 async function deleteInOcl(context) {
   let query = deleteQuery;
   const binds = {};
-  console.log(context, "context");
 
   if (context.id) {
     binds.id = context.id;
@@ -122,7 +116,7 @@ const updateSql = `update category
 async function update(obj, req) {
   try {
     obj.workspace_id = "WS216863988676954993388743949988460632986";
-    obj.id = req.params.id;
+    obj.id = req.params.params;
     //   Object.assign is just copy for checking
     // to prevent direct modification
     const record = Object.assign({}, obj);

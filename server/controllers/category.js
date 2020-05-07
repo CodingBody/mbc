@@ -28,11 +28,12 @@ module.exports.post = post;
 
 async function get(req, res, next) {
   try {
-    const context = {};
-
-    context.id = parseInt(req.params.id, 10);
-
-    const rows = await find(context);
+    let rows;
+    if (req.params.params) {
+      rows = await find(req.params.params);
+    } else {
+      rows = await find();
+    }
 
     if (req.params.id) {
       if (rows.length === 1) {
@@ -53,7 +54,7 @@ module.exports.get = get;
 async function deleteRecord(req, res, next) {
   try {
     const context = {};
-    context.id = req.params.id;
+    context.id = req.params.params;
     const recordId = await deleteInOcl(context);
 
     res.status(200).json(recordId);

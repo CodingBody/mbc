@@ -3,12 +3,11 @@ const { create, find, update, deleteInOcl } = require("../db_apis/appuser.js");
 // !! change variable name to increase reusability of fns and code
 function getObjectFromRec(req) {
   const obj = {
-    username: req.body.username,
-    account: req.body.account,
-    password: req.body.password,
-    sex: req.body.sex,
-    status: req.body.status,
-    tag: req.body.tag,
+    username: req.body.username && req.body.username,
+    account: req.body.account && req.body.account,
+    sex: req.body.sex && req.body.sex,
+    status: req.body.status && req.body.status,
+    tag: req.body.tag && req.body.tag,
   };
 
   return obj;
@@ -17,6 +16,7 @@ function getObjectFromRec(req) {
 async function post(req, res, next) {
   try {
     let obj = getObjectFromRec(req);
+    obj.password = req.body.password;
 
     const result = await create(obj);
 
@@ -30,11 +30,12 @@ module.exports.post = post;
 
 async function get(req, res, next) {
   try {
-    const context = {};
-
-    context.id = parseInt(req.params.id, 10);
-    console.log("run!");
-    const rows = await find(context);
+    let rows;
+    if (req.params.params) {
+      rows = await find(req.params.params);
+    } else {
+      rows = await find();
+    }
 
     if (req.params.id) {
       if (rows.length === 1) {
@@ -55,7 +56,7 @@ module.exports.get = get;
 async function deleteRecord(req, res, next) {
   try {
     const context = {};
-    context.id = req.params.id;
+    context.id = req.params.params;
     const recordId = await deleteInOcl(context);
 
     res.status(200).json(recordId);
@@ -72,8 +73,8 @@ module.exports.deleteRecord = deleteRecord;
 async function put(req, res, next) {
   try {
     let obj = getObjectFromRec(req);
-    console.log(obj, "obj");
 
+    console.log(obj, "obj10");
     result = await update(obj, req);
     if (result !== null) {
       res.status(200).json(result);

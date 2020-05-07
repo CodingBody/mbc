@@ -41,14 +41,14 @@ router
   );
 
 router
-  .route("/category/:id?")
+  .route("/category/:params?")
   .post(category.post)
   .get(category.get)
   .delete(category.deleteRecord)
   .put(category.put);
 
 router
-  .route("/appuser/:id?")
+  .route("/appuser/:params?")
   .post(appuser.post)
   .get(appuser.get)
   .put(appuser.put)
