@@ -65,7 +65,7 @@ const CreateModal = ({ loading, open, setOpen, create, category, record }) => {
             <MuiButton
               bg="inherit"
               onClick={() => setOpen()}
-              size="1.2rem"
+              sz="1.2rem"
               cr={textPrimary}
             >
               Cancel
@@ -74,7 +74,7 @@ const CreateModal = ({ loading, open, setOpen, create, category, record }) => {
             <MuiButton
               onClick={handleSubmit}
               bg="inherit"
-              size="1.2rem"
+              sz="1.2rem"
               cr="#87ceeb"
               disabled={loading}
             >

@@ -13,8 +13,8 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../controllers/auth.js");
 const { check } = require("express-validator");
-const category = require("../controllers/category.js");
-const appuser = require("../controllers/appuser.js");
+const category = require("../routes/category/controllers.js");
+const appuser = require("../routes/appUser/controllers.js");
 
 router
   .route("/auth/register")
@@ -40,13 +40,19 @@ router
     auth.loginPost
   );
 
+// @@ param_1 represents how many columns
+// @@ param_2 represents title
+// the reason of do post request intead of get is to send data from client to check
+// the number of column user wanna see
+// this fn would be too heavy for frontend
 router
   .route("/category/:params?")
   .post(category.post)
-  .get(category.get)
   .delete(category.deleteRecord)
   .put(category.put);
+router.route("/get/category/:params?").post(category.get);
 
+// @@ param_1 represents how many columns
 router
   .route("/appuser/:params?")
   .post(appuser.post)

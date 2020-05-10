@@ -33,7 +33,6 @@ const EditModal = ({
   record = false,
 }) => {
   const [form, setForm] = React.useState(null);
-  console.log(record, "record in edit");
   React.useEffect(() => {
     if (record !== false) setForm(record);
     for (let property in record) {
@@ -83,7 +82,7 @@ const EditModal = ({
               <MuiButton
                 onClick={() => setOpen()}
                 bg="inherit"
-                size="1.2rem"
+                sz="1.2rem"
                 cr={textPrimary}
               >
                 Cancel
@@ -91,7 +90,7 @@ const EditModal = ({
               <MuiButton
                 onClick={handleDelete}
                 bg="inherit"
-                size="1.2rem"
+                sz="1.2rem"
                 cr="#fb3333bf"
                 disabled={loading}
               >
@@ -104,7 +103,7 @@ const EditModal = ({
                   updateRecordStart({ id: record.id, category, form })
                 }
                 bg="inherit"
-                size="1.2rem"
+                sz="1.2rem"
                 cr="#87ceeb"
                 disabled={loading}
               >

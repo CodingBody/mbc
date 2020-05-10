@@ -1,26 +1,6 @@
 import styled from "styled-components";
 import { renderCells } from "../utils/Helper";
-import { textPrimary, primary } from "./Variable";
-import { Box } from "@material-ui/core";
-
-export const Header = styled.div`
-  color: ${textPrimary};
-
-  letter-spacing: 0.1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  margin-bottom: 2rem;
-`;
-
-export const HeaderLeft = styled.div`
-  display: flex;
-  svg {
-    font-size: 2.5rem;
-    margin-right: 2rem;
-  }
-`;
+import { textPrimary, primary, primaryHover, primaryDark_2 } from "./Variable";
 
 export const SearchBarBox = styled.div`
   display: flex;
@@ -45,47 +25,42 @@ export const TableContainer = styled.table`
 `;
 
 export const ColumnNames = styled.thead`
+  border-top: 2px solid ${primaryHover};
+  border-right: 2px solid ${primaryHover};
+  border-left: 2px solid ${primaryHover};
+  border-bottom: 1px solid ${primaryHover};
   tr {
     /* display: flex; */
     display: grid;
-    grid-template-columns: ${(props) => renderCells(props.category)};
+    grid-template-columns: ${(props) => renderCells(props.clLength)};
   }
 
   th {
     color: ${textPrimary};
     font-size: 1.2rem;
-    border: 1px solid #cecece73;
     background: ${primary};
-    padding: 10px 0;
+    padding: 12px 0;
     flex-grow: 1;
   }
 `;
 
 export const TableBody = styled.tr`
   display: grid;
-  grid-template-columns: ${(props) => renderCells(props.category)};
+  grid-template-columns: ${(props) => renderCells(props.clLength)};
 
   td:first-child {
-    border: 1px solid #cecece73;
-    padding: 10px 0;
+    border: 1px solid ${primaryHover};
+    padding: 12px 0;
     display: flex;
     align-items: center;
     justify-content: center;
     svg {
-      color: skyblue;
+      color: ${primaryDark_2};
     }
   }
   td {
-    border: 1px solid #cecece73;
-    padding: 10px 0 10px 4px;
+    font-size: 1.2rem;
+    border: 1px solid ${primaryHover};
+    padding: 12px 0 12px 5px;
   }
-`;
-
-export const Info = styled.div`
-  width: 100%;
-  border: 1px solid #cecece73;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 `;

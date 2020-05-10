@@ -6,6 +6,7 @@ import ControlCameraIcon from "@material-ui/icons/ControlCamera";
 import CategoryIcon from "@material-ui/icons/Category";
 import MovieFilterIcon from "@material-ui/icons/MovieFilter";
 import DateRangeIcon from "@material-ui/icons/DateRange";
+import EventNoteIcon from "@material-ui/icons/EventNote";
 import { v4 as uuidv4 } from "uuid";
 
 export const navbarItem = [
@@ -57,8 +58,8 @@ export const navbarItem = [
   },
   {
     link: "Program Table",
-    params: "programTable",
-    icon: <DateRangeIcon />,
+    params: "program_table",
+    icon: <EventNoteIcon />,
     id: uuidv4(),
     subLink: null,
   },

@@ -11,7 +11,7 @@ import {
   showTable,
 } from "./actions";
 import axios from "axios";
-import { checkFormType } from "./../../utils/Helper";
+import { checkFormType } from "../helper";
 
 // @@ coming value: object
 export function* createRecord({ payload }) {
@@ -69,32 +69,41 @@ export function* createRecord({ payload }) {
 export function* fetchDataFromDb({ payload }) {
   try {
     yield put(loadingStart());
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
-    const { params, category } = payload;
-    console.log(payload, "payload");
+    const { params, category, columns } = payload;
+    const body = { columns };
+    console.log(body, "columns");
+
     let ctg = category.toLowerCase();
     let res;
     if (params !== "") {
-      res = yield axios.get(`/api/${ctg}/${params}`);
+      res = yield axios.post(`/api/get/${ctg}/${params}`, body, config);
     } else {
       console.log("runnned!! ");
-      res = yield axios.get(`/api/${ctg}/`);
+      res = yield axios.post(`/api/get/${ctg}`, body, config);
     }
     const data = res.data;
-    console.log(data, "data");
+    const clLength = Object.keys(data[0]).length;
 
     if (Array.isArray(data)) {
       const columnNames = Object.keys(data[0]);
       const record = data.map((d) => Object.values(d));
 
-      yield put(fetchRecordSuccess({ record, columnNames }));
+      yield put(fetchRecordSuccess({ record, columnNames, clLength }));
       yield put(loadingFinish());
       yield put(showTable());
     } else {
       const columnNames = Object.keys(data);
       const record = Object.values(data);
 
-      yield put(fetchRecordSuccess({ record: [record], columnNames }));
+      yield put(
+        fetchRecordSuccess({ record: [record], columnNames, clLength })
+      );
       yield put(loadingFinish());
       yield put(showTable());
     }
@@ -136,13 +145,11 @@ export function* updateRecord({ payload }) {
 
       const record = yield select((state) => state.main.data);
       const { id, category, form } = payload;
-      // !! todo add switch statement
       const config = {
         headers: {
           "Content-Type": "application/json",
         },
       };
-      // add switch statement
       const body = checkFormType({ category, form });
       console.log(form, body, "form and body in saga");
 
@@ -156,8 +163,8 @@ export function* updateRecord({ payload }) {
           if (record[i][x] === data.id) {
             let records = record.filter((rec) => rec !== record[i]);
             // which one to push
-            records.push(newRecord);
-            yield put(updateRecordSuccess({ record: records }));
+            const newRecords = [newRecord, ...records];
+            yield put(updateRecordSuccess({ record: newRecords }));
           }
         }
       }

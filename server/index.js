@@ -2,10 +2,15 @@ const webServer = require("./services/web-server.js");
 const database = require("./services/database.js");
 const dbConfig = require("./config/database.js");
 const defaultThreadPoolSize = 4;
+const debuger = require("./debugger/debugger");
 
 // Increase thread pool size by poolMax
 process.env.UV_THREADPOOL_SIZE =
   dbConfig.hrPool.poolMax + defaultThreadPoolSize;
+console.log(process.env.DEBUG, "debug setting");
+// !! todo find out why these dont work
+// console.log(process.stderr.isTTY, "HI");
+// console.log(process.stdout.isTTY, "HI stdoujt");
 
 async function startup() {
   console.log("Starting application");

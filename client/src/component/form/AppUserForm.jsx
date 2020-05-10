@@ -12,7 +12,7 @@ function AppUserForm({ handleChange, form }) {
           onChange={handleChange}
           label="username"
           fullWidth
-          size="1.3rem"
+          sz="1.3rem"
           value={form.username}
         />
       </Box>
@@ -23,7 +23,7 @@ function AppUserForm({ handleChange, form }) {
           onChange={handleChange}
           label="account"
           fullWidth
-          size="1.3rem"
+          sz="1.3rem"
           value={form.account}
         />
       </Box>
@@ -35,7 +35,7 @@ function AppUserForm({ handleChange, form }) {
           label="password"
           type="password"
           fullWidth
-          size="1.3rem"
+          sz="1.3rem"
           value={form.password ? form.password : ""}
         />
       </Box>
@@ -46,7 +46,7 @@ function AppUserForm({ handleChange, form }) {
           onChange={handleChange}
           label="password_check"
           fullWidth
-          size="1.3rem"
+          sz="1.3rem"
           type="password"
           value={form.password_check ? form.password_check : ""}
         />
@@ -58,7 +58,7 @@ function AppUserForm({ handleChange, form }) {
           onChange={handleChange}
           label="status"
           fullWidth
-          size="1.3rem"
+          sz="1.3rem"
           value={form.status}
         />
       </Box>
@@ -69,7 +69,7 @@ function AppUserForm({ handleChange, form }) {
           onChange={handleChange}
           label="sex"
           fullWidth
-          size="1.3rem"
+          sz="1.3rem"
           value={form.sex}
         />
       </Box>
@@ -80,7 +80,7 @@ function AppUserForm({ handleChange, form }) {
           onChange={handleChange}
           label="tag"
           fullWidth
-          size="1.3rem"
+          sz="1.3rem"
           value={form.tag}
         />
       </Box>

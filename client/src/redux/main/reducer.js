@@ -4,6 +4,7 @@ const initialState = {
   data: null,
   columnNames: null,
   showTable: false,
+  clLength: null,
   edit: {
     record: null,
   },
@@ -33,12 +34,13 @@ const main = (state = initialState, action) => {
         data: payload.record,
         columnNames: payload.columnNames,
         showTable: true,
+        clLength: payload.clLength,
       };
 
     case mainActionTypes.CREATE_RECORD_SUCCESS:
       return {
         ...state,
-        data: [...state.data, payload.record],
+        data: [payload.record, ...state.data],
         columnNames: payload.columnNames,
         showTable: true,
       };
@@ -48,6 +50,7 @@ const main = (state = initialState, action) => {
         data: [payload.record],
         columnNames: payload.columnNames,
         showTable: true,
+        clLength: payload.clLength,
       };
     case mainActionTypes.DELETE_RECORD_SUCCESS:
       return {

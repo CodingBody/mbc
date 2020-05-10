@@ -7,15 +7,18 @@ import {
   textPrimary,
   primaryDark,
   primaryHover,
+  disabled,
 } from "../../styled-component/Variable";
 import {
-  ContentLeft,
-  ContentCenter,
+  FlexEnd,
   ColumnDirection,
   BasicForm,
+  FlexCenter,
 } from "./../../styled-component/Layout";
 import SearchIcon from "@material-ui/icons/Search";
 import { getSearchBarTitle } from "../../utils/Helper";
+import { FlexCenterWithAni } from "./../../styled-component/Animation";
+import { CheckBoxIco } from "./../../styled-component/Button";
 
 const SearchBar = ({
   input,
@@ -24,10 +27,12 @@ const SearchBar = ({
   handleSeachbarChange,
   category,
   loading,
+  columns,
+  onClickColumn,
 }) => {
   return (
     <React.Fragment>
-      <ContentCenter>
+      <FlexCenterWithAni>
         <ColumnDirection width="50%" border={10} borderColor="secondary.dark">
           <Box p={2} mb={2}>
             <HeadTwo>
@@ -40,13 +45,32 @@ const SearchBar = ({
               <StdTextFieldTwo
                 fullWidth
                 value={input}
-                label="Title..."
-                size="1.4rem"
+                label={`${getSearchBarTitle(category)}...`}
+                sz="1.4rem"
                 onChange={handleSeachbarChange}
               />
             </BasicForm>
           </Box>
-          <ContentLeft p={2} mb={2}>
+          <FlexCenter wrap="wrap" p={2} mb={2}>
+            {columns.map((item) => (
+              <Box key={item.id} m={1}>
+                <MuiButton
+                  endIcon={
+                    <CheckBoxIco cr={item.fetch ? null : `${disabled}`} />
+                  }
+                  onClick={() => onClickColumn(item)}
+                  variant="contained"
+                  cr={item.fetch ? textPrimary : `${disabled}`}
+                  bg={primaryDark}
+                  border={primaryHover}
+                  sz="1.3rem"
+                >
+                  {item.name}
+                </MuiButton>
+              </Box>
+            ))}
+          </FlexCenter>
+          <FlexEnd p={2} mb={2}>
             <MuiButton
               startIcon={<SearchIcon />}
               onClick={handleSearchSubmit}
@@ -55,13 +79,13 @@ const SearchBar = ({
               bg={primaryDark}
               border={primaryHover}
               disabled={loading}
-              size="1.5rem"
+              sz="1.5rem"
             >
               Search
             </MuiButton>
-          </ContentLeft>
+          </FlexEnd>
         </ColumnDirection>
-      </ContentCenter>
+      </FlexCenterWithAni>
     </React.Fragment>
   );
 };

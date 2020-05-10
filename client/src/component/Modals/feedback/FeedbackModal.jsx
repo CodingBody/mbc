@@ -51,7 +51,7 @@ const FeedBackModal = () => {
           </div>
           <div className="iconBox">
             <div>
-              <Text size="">Experience</Text>
+              <Text>Experience</Text>
             </div>
             <div>
               <div onClick={() => setEmoji(1)}>

@@ -192,15 +192,15 @@ const HomePage = ({ history, login, user }) => {
       <FormContainer>
         <TitleBox>
           <div>
-            <HeadOne size="7" color="#15159ae0">
+            <HeadOne sz="7rem" color="#15159ae0">
               EPIC
             </HeadOne>
           </div>
           <div>
-            <HeadOne size="6">LIVE</HeadOne>
+            <HeadOne sz="6rem">LIVE</HeadOne>
           </div>
           <div>
-            <HeadTwo size="2" color="">
+            <HeadTwo sz="2rem" color="">
               VR CMS
             </HeadTwo>
           </div>

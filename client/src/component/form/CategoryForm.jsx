@@ -1,7 +1,6 @@
 import React from "react";
 import { StdTextFieldTwo } from "./../../styled-component/Input";
 import { Form } from "./../../styled-component/Layout";
-import { TextField } from "@material-ui/core/";
 import { Box } from "@material-ui/core";
 
 const CategoryForm = ({ handleChange, form }) => {
@@ -13,7 +12,7 @@ const CategoryForm = ({ handleChange, form }) => {
           onChange={handleChange}
           label="Title"
           fullWidth
-          size="1.3rem"
+          sz="1.3rem"
           value={form.title}
         />
       </Box>
@@ -23,7 +22,7 @@ const CategoryForm = ({ handleChange, form }) => {
           onChange={handleChange}
           label="Priority"
           fullWidth
-          size="1.3rem"
+          sz="1.3rem"
           value={form.priority}
         />
       </Box>
@@ -33,7 +32,7 @@ const CategoryForm = ({ handleChange, form }) => {
           onChange={handleChange}
           label="Genre List"
           fullWidth
-          size="1.3rem"
+          sz="1.3rem"
           value={form.genre_list}
         />
       </Box>
@@ -43,7 +42,7 @@ const CategoryForm = ({ handleChange, form }) => {
           onChange={handleChange}
           label="Usageyn"
           fullWidth
-          size="1.3rem"
+          sz="1.3rem"
           value={form.usageyn}
         />
       </Box>

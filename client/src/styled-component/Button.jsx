@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Button as Bt } from "@material-ui/core";
+import { disabled } from "./Variable";
+import CheckBoxIcon from "@material-ui/icons/CheckBox";
 
 export const Button = styled.button`
   padding: 13px;
@@ -24,5 +26,9 @@ export const MuiButton = styled(Bt)`
   background-color: ${(props) => props.bg};
   color: ${(props) => props.cr};
   border: ${(props) => ` 1px solid ${props.border}`};
-  font-size: ${(props) => props.size};
+  font-size: ${(props) => props.sz};
+`;
+
+export const CheckBoxIco = styled(CheckBoxIcon)`
+  color: ${(props) => props.cr};
 `;

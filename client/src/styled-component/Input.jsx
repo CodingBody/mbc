@@ -17,7 +17,7 @@ export const StdTextFieldOne = styled(TextField)`
 // on search bar
 export const StdTextFieldTwo = styled(TextField)`
   .MuiInputLabel-root {
-    font-size: ${(props) => props.size};
+    font-size: ${(props) => props.sz};
   }
   .MuiInputLabel-formControl {
     transform: translate(0, 20px) scale(1);

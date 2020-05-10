@@ -3,18 +3,24 @@ import styled from "styled-components";
 export const HeadOne = styled.h1`
   font-weight: 400;
   color: ${(props) => props.color};
-  font-size: ${(props) => (props.size ? `${props.size}rem` : "2rem")};
+  font-size: ${(props) => (props.sz ? `${props.sz}` : "2rem")};
 `;
 
 export const HeadTwo = styled.h2`
   font-weight: bold;
   color: ${(props) => props.color};
-  font-size: ${(props) => (props.size ? `${props.size}rem` : "1.6rem")};
+  font-size: ${(props) => (props.sz ? `${props.sz}` : "1.6rem")};
+`;
+
+export const HeadThree = styled.h3`
+  font-weight: bold;
+  color: ${(props) => props.color};
+  font-size: ${(props) => (props.sz ? `${props.sz}` : "1.3rem")};
 `;
 
 export const Text = styled.p`
   color: ${(props) => props.color};
-  font-size: ${(props) => (props.size ? `${props.size}rem` : "1.3rem")};
+  font-size: ${(props) => (props.sz ? `${props.sz}` : "1.3rem")};
   margin-bottom: 1rem;
 `;
 

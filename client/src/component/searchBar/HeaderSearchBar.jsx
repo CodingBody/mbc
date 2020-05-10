@@ -1,24 +1,27 @@
 import React from "react";
-import { ContentCenter, BasicForm } from "./../../styled-component/Layout";
+import { BasicForm } from "./../../styled-component/Layout";
 import { StdTextFieldTwo } from "../../styled-component/Input";
+import { FlexCenterWithAni } from "./../../styled-component/Animation";
+import { getSearchBarTitle } from "../../utils/Helper";
 
 const HeaderSearchBar = ({
   input,
   handleSeachbarChange,
   handleSearchSubmit,
+  category,
 }) => {
   return (
-    <ContentCenter width="100%">
+    <FlexCenterWithAni width="100%">
       <BasicForm onSubmit={handleSearchSubmit} width="50%">
         <StdTextFieldTwo
           onChange={handleSeachbarChange}
           value={input}
-          label="Title..."
-          size="1.3rem"
+          label={`${getSearchBarTitle(category)}...`}
+          sz="1.3rem"
           fullWidth
         />
       </BasicForm>
-    </ContentCenter>
+    </FlexCenterWithAni>
   );
 };
 
