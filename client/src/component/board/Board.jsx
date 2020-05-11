@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { Switch } from "react-router-dom";
-import Table from "../table/Table";
 import { primaryDark } from "../../styled-component/Variable";
+import { renderMain } from "../../utils/Helper";
+import { Box } from "@material-ui/core";
 
-const Container = styled.div`
+const Container = styled(Box)`
   background: #fff;
   /* !to do  */
   border-top: 13px solid ${primaryDark};
@@ -13,13 +13,7 @@ const Container = styled.div`
 `;
 
 const Board = ({ category }) => {
-  return (
-    <Container>
-      <Switch>
-        <Table category={category} />
-      </Switch>
-    </Container>
-  );
+  return <Container>{renderMain(category)}</Container>;
 };
 
 export default Board;

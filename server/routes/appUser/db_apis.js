@@ -1,34 +1,16 @@
 const oracledb = require("oracledb");
 const database = require("../../services/database.js");
+const {
+  insertQuery,
+  selectQuery,
+  deleteQuery,
+  updateQuery,
+  updateQueryWithPassword,
+} = require("./query.js");
 
 // @@ have the same order for all queries
 // @@ returns object id that came
 // @@ write workspace_id statically
-// @@ alter
-const createSql = `insert into app_user (
-    workspace_id,
-    username,
-    account,
-    password,
-    status,
-    tag,
-    sex,
-    avatar_index,
-    unixtime,
-    created_by
-  ) values (
-    :workspace_id,
-    :username,
-    :account,
-    :password,
-    :status,
-    :tag,
-    :sex,
-    :avatar_index,
-    :unixtime,
-    :created_by 
-  ) returning id
-  into :id`;
 
 // returns object that came
 async function create(obj) {
@@ -39,15 +21,15 @@ async function create(obj) {
     const unixtime = Math.random() * 10000000;
 
     record.avatar_index = Math.floor(avatar_index);
-    record.unixtime = Math.floor(unixtime);
+    record.unixtimeupdateQueryWithPassword = Math.floor(unixtime);
     record.created_by = "admin";
 
     record.id = {
       dir: oracledb.BIND_OUT,
       type: oracledb.STRING,
     };
-    const result = await database.simpleExecute(createSql, record);
-    // createSql = statement,  category = binds
+    const result = await database.simpleExecute(insertQuery, record);
+    // insertQuery = statement,  category = binds
     delete record.workspace_id;
     delete record.avatar_index;
     delete record.unixtime;
@@ -62,18 +44,9 @@ async function create(obj) {
 
 module.exports.create = create;
 
-// @@ alter
-const baseQuery = `SELECT username "username",
-account "account",
-status "status",
-tag "tag",
-sex "sex",
-id "id"
-FROM react.app_user`;
-
 // returns objects from db
 async function find(params) {
-  let query = baseQuery;
+  let query = selectQuery;
   const binds = {};
   if (params) {
     // params is username here
@@ -90,10 +63,6 @@ async function find(params) {
 }
 
 module.exports.find = find;
-
-// @@ alter
-const deleteQuery = `DELETE FROM react.app_user`;
-//
 
 // returns id that came
 async function deleteInOcl(context) {
@@ -122,26 +91,6 @@ module.exports.deleteInOcl = deleteInOcl;
 
 // @@ returns object id that came
 // @@ write workspace_id statically
-// @@ alter
-const updateSql = `update app_user
-  set username = :username,
-    account = :account,
-    status = :status,
-    tag = :tag,
-    sex = :sex,
-    updated_by = :updated_by
-  where id = :id`;
-
-const updateSqlWithPassword = `update app_user
-  set username = :username,
-    account = :account,
-    password = :password,
-    status = :status,
-    tag = :tag,
-    sex = :sex,
-    updated_by = :updated_by
-  where id = :id`;
-//
 
 async function update(obj, req) {
   try {
@@ -153,15 +102,15 @@ async function update(obj, req) {
     console.log(record, "record");
     let result;
     if (record.password) {
-      result = await database.simpleExecute(updateSqlWithPassword, record);
+      result = await database.simpleExecute(updateQueryWithPassword, record);
       console.log("runneeddd!");
     } else {
-      result = await database.simpleExecute(updateSql, record);
+      result = await database.simpleExecute(updateQuery, record);
     }
 
-    // createSql = statement,  category = binds
+    // insertQuery = statement,  category = binds
 
-    // createSql = statement,  category = binds
+    // insertQuery = statement,  category = binds
     delete record.updated_by;
 
     console.log(result, "record");

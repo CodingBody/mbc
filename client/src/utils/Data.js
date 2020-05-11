@@ -80,7 +80,7 @@ export const navbarItem = [
   },
   {
     link: "Asset Upload",
-    params: "assetupload",
+    params: "asset_upload",
 
     icon: <DateRangeIcon />,
     id: uuidv4(),

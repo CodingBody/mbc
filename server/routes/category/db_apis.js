@@ -1,22 +1,13 @@
 const oracledb = require("oracledb");
 const database = require("../../services/database.js");
-
+const {
+  insertQuery,
+  selectQuery,
+  deleteQuery,
+  updateQuery,
+} = require("./query");
 // !! this order
 // @@ alter
-const createSql = `insert into category (
-    workspace_id,
-    title,
-    priority,
-    genre_list,
-    usageyn
-  ) values (
-    :workspace_id,
-    :title,
-    :priority,
-    :genre_list,
-    :usageyn
-  ) returning id
-  into :id`;
 
 // returns object that came
 async function create(obj) {
@@ -31,7 +22,7 @@ async function create(obj) {
       type: oracledb.STRING,
     };
 
-    const result = await database.simpleExecute(createSql, record);
+    const result = await database.simpleExecute(insertQuery, record);
     // createSql = statement,  category = binds
     record.id = result.outBinds.id[0];
 
@@ -46,17 +37,12 @@ async function create(obj) {
 module.exports.create = create;
 
 // @@ alter
-const baseQuery = `SELECT title "title",
-priority "priority",
-genre_list "genre_list",
-usageyn "usageyn",
-id "id"
-FROM react.category`;
 
 // returns objects from db
 // !! fix NaN in query
 async function find(params) {
-  let query = baseQuery;
+  let query = selectQuery;
+  console.log(selectQuery, "selectQuery");
   const binds = {};
   let param = params;
   if (param !== null && param !== undefined) {
@@ -77,7 +63,6 @@ async function find(params) {
 module.exports.find = find;
 
 // @@ alter
-const deleteQuery = `DELETE FROM react.category`;
 //
 
 // returns id that came
@@ -107,13 +92,7 @@ module.exports.deleteInOcl = deleteInOcl;
 
 // returns object that came
 // @@ alter
-const updateSql = `update category
-  set workspace_id = :workspace_id,
-    title = :title,
-    priority = :priority,
-    genre_list = :genre_list,
-    usageyn = :usageyn
-  where id = :id`;
+
 //
 
 async function update(obj, req) {
@@ -124,7 +103,7 @@ async function update(obj, req) {
     // to prevent direct modification
     const record = Object.assign({}, obj);
 
-    const result = await database.simpleExecute(updateSql, record);
+    const result = await database.simpleExecute(updateQuery, record);
     // createSql = statement,  category = binds
 
     delete record.workspace_id;

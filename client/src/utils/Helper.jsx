@@ -2,11 +2,28 @@ import React from "react";
 import CategoryForm from "./../component/form/CategoryForm";
 import AppUserForm from "../component/form/AppUserForm";
 import { v4 as uuid4 } from "uuid";
+import TableSearch from "../component/main/tableSearch/TableSearch.jsx";
+import AssetInput from "./../component/main/assetInput/AssetInput";
 
 // !! optimazation, distructuring
 // alter when number of columns has changed
 
 // !! fix appuserform
+
+export const renderMain = (category) => {
+  switch (category) {
+    case "category":
+    case "appuser":
+    case "program_table":
+    case "content":
+      return <TableSearch category={category} />;
+    case "asset_upload":
+      return <AssetInput category={category} />;
+    default:
+      return;
+  }
+};
+
 export const renderForm = ({ category, form, handleChange }) => {
   switch (category) {
     case "category":
