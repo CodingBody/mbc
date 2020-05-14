@@ -11,33 +11,20 @@ const version = require("../controllers/version.js");
 
 const express = require("express");
 const router = express.Router();
-const auth = require("../controllers/auth.js");
 const { check } = require("express-validator");
+const auth = require("../routes/auth/controllers.js");
 const category = require("../routes/category/controllers.js");
 const appuser = require("../routes/appUser/controllers.js");
-
-router
-  .route("/auth/register")
-  .post(
-    [
-      check("name", "Name is required").not().isEmpty(),
-      check("email", "Please include a valid email").isEmail(),
-      check(
-        "password",
-        "Please enter a password with 6 or more characters"
-      ).isLength({ min: 6 }),
-    ],
-    auth.registerPost
-  );
 
 router
   .route("/auth/login")
   .post(
     [
-      check("username", "Please include a valid email").exists(),
+      check("workspace_name", "workspace is required").exists(),
+      check("name", "Please include a valid email").exists(),
       check("password", "Password is required").exists(),
     ],
-    auth.loginPost
+    auth.loginAdmin
   );
 
 // @@ param_1 represents how many columns

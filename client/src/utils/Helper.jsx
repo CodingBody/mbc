@@ -8,7 +8,37 @@ import AssetInput from "./../component/main/assetInput/AssetInput";
 // !! optimazation, distructuring
 // alter when number of columns has changed
 
-// !! fix appuserform
+export const getFileType = (name) => {
+  const arr = name.split(".");
+
+  let extenssion = arr[arr.length - 1];
+  switch (extenssion) {
+    case "png":
+    case "jpg":
+      return "image";
+    case "webm":
+    case "vob":
+    case "m4v":
+      return "video";
+    case "docx":
+      return "files";
+    default:
+      return;
+  }
+};
+
+export const getFilePurpose = (type) => {
+  switch (type) {
+    case "image":
+      return ["Thumbnail", "Poster", "Logo", "Background"];
+    case "video":
+      return ["2D", "180", "360", "4Dreplay"];
+    case "files":
+      return "noType";
+    default:
+      return;
+  }
+};
 
 export const renderMain = (category) => {
   switch (category) {
@@ -24,6 +54,7 @@ export const renderMain = (category) => {
   }
 };
 
+// !! fix appuserform
 export const renderForm = ({ category, form, handleChange }) => {
   switch (category) {
     case "category":

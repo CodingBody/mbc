@@ -1,6 +1,12 @@
 import styled from "styled-components";
 import { renderCells } from "../utils/Helper";
-import { textPrimary, primary, primaryHover, primaryDark_2 } from "./Variable";
+import {
+  textPrimary,
+  primary,
+  primaryHover,
+  primaryDark_2,
+  primaryDark,
+} from "./Variable";
 
 export const SearchBarBox = styled.div`
   display: flex;
@@ -44,12 +50,30 @@ export const ColumnNames = styled.thead`
   }
 `;
 
+export const ColumnNamesSecondary = styled.thead`
+  border-bottom: 2px solid ${primaryHover};
+  tr {
+    /* display: flex; */
+    display: grid;
+    grid-template-columns: ${(props) => renderCells(props.clLength)};
+  }
+
+  th {
+    color: ${textPrimary};
+    font-size: 1.2rem;
+    background: ${primary};
+    padding: 12px 0;
+    flex-grow: 1;
+  }
+`;
+
 export const TableBody = styled.tr`
   display: grid;
   grid-template-columns: ${(props) => renderCells(props.clLength)};
+  margin-bottom: ${(props) => props.mb};
 
   td:first-child {
-    border: 1px solid ${primaryHover};
+    border: ${(props) => (props.br ? props.br : null)};
     padding: 12px 0;
     display: flex;
     align-items: center;
@@ -59,8 +83,27 @@ export const TableBody = styled.tr`
     }
   }
   td {
+    display: flex;
+    align-items: center;
+    justify-content: ${(props) => props.flex};
     font-size: 1.2rem;
-    border: 1px solid ${primaryHover};
+    border: ${(props) => (props.br ? props.br : null)};
+    padding: 12px 0 12px 5px;
+  }
+`;
+
+export const TableBodySecondary = styled.tr`
+  display: grid;
+  grid-template-columns: ${(props) => renderCells(props.clLength)};
+  margin-bottom: ${(props) => props.mb};
+  border-bottom: 1px solid #d2d2d2;
+
+  td {
+    display: flex;
+    align-items: center;
+    justify-content: ${(props) => props.flex};
+    font-size: 1.2rem;
+    border: ${(props) => (props.br ? props.br : null)};
     padding: 12px 0 12px 5px;
   }
 `;

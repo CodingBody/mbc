@@ -1,5 +1,4 @@
 const { create, find, update, deleteInOcl } = require("./db_apis.js");
-const debuger = require("./../../debugger/debugger");
 const filterColumns = require("../../common/helper");
 
 // !! change variable name to increase reusability of fns and code
@@ -33,8 +32,6 @@ async function get(req, res, next) {
     const params = req.params.params;
     const columns = req.body.columns;
     // @@ code_review_3
-
-    debuger(columns, "columns");
 
     let rows;
     if (params) {

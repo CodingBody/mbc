@@ -23,6 +23,16 @@ export const SpaceBetween = styled(Box)`
   width: ${(props) => props.width};
 `;
 
+export const SpaceAround = styled(Box)`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  background-color: ${(props) => props.bg};
+  color: ${(props) => props.cr};
+  width: ${(props) => props.width};
+`;
+
 export const FlexCenter = styled(Box)`
   display: flex;
   justify-content: center;

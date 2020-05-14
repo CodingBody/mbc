@@ -160,10 +160,10 @@ const CheckBox = styled.div`
   }
 `;
 
-const HomePage = ({ history, login, user }) => {
+const HomePage = ({ history, login }) => {
   const [form, setForm] = useState({
-    serviceName: "MBC",
-    username: "admin",
+    workspace_name: "react",
+    name: "react",
     password: "",
     remember: false,
   });
@@ -218,8 +218,8 @@ const HomePage = ({ history, login, user }) => {
             <TextField>
               <input
                 placeholder="Service Name"
-                value={form.serviceName}
-                name="serviceName"
+                value={form.workspace_name}
+                name="workspace_name"
                 required
                 onChange={handleChange}
                 type="text"
@@ -230,8 +230,8 @@ const HomePage = ({ history, login, user }) => {
               <input
                 required
                 type="text"
-                name="username"
-                value={form.username}
+                name="name"
+                value={form.name}
                 onChange={handleChange}
                 placeholder="User Name"
               />
@@ -275,14 +275,8 @@ const HomePage = ({ history, login, user }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  user: state.auth.user,
-});
-
 const mapDispatchToProps = (dispatch) => ({
   login: (form) => dispatch(userLoginStart(form)),
 });
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(HomePage)
-);
+export default withRouter(connect(null, mapDispatchToProps)(HomePage));

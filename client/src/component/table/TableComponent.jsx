@@ -45,7 +45,11 @@ const TableComponent = ({
         <tbody>
           {data &&
             data.map((record) => (
-              <TableBody clLength={clLength} key={uuid4()}>
+              <TableBody
+                br={`1px solid ${primaryHover}`}
+                clLength={clLength}
+                key={uuid4()}
+              >
                 <td>
                   <SdEditIcon
                     onClick={() => handleEditClick(record, columnNames)}

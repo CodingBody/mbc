@@ -5,17 +5,18 @@ import { authActionTypes, userLoginSuccess, userLoginfailure } from "./actions";
 // api
 export function* logUserIn({ payload }) {
   console.log(payload, "payload");
-  const { username, password } = payload;
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
 
-  const body = JSON.stringify({ username, password });
+  const body = JSON.stringify(payload);
+  console.log(body, "json");
+
   try {
     const res = yield axios.post("/api/auth/login", body, config);
-    yield put(userLoginSuccess(res.data));
+    yield put(userLoginSuccess(res.data[0]));
   } catch (err) {
     const errors = err.response.data.errors;
     yield put(userLoginfailure(errors));

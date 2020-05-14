@@ -1,7 +1,7 @@
 import { authActionTypes } from "./actions";
 
 const initialState = {
-  user: null,
+  user: "",
   error: null,
 };
 
@@ -9,11 +9,11 @@ const auth = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case authActionTypes.CHECK_IF_USER_LOGIN:
-      return { ...state, user: "hello" };
+      return { ...state, user: "" };
     case authActionTypes.USER_LOGIN_SUCCESS:
       return { ...state, user: payload };
     case authActionTypes.USER_LOGIN_FAILURE:
-      return { ...state, user: null, error: payload };
+      return { ...state, user: "", error: payload };
     default:
       return state;
   }

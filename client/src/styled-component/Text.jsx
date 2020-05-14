@@ -7,7 +7,7 @@ export const HeadOne = styled.h1`
 `;
 
 export const HeadTwo = styled.h2`
-  font-weight: bold;
+  font-weight: ${(props) => props.weight};
   color: ${(props) => props.color};
   font-size: ${(props) => (props.sz ? `${props.sz}` : "1.6rem")};
 `;
@@ -19,9 +19,11 @@ export const HeadThree = styled.h3`
 `;
 
 export const Text = styled.p`
-  color: ${(props) => props.color};
+  color: ${(props) => props.cr};
   font-size: ${(props) => (props.sz ? `${props.sz}` : "1.3rem")};
-  margin-bottom: 1rem;
+  margin-bottom: ${(props) => props.mb};
+  font-weight: ${(props) => props.weight};
+  text-transform: ${(props) => props.transform};
 `;
 
 export const Close = styled.p`
