@@ -8,11 +8,15 @@ import {
   TableBodySecondary,
 } from "./../../styled-component/Table";
 import { v4 } from "uuid";
-import { FormControl, InputLabel, Select } from "@material-ui/core";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  LinearProgress,
+} from "@material-ui/core";
 import { v4 as uuidv4 } from "uuid";
 
 const RecievedFiles = ({ files, handleSelectChange }) => {
-  console.log(files, "files");
   return (
     <FlexCenterWithAni>
       <ColumnDirection
@@ -44,7 +48,7 @@ const RecievedFiles = ({ files, handleSelectChange }) => {
                 <tbody key={v4()}>
                   <TableBodySecondary flex="center" clLength={4}>
                     <td>
-                      <Text transform="uppercase">{file.fileType}</Text>
+                      <Text transform="uppercase">{file.type}</Text>
                     </td>
                     <td>{file.name}</td>
                     <td>
@@ -84,7 +88,16 @@ const RecievedFiles = ({ files, handleSelectChange }) => {
                       )}
                     </td>
 
-                    <td> dd</td>
+                    <LinearProgress
+                      style={{
+                        margin: "auto",
+                        width: "70%",
+                        borderRadius: "10px",
+                        height: " 13px",
+                      }}
+                      variant="determinate"
+                      value={file.progress}
+                    />
                   </TableBodySecondary>
                 </tbody>
               ))}

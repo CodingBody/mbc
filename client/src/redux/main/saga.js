@@ -84,7 +84,6 @@ export function* fetchDataFromDb({ payload }) {
     if (params !== "") {
       res = yield axios.post(`/api/get/${ctg}/${params}`, body, config);
     } else {
-      console.log("runnned!! ");
       res = yield axios.post(`/api/get/${ctg}`, body, config);
     }
     const data = res.data;
@@ -153,7 +152,7 @@ export function* updateRecord({ payload }) {
       const body = checkFormType({ category, form });
       console.log(form, body, "form and body in saga");
 
-      // !! well done let's brag
+      // $$ well done let's brag
 
       const res = yield axios.put(`/api/${category}/${id}`, body, config);
       const data = res.data;

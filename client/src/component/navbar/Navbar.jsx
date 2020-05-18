@@ -96,12 +96,12 @@ const SubLink = styled.ul`
       margin-right: 5px;
     }
   }
-`;
+`;=
 
 const Navbar = ({ history, shrink, category }) => {
   const [renderSubLink, setRenderSubLink] = useState(null);
 
-  // !! brilliant
+  // $$ brilliant
   React.useEffect(() => {
     if (category) {
       const currentLink = navbarItem.filter((item) => item.params === category);

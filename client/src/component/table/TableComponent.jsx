@@ -17,6 +17,7 @@ import {
   disabled,
   textPrimary,
 } from "../../styled-component/Variable";
+import HeaderMunu from "./../header/HeaderMenu";
 import EditIcon from "@material-ui/icons/Edit";
 import styled from "styled-components";
 import { v4 as uuid4 } from "uuid";
@@ -38,7 +39,9 @@ const TableComponent = ({
       <TableContainer cellspacing="0">
         <ColumnNames clLength={clLength}>
           <tr>
-            <th></th>
+            <th>
+              <HeaderMunu />
+            </th>
             {removeLastItemInArr(columnNames, clLength)}
           </tr>
         </ColumnNames>

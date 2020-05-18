@@ -11,30 +11,28 @@ const { validationResult } = require("express-validator");
 const loginAdmin = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    // 200 means everything's ok 400 which is bad request
+    console.log("runed");
     return res.status(400).json({ errors: errors.array() });
   }
 
   const { name, password, workspace_name } = req.body;
 
   const context = { name, password, workspace_name };
-  try {
-    let query = selectQuery;
-    const binds = {};
+  let query = selectQuery;
+  const binds = {};
 
-    if (context.password) {
-      binds.password = context.password;
-      binds.name = context.name;
+  binds.password = context.password;
+  binds.name = context.name;
 
-      query += `\nWHERE password = :password AND name = :name`;
-    }
+  query += `\nWHERE password = :password AND name = :name`;
 
-    const result = await database.simpleExecute(query, binds);
-    // !! report
-    return res.json(result.rows);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server error");
+  const result = await database.simpleExecute(query, binds);
+  if (result.rows.length < 1) {
+    return res.status(404).json({ errors: [{ msg: "Invalid Credentials" }] });
+  }
+
+  if (result.rows.length > 0) {
+    return res.status(200).json({ result: result.rows[0] });
   }
 };
 

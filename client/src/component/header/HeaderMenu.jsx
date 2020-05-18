@@ -10,8 +10,10 @@ import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import { toggleHelpModal } from "../../redux/modal/actions";
 import { connect } from "react-redux";
+import { userLogOut } from "../../redux/auth/actions";
+import { withRouter } from "react-router-dom";
 
-function HeaderMenu({ admin = false, toggleHelpModal }) {
+function HeaderMenu({ admin = false, toggleHelpModal, logOut, history }) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
@@ -49,8 +51,10 @@ function HeaderMenu({ admin = false, toggleHelpModal }) {
     toggleHelpModal();
   };
 
-  const what = (test) => {
-    console.log(test);
+  const handleLogOut = (e) => {
+    logOut();
+    handleClose(e);
+    history.push("/");
   };
 
   return (
@@ -92,7 +96,7 @@ function HeaderMenu({ admin = false, toggleHelpModal }) {
                     id="menu-list-grow"
                     onKeyDown={handleListKeyDown}
                   >
-                    <MenuItem onClick={handleClose}>SignOut</MenuItem>
+                    <MenuItem onClick={(e) => handleLogOut(e)}>LogOut</MenuItem>
                   </MenuList>
                 ) : (
                   <MenuList
@@ -115,6 +119,7 @@ function HeaderMenu({ admin = false, toggleHelpModal }) {
 
 const mapDispatchToProps = (dispatch) => ({
   toggleHelpModal: () => dispatch(toggleHelpModal()),
+  logOut: () => dispatch(userLogOut()),
 });
 
-export default connect(null, mapDispatchToProps)(HeaderMenu);
+export default withRouter(connect(null, mapDispatchToProps)(HeaderMenu));

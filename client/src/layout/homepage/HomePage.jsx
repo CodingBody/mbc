@@ -183,8 +183,7 @@ const HomePage = ({ history, login }) => {
   };
 
   const handleSubmit = () => {
-    history.push("/dashboard/mbc/home");
-    login(form);
+    login({ form, history });
   };
 
   return (
@@ -276,7 +275,7 @@ const HomePage = ({ history, login }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  login: (form) => dispatch(userLoginStart(form)),
+  login: (payload) => dispatch(userLoginStart(payload)),
 });
 
 export default withRouter(connect(null, mapDispatchToProps)(HomePage));

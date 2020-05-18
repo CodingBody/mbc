@@ -1,20 +1,18 @@
-import { all, call, takeLatest, select } from "redux-saga/effects";
-import axios from "axios";
+import { all, call, takeLatest, select, put } from "redux-saga/effects";
 import { fileActionTypes } from "./actions";
-import { Select } from "@material-ui/core";
 import { authenticateUser } from "../helper";
 
 // api
 export function* loadFileToStorage({ payload }) {
   const user = (state) => state.auth.user;
   const currentUser = yield select(user);
-  console.log(typeof currentUser, "currentUser");
+  console.log(payload, "payload");
 
   if (!currentUser) return alert("you need to login first");
   if (currentUser) {
     const { id, upload_key, workspace_id } = currentUser;
-
-    authenticateUser(id, upload_key, workspace_id);
+    console.log(put, "out");
+    authenticateUser(id, upload_key, workspace_id, payload);
   }
 
   //   if (!payload) return;

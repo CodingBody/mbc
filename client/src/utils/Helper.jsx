@@ -5,7 +5,6 @@ import { v4 as uuid4 } from "uuid";
 import TableSearch from "../component/main/tableSearch/TableSearch.jsx";
 import AssetInput from "./../component/main/assetInput/AssetInput";
 
-// !! optimazation, distructuring
 // alter when number of columns has changed
 
 export const getFileType = (name) => {
@@ -29,7 +28,8 @@ export const getFileType = (name) => {
 
 export const getFilePurpose = (type) => {
   switch (type) {
-    case "image":
+    case "image/png":
+    case "image/jpg":
       return ["Thumbnail", "Poster", "Logo", "Background"];
     case "video":
       return ["2D", "180", "360", "4Dreplay"];

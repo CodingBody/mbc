@@ -1,46 +1,10 @@
 import axios from "axios";
 import AWS from "aws-sdk";
-import { increaseProgress } from "./file/actions";
 
-export const checkFormType = ({ category, form }) => {
-  console.log(category, "category");
-  switch (category) {
-    case "category":
-      const { title, priority, genre_list, usageyn } = form;
-      return JSON.stringify({
-        title,
-        priority,
-        genre_list,
-        usageyn,
-      });
-    case "appuser":
-      const {
-        username,
-        account,
-        password,
-        password_check,
-        status,
-        sex,
-        tag,
-      } = form;
-      if (password !== password_check) {
-        alert("your passwords are not equal");
-      }
-      return JSON.stringify({
-        username,
-        account,
-        password,
-        status,
-        sex,
-        tag,
-      });
-    default:
-      return;
-  }
-};
-
-export const authenticateUser = (id, upload_key, workspace_id, files, put) => {
+export const insertFileToS3 = (user, files, getProgress) => {
+  console.log(getProgress, "outside");
   // !! this url below is different from that in gateway
+  const { id, upload_key, workspace_id } = user;
   axios
     .post(
       "https://cqvfwe05v9.execute-api.ap-northeast-1.amazonaws.com/prod/api/auth/login",
@@ -53,9 +17,9 @@ export const authenticateUser = (id, upload_key, workspace_id, files, put) => {
     .then(function (response) {
       statusChangeCallback({
         files: files,
+        getProgress: getProgress,
         status: "connected",
         authResponse: {
-          put: put,
           userID: id,
           accessToken: response.data.token,
           IdentityId: response.data.identityId,
@@ -72,7 +36,8 @@ function statusChangeCallback(response) {
   console.log(response, "response in callback");
 
   const files = response.files;
-  const put = response.put;
+  const getProgress = response.getProgress;
+
   console.log("userId : " + response.authResponse.userID);
 
   if (response.status === "connected") {
@@ -122,18 +87,19 @@ function statusChangeCallback(response) {
       if (files.length > 0) {
         for (var i = 0; i < files.length; i++) {
           // if (files[i].type == "image") {
-          aws_upload(files[i], bucket1);
+          aws_upload(files[i], bucket1, getProgress);
           // }
         }
       } else {
         // !! throw notification that nothing to upload in here
       }
 
-      function aws_upload(file, bucket) {
+      function aws_upload(file, bucket, getProgress) {
         const { name, type } = file;
 
         console.log(file, "in");
         console.log("start uploading");
+        console.log(getProgress, "getProgress");
 
         file.selectedPurpose = "thumnbnail";
 
@@ -151,13 +117,13 @@ function statusChangeCallback(response) {
         });
 
         manager.on("httpUploadProgress", function (progress) {
-          console.log("progress", progress); // { loaded: 4915, total: 192915, part: 1, key: 'foo.jpg' }
+          console.log("progress ", progress); // { loaded: 4915, total: 192915, part: 1, key: 'foo.jpg' }
           var str = progress.key.split("/");
           var key = str[5];
           var status = (progress.loaded / progress.total) * 100;
           console.log(status, "status");
-          console.log(put, "put");
 
+          getProgress(status, progress.key);
           if (status == 100) {
             console.log("done !!");
           }

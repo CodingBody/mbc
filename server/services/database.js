@@ -17,8 +17,6 @@ function simpleExecute(statement, binds = [], opts = {}) {
   return new Promise(async (resolve, reject) => {
     let conn;
 
-    // !!Using bind variables with Oracle Database
-    // is very important for security and performance reason
     opts.outFormat = oracledb.OBJECT;
     opts.autoCommit = true;
 
@@ -32,7 +30,6 @@ function simpleExecute(statement, binds = [], opts = {}) {
       reject(err, "rejected in db");
     } finally {
       if (conn) {
-        // conn assignment worked, need to close
         try {
           await conn.close();
         } catch (err) {

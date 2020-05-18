@@ -12,19 +12,20 @@ const version = require("../controllers/version.js");
 const express = require("express");
 const router = express.Router();
 const { check } = require("express-validator");
-const auth = require("../routes/auth/controllers.js");
+const { loginAdmin } = require("../routes/auth/controllers.js");
 const category = require("../routes/category/controllers.js");
 const appuser = require("../routes/appUser/controllers.js");
+const tryCatch = require("../middleware/tryCatch");
 
 router
   .route("/auth/login")
   .post(
     [
-      check("workspace_name", "workspace is required").exists(),
-      check("name", "Please include a valid email").exists(),
-      check("password", "Password is required").exists(),
+      check("workspace_name", "workspace is required").not().isEmpty(),
+      check("name", "Please include a valid email").not().isEmpty(),
+      check("password", "Password is required").not().isEmpty(),
     ],
-    auth.loginAdmin
+    tryCatch(loginAdmin)
   );
 
 // @@ param_1 represents how many columns
@@ -34,10 +35,10 @@ router
 // this fn would be too heavy for frontend
 router
   .route("/category/:params?")
-  .post(category.post)
-  .delete(category.deleteRecord)
-  .put(category.put);
-router.route("/get/category/:params?").post(category.get);
+  .post(tryCatch(category.post))
+  .delete(tryCatch(category.deleteRecord))
+  .put(tryCatch(category.put));
+router.route("/get/category/:params?").post(tryCatch(category.get));
 
 // @@ param_1 represents how many columns
 router

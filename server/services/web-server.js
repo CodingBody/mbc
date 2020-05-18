@@ -5,6 +5,7 @@ const webServerConfig = require("../config/web-server.js");
 const router = require("./router.js");
 const bodyParser = require("body-parser");
 const querystring = require("querystring");
+const error = require("../middleware/error");
 
 let httpServer;
 
@@ -14,7 +15,7 @@ function initialize() {
     httpServer = http.createServer(app);
 
     // Combines logging info from request and response
-    app.use(morgan("combined"));
+    // app.use(morgan("combined"));
 
     // Parse incoming JSON requests and revive JSON.
     app.use(
@@ -30,6 +31,7 @@ function initialize() {
     // Mount the router at /api so all its routes start with /api
     app.use("/api", router);
     // app.use("/api/auth", require("../controllers/auth"));
+    app.use(error);
 
     httpServer
       .listen(webServerConfig.port)

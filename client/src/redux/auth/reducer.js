@@ -14,6 +14,8 @@ const auth = (state = initialState, action) => {
       return { ...state, user: payload };
     case authActionTypes.USER_LOGIN_FAILURE:
       return { ...state, user: "", error: payload };
+    case authActionTypes.USER_LOGOUT:
+      return { ...state, user: "" };
     default:
       return state;
   }

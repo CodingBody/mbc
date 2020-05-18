@@ -7,7 +7,6 @@ const {
   updateQuery,
 } = require("./query");
 // !! this order
-// @@ alter
 
 // returns object that came
 async function create(obj) {
@@ -59,7 +58,6 @@ async function find(params) {
   }
 }
 
-// !! find is a method of module object
 module.exports.find = find;
 
 // @@ alter
