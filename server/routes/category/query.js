@@ -14,14 +14,13 @@ const insertQuery = `insert into category (
   into :id`;
 
 module.exports.insertQuery = insertQuery;
-const selectQuery = `SELECT title "title",
-  priority "priority",
-  genre_list "genre_list",
-  usageyn "usageyn",
-  id "id"
-  FROM react.category`;
 
-module.exports.selectQuery = selectQuery;
+module.exports.selectQuery = `SELECT title "title",
+priority "priority",
+genre_list "genre_list",
+usageyn "usageyn",
+id "id"
+FROM react.category`;
 
 const deleteQuery = `DELETE FROM react.category`;
 

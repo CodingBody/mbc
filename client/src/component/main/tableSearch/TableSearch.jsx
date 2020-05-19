@@ -1,47 +1,22 @@
 import React from "react";
-import styled from "styled-components";
-import {
-  TableBody,
-  TableContainer,
-  ColumnNames,
-} from "../../../styled-component/Table";
-import EditIcon from "@material-ui/icons/Edit";
 import SearchBar from "../../searchBar/SearchBar";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { v4 as uuid4 } from "uuid";
 import {
   toggleCreateModal,
   toggleEditModal,
 } from "../../../redux/modal/actions";
-import {
-  getFormFields,
-  removeLast,
-  removeLastItemInArr,
-} from "../../../utils/Helper";
+import { getFormFields } from "../../../utils/Helper";
 import {
   fetchRecordStart,
   populateRecordOnEdit,
   populateColumnNamesOnCreate,
 } from "../../../redux/main/actions";
 import { navbarItem } from "../../../utils/Data";
-import {
-  primaryDark,
-  textPrimary,
-  primaryHover,
-  disabled,
-} from "../../../styled-component/Variable";
-import { MuiButton, CheckBoxIco } from "../../../styled-component/Button";
-import {
-  FlexStartWithBorder,
-  FlexCenter,
-} from "../../../styled-component/Layout";
-import { BasixAni } from "../../../styled-component/Animation";
-import { HeadThree } from "../../../styled-component/Text";
-import { Box } from "@material-ui/core";
 import { getAllColumnNames } from "../../../utils/Helper";
 import SubHeader from "../../header/SubHeader";
 import TableComponent from "./../../table/TableComponent";
+import SortModal from "./../../Modals/sort/SortModal";
 
 const TableSearch = ({
   fetchRecord,
@@ -63,7 +38,6 @@ const TableSearch = ({
   React.useEffect(() => {
     setColumns(getAllColumnNames(category));
   }, [category]);
-  console.log(columns, "selectedColumns");
   //
   const handleSeachbarChange = (e) => {
     setInput(e.target.value);
@@ -132,7 +106,6 @@ const TableSearch = ({
           renderIcon={renderIcon}
           handleSearchSubmit={handleSearchSubmit}
           handleSeachbarChange={handleSeachbarChange}
-          input={input}
           category={category}
           onClickColumn={onClickColumn}
           columns={columns}
@@ -149,6 +122,12 @@ const TableSearch = ({
           columnNames={columnNames}
         />
       )}
+      <SortModal
+        input={input}
+        loading={loading}
+        columns={columns}
+        category={category}
+      />
     </React.Fragment>
   );
 };

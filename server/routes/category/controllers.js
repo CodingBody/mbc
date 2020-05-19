@@ -23,16 +23,13 @@ async function post(req, res) {
 module.exports.post = post;
 
 async function get(req, res) {
-  const params = req.params.params;
-  const columns = req.body.columns;
+  // if (req.headers.sort) {
+  //   const sort = JSON.parse(req.headers.sort);
+  //   console.log(sort, "sort");
+  // }
 
-  let rows;
-  if (params) {
-    rows = await find(params);
-  } else {
-    rows = await find();
-  }
-
+  rows = await find(req);
+  const columns = JSON.parse(req.headers.column_names);
   const result = filterColumns(columns, rows);
 
   if (rows.length > 0) {

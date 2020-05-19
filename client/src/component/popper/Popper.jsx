@@ -2,8 +2,10 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import { toggleSortModal } from "./../../redux/modal/actions";
+import { connect } from "react-redux";
 
-export default function SimpleMenu() {
+const Popper = ({ toggleSortModal }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -12,6 +14,11 @@ export default function SimpleMenu() {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleClickSort = () => {
+    handleClose();
+    toggleSortModal();
   };
 
   return (
@@ -30,10 +37,10 @@ export default function SimpleMenu() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleClickSort}>Sort</MenuItem>
       </Menu>
     </div>
   );
-}
+};
+
+export default connect(null, { toggleSortModal })(Popper);

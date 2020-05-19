@@ -4,7 +4,6 @@ import Slide from "@material-ui/core/Slide";
 import { HeadTwo, Close } from "../../../styled-component/Text";
 import { connect } from "react-redux";
 import { toggleEditModal } from "../../../redux/modal/actions";
-import { EditModalContainer } from "../../../styled-component/ModalContainer";
 import { MuiButton } from "../../../styled-component/Button";
 import AppUserForm from "../../form/AppUserForm";
 import CategoryForm from "./../../form/CategoryForm";

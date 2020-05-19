@@ -3,9 +3,7 @@ import HomePage from "./layout/homepage/HomePage";
 import Dashboard from "./layout/dashboard/Dashboard";
 import { Route } from "react-router-dom";
 import HelpModal from "./component/Modals/help/HelpModal";
-import axios from "axios";
 import { connect } from "react-redux";
-var AWS = require("aws-sdk");
 
 function App({ user }) {
   return (

@@ -9,7 +9,8 @@ const {
 // !! this order
 
 // returns object that came
-async function create(obj) {
+
+module.exports.create = async function (obj) {
   try {
     // @@ alter
     obj.workspace_id = "WS216863988676954993388743949988460632986";
@@ -31,40 +32,44 @@ async function create(obj) {
   } catch (err) {
     console.error(err);
   }
-}
-
-module.exports.create = create;
-
-// @@ alter
+};
 
 // returns objects from db
 // !! fix NaN in query
-async function find(params) {
+
+module.exports.find = async function (req) {
+  const params = req.params.params;
   let query = selectQuery;
-  console.log(selectQuery, "selectQuery");
-  const binds = {};
   let param = params;
+  const sort = req.headers.sort;
+  const binds = {};
   if (param !== null && param !== undefined) {
     // param is title here
-    query += `\nwhere title like '%${param}%'`;
+    query += `\nWHERE title like '%${param}%'`;
+  }
+
+  if (sort !== "undefined" && sort !== undefined && sort) {
+    const { column, direction, isNullLast } = JSON.parse(sort);
+    let direct;
+    if (direction === "ascending") {
+      direct = "ASC";
+    } else if (direction === "descending") {
+      direct = "DESC";
+    }
+    query += `\nORDER BY ${column} ${direct}`;
   }
 
   const result = await database.simpleExecute(query, binds);
-  // !! report
   if (Array.isArray(result.rows)) {
     return result.rows;
   } else {
     console.log(result);
   }
-}
-
-module.exports.find = find;
-
-// @@ alter
-//
+};
 
 // returns id that came
-async function deleteInOcl(context) {
+
+module.exports.deleteInOcl = async function (context) {
   let query = deleteQuery;
   const binds = {};
 
@@ -84,16 +89,14 @@ async function deleteInOcl(context) {
   } else {
     throw Error("no record has been deleted");
   }
-}
-
-module.exports.deleteInOcl = deleteInOcl;
+};
 
 // returns object that came
 // @@ alter
 
 //
 
-async function update(obj, req) {
+module.exports.update = async function (obj, req) {
   try {
     obj.workspace_id = "WS216863988676954993388743949988460632986";
     obj.id = req.params.params;
@@ -114,6 +117,4 @@ async function update(obj, req) {
   } catch (err) {
     console.error(err);
   }
-}
-
-module.exports.update = update;
+};

@@ -17,10 +17,10 @@ import {
   disabled,
   textPrimary,
 } from "../../styled-component/Variable";
-import HeaderMunu from "./../header/HeaderMenu";
 import EditIcon from "@material-ui/icons/Edit";
 import styled from "styled-components";
 import { v4 as uuid4 } from "uuid";
+import Popper from "./../popper/Popper";
 
 const SdEditIcon = styled(EditIcon)`
   cursor: pointer;
@@ -40,7 +40,7 @@ const TableComponent = ({
         <ColumnNames clLength={clLength}>
           <tr>
             <th>
-              <HeaderMunu />
+              <Popper />
             </th>
             {removeLastItemInArr(columnNames, clLength)}
           </tr>

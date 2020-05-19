@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { TextField, Box } from "@material-ui/core/";
+import { FormControl } from "@material-ui/core";
 
 // on modal
 export const StdTextFieldOne = styled(TextField)`
@@ -52,4 +53,8 @@ export const FileInputField = styled(Box)`
     p {
     }
   }
+`;
+
+export const SelectInput = styled(FormControl)`
+  width: 100%;
 `;

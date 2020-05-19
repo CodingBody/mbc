@@ -69,22 +69,27 @@ export function* createRecord({ payload }) {
 export function* fetchDataFromDb({ payload }) {
   try {
     yield put(loadingStart());
+    let formattedSort;
+    const { params, category, columns } = payload;
+    if (payload.sort) {
+      formattedSort = JSON.stringify(payload.sort);
+    }
+
+    const columnNames = JSON.stringify(columns);
     const config = {
       headers: {
         "Content-Type": "application/json",
+        column_names: columnNames,
+        sort: formattedSort,
       },
     };
-
-    const { params, category, columns } = payload;
-    const body = { columns };
-    console.log(body, "columns");
 
     let ctg = category.toLowerCase();
     let res;
     if (params !== "") {
-      res = yield axios.post(`/api/get/${ctg}/${params}`, body, config);
+      res = yield axios.get(`/api/${ctg}/${params}`, config);
     } else {
-      res = yield axios.post(`/api/get/${ctg}`, body, config);
+      res = yield axios.get(`/api/${ctg}`, config);
     }
     const data = res.data;
     const clLength = Object.keys(data[0]).length;
@@ -177,7 +182,10 @@ export function* updateRecord({ payload }) {
 
 // listeners
 export function* onFetchData() {
-  yield takeLatest(mainActionTypes.FETCH_RECORD_START, fetchDataFromDb);
+  yield takeLatest(
+    [mainActionTypes.FETCH_RECORD_START, mainActionTypes.ADD_SORT_TO_FETCH],
+    fetchDataFromDb
+  );
 }
 
 export function* onCreateRecord() {

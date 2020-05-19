@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { navbarItem } from "../../utils/Data";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import StopRoundedIcon from "@material-ui/icons/StopRounded";
 import {
   textPrimary,
@@ -74,6 +74,8 @@ const SubLink = styled.ul`
 
   li {
     transition: background-color 0.3s ease;
+    background-color: ${(props) => props.selected};
+
     align-items: center;
     justify-content: flex-start;
     color: ${textPrimary};
@@ -96,23 +98,36 @@ const SubLink = styled.ul`
       margin-right: 5px;
     }
   }
-`;=
+`;
 
 const Navbar = ({ history, shrink, category }) => {
   const [renderSubLink, setRenderSubLink] = useState(null);
 
   // $$ brilliant
+  // $$ brilliant again !! !
+  const [currentLink, setCurrentLink] = useState(null);
   React.useEffect(() => {
     if (category) {
-      const currentLink = navbarItem.filter((item) => item.params === category);
+      const res = navbarItem.filter((item) => item.params === category);
+      if (res.length !== 0) {
+        setCurrentLink(category);
+        setRenderSubLink(res[0].id);
+      } else {
+        const res = category.split(".");
+        const link = navbarItem.filter((item) => item.params === res[0]);
+        setCurrentLink(category);
 
-      setRenderSubLink(currentLink[0].id);
+        setRenderSubLink(link[0].id);
+      }
     }
-  }, []);
+  }, [category]);
 
   const handleClickLink = (params, id) => {
-    setRenderSubLink(id);
     history.push(`/dashboard/mbc/${params}`);
+  };
+
+  const test = () => {
+    //
   };
 
   return (
@@ -121,23 +136,32 @@ const Navbar = ({ history, shrink, category }) => {
         {navbarItem &&
           navbarItem.map((item) => (
             <React.Fragment key={item.id}>
-              <LinkBox selected={category === item.params ? "selected" : null}>
+              <LinkBox
+                selected={currentLink === item.params ? "selected" : null}
+              >
                 <div onClick={() => handleClickLink(item.params, item.id)}>
                   {item.icon}
                   {shrink ? null : <LinkText>{item.link}</LinkText>}
                 </div>
               </LinkBox>
-              <SubLink>
-                {!shrink &&
-                  item.subLink &&
-                  renderSubLink === item.id &&
-                  item.subLink.map((link) => (
-                    <li key={link}>
+              {!shrink &&
+                item.subLink &&
+                renderSubLink === item.id &&
+                item.subLink.map((link) => (
+                  <SubLink
+                    selected={
+                      currentLink === link.params ? `${primaryHover}` : null
+                    }
+                  >
+                    <li
+                      onClick={() => handleClickLink(link.params, item.id)}
+                      key={link.id}
+                    >
                       <StopRoundedIcon />
-                      <p>{link}</p>
+                      <p>{link.link}</p>
                     </li>
-                  ))}
-              </SubLink>
+                  </SubLink>
+                ))}
             </React.Fragment>
           ))}
       </SubContainer>

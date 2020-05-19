@@ -76,7 +76,11 @@ export const navbarItem = [
     params: "appmanage",
     icon: <DateRangeIcon />,
     id: uuidv4(),
-    subLink: ["Event Banner", "Notice", "Artist"],
+    subLink: [
+      { link: "Event Banner", params: "appmanage.event_banner", id: uuidv4() },
+      { link: "Notice", params: "appmanage.notice", id: uuidv4() },
+      { link: "Artist", params: "appmanage.artist", id: uuidv4() },
+    ],
   },
   {
     link: "Asset Upload",

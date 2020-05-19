@@ -5,13 +5,13 @@ const initialState = {
   columnNames: null,
   showTable: false,
   clLength: null,
+  loading: false,
   edit: {
     record: null,
   },
   create: {
     record: null,
   },
-  loading: false,
 };
 
 const main = (state = initialState, action) => {

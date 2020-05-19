@@ -37,8 +37,8 @@ router
   .route("/category/:params?")
   .post(tryCatch(category.post))
   .delete(tryCatch(category.deleteRecord))
-  .put(tryCatch(category.put));
-router.route("/get/category/:params?").post(tryCatch(category.get));
+  .put(tryCatch(category.put))
+  .get(tryCatch(category.get));
 
 // @@ param_1 represents how many columns
 router

@@ -4,6 +4,7 @@ import AppUserForm from "../component/form/AppUserForm";
 import { v4 as uuid4 } from "uuid";
 import TableSearch from "../component/main/tableSearch/TableSearch.jsx";
 import AssetInput from "./../component/main/assetInput/AssetInput";
+import Rank from "./../component/main/rank/Rank";
 
 // alter when number of columns has changed
 
@@ -49,6 +50,8 @@ export const renderMain = (category) => {
       return <TableSearch category={category} />;
     case "asset_upload":
       return <AssetInput category={category} />;
+    case "rank":
+      return <Rank />;
     default:
       return;
   }

@@ -13,7 +13,7 @@ export const mainActionTypes = {
   CLEAR_TABLE: "CLEAR_TABLE",
   LOADING_START: "LOADING_START",
   LOADING_FINISH: "LOADING_FINISH",
-
+  ADD_SORT_TO_FETCH: "ADD_SORT_TO_FETCH",
   SHOW_TABLE: "SHOW_TABLE",
 };
 
@@ -86,4 +86,9 @@ export const loadingStart = () => ({
 
 export const loadingFinish = () => ({
   type: mainActionTypes.LOADING_FINISH,
+});
+
+export const addSortToFetchInSaga = (payload) => ({
+  type: mainActionTypes.ADD_SORT_TO_FETCH,
+  payload,
 });
