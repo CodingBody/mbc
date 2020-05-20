@@ -15,6 +15,7 @@ export const mainActionTypes = {
   LOADING_FINISH: "LOADING_FINISH",
   ADD_SORT_TO_FETCH: "ADD_SORT_TO_FETCH",
   SHOW_TABLE: "SHOW_TABLE",
+  RANK_FETCH_SUCCESS: "RANK_FETCH_SUCCESS",
 };
 
 export const showTable = () => ({
@@ -90,5 +91,10 @@ export const loadingFinish = () => ({
 
 export const addSortToFetchInSaga = (payload) => ({
   type: mainActionTypes.ADD_SORT_TO_FETCH,
+  payload,
+});
+
+export const rankFetchSuccess = (payload) => ({
+  type: mainActionTypes.RANK_FETCH_SUCCESS,
   payload,
 });

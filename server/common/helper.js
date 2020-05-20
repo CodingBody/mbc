@@ -13,17 +13,35 @@ const deleteUnSelectedColumn = (cols, rows) => {
   return result;
 };
 
-// @@ code_review_5
-const filterColumns = (cols, rows) => {
+module.exports.filterColumns = function (cols, rows) {
   if (cols) {
     const formatedCols = cols.map((col) => ({
       [col.name]: col.fetch,
     }));
-    console.log(formatedCols, "formatedCols");
-    // change to obj or using Object keys to use this fn for all routes
 
     return deleteUnSelectedColumn(formatedCols, rows);
   }
 };
 
-module.exports = filterColumns;
+module.exports.checkSort = function (req, query) {
+  const sort = req.headers.sort;
+  if (sort !== "undefined" && sort !== undefined && sort) {
+    const { column, direction, isNullLast } = JSON.parse(sort);
+    let direct;
+    if (direction === "ascending") {
+      direct = "ASC";
+    } else if (direction === "descending") {
+      direct = "DESC";
+    }
+    query += `\nORDER BY ${column} ${direct}`;
+  }
+
+  return query;
+};
+
+module.exports.checkDate = function (req, query) {
+  const startDate = req.headers.startDate;
+  const endDate = req.headers.endDate;
+
+  return query;
+};

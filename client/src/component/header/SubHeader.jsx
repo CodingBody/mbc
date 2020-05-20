@@ -7,6 +7,7 @@ import { primaryDark } from "./../../styled-component/Variable";
 import { MuiButton } from "../../styled-component/Button";
 import { navbarItem } from "./../../utils/Data";
 import { HeadTwo } from "../../styled-component/Text";
+import StopRoundedIcon from "@material-ui/icons/StopRounded";
 
 const SubHeader = ({
   handleClickCreate,
@@ -14,19 +15,29 @@ const SubHeader = ({
   handleSeachbarChange,
   input,
   category,
-  showCreateButton = true,
+  showButton = false,
   showTable = false,
 }) => {
   const renderHeader = (category) => {
     if (category) {
       const res = navbarItem.filter((item) => item.params === category);
       if (!res) return <React.Fragment> </React.Fragment>;
-      return (
-        <React.Fragment>
-          {res[0].icon}
-          <HeadTwo>{category.toUpperCase()}</HeadTwo>
-        </React.Fragment>
-      );
+      if (res.length === 0) {
+        const res = category.split(".");
+        return (
+          <React.Fragment>
+            <StopRoundedIcon />
+            <HeadTwo>{res[1].toUpperCase()}</HeadTwo>
+          </React.Fragment>
+        );
+      } else {
+        return (
+          <React.Fragment>
+            {res[0].icon}
+            <HeadTwo>{category.toUpperCase()}</HeadTwo>
+          </React.Fragment>
+        );
+      }
     }
   };
 
@@ -41,7 +52,7 @@ const SubHeader = ({
           category={category}
         />
       )}
-      {showCreateButton && (
+      {showButton && (
         <div>
           <MuiButton
             startIcon={<AddCircleOutlineIcon />}

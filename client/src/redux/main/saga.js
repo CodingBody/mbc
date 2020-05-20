@@ -9,6 +9,7 @@ import {
   loadingStart,
   loadingFinish,
   showTable,
+  rankFetchSuccess,
 } from "./actions";
 import axios from "axios";
 import { checkFormType } from "../helper";
@@ -70,29 +71,48 @@ export function* fetchDataFromDb({ payload }) {
   try {
     yield put(loadingStart());
     let formattedSort;
+    let startDate;
+    let endDate;
     const { params, category, columns } = payload;
+    const columnNames = JSON.stringify(columns);
     if (payload.sort) {
       formattedSort = JSON.stringify(payload.sort);
     }
+    if (payload.startDate) {
+      startDate = JSON.stringify(payload.startDate);
+      endDate = JSON.stringify(payload.endDate);
+      console.log(startDate);
+      console.log(endDate, "d");
+    }
 
-    const columnNames = JSON.stringify(columns);
     const config = {
       headers: {
         "Content-Type": "application/json",
         column_names: columnNames,
         sort: formattedSort,
+        start_date: startDate,
+        end_date: endDate,
       },
     };
 
+    console.log(config, "config");
+
     let ctg = category.toLowerCase();
     let res;
-    if (params !== "") {
+    if (params !== "" && params !== undefined) {
       res = yield axios.get(`/api/${ctg}/${params}`, config);
     } else {
       res = yield axios.get(`/api/${ctg}`, config);
     }
     const data = res.data;
     const clLength = Object.keys(data[0]).length;
+    if (category === "statistics.rank") {
+      const rankRecord = data;
+      yield put(rankFetchSuccess({ rankRecord }));
+      yield put(loadingFinish());
+
+      return;
+    }
 
     if (Array.isArray(data)) {
       const columnNames = Object.keys(data[0]);

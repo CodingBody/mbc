@@ -92,6 +92,7 @@ const TableSearch = ({
   return (
     <React.Fragment>
       <SubHeader
+        showButton={true}
         handleSearchSubmit={handleSearchSubmit}
         handleSeachbarChange={handleSeachbarChange}
         input={input}

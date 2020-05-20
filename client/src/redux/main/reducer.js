@@ -1,6 +1,7 @@
 import { mainActionTypes } from "./actions";
 
 const initialState = {
+  rankRecord: null,
   data: null,
   columnNames: null,
   showTable: false,
@@ -36,7 +37,11 @@ const main = (state = initialState, action) => {
         showTable: true,
         clLength: payload.clLength,
       };
-
+    case mainActionTypes.RANK_FETCH_SUCCESS:
+      return {
+        ...state,
+        rankRecord: payload.rankRecord,
+      };
     case mainActionTypes.CREATE_RECORD_SUCCESS:
       return {
         ...state,
@@ -87,6 +92,7 @@ const main = (state = initialState, action) => {
         ...state,
         data: null,
         columnNames: null,
+        rankRecord: null,
 
         edit: {
           record: null,

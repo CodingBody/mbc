@@ -50,8 +50,8 @@ export const renderMain = (category) => {
       return <TableSearch category={category} />;
     case "asset_upload":
       return <AssetInput category={category} />;
-    case "rank":
-      return <Rank />;
+    case "statistics.rank":
+      return <Rank category={category} />;
     default:
       return;
   }

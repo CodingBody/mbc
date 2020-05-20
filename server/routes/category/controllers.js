@@ -1,5 +1,5 @@
 const { create, find, update, deleteInOcl } = require("./db_apis.js");
-const filterColumns = require("../../common/helper");
+const { filterColumns } = require("../../common/helper");
 
 function getObjectFromRec(req) {
   const obj = {
@@ -12,22 +12,16 @@ function getObjectFromRec(req) {
   return obj;
 }
 
-async function post(req, res) {
+module.exports.post = async function (req, res) {
   let obj = getObjectFromRec(req);
 
   const result = await create(obj);
 
   res.status(201).json(result);
-}
+};
 
-module.exports.post = post;
-
-async function get(req, res) {
-  // if (req.headers.sort) {
-  //   const sort = JSON.parse(req.headers.sort);
-  //   console.log(sort, "sort");
-  // }
-
+module.exports.get = async function (req, res) {
+  // what to do if there a one row returned
   rows = await find(req);
   const columns = JSON.parse(req.headers.column_names);
   const result = filterColumns(columns, rows);
@@ -35,21 +29,17 @@ async function get(req, res) {
   if (rows.length > 0) {
     res.status(200).json(result);
   }
-}
+};
 
-module.exports.get = get;
-
-async function deleteRecord(req, res) {
+module.exports.deleteRecord = async function (req, res) {
   const context = {};
   context.id = req.params.params;
   const recordId = await deleteInOcl(context);
 
   res.status(200).json(recordId);
-}
+};
 
-module.exports.deleteRecord = deleteRecord;
-
-async function put(req, res) {
+module.exports.put = async function (req, res) {
   let obj = getObjectFromRec(req);
 
   result = await update(obj, req);
@@ -59,6 +49,4 @@ async function put(req, res) {
     console.log("update failed in oracleDb");
     res.status(404).end();
   }
-}
-
-module.exports.put = put;
+};

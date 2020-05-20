@@ -63,7 +63,7 @@ const Header = ({ setShrink, shrink }) => {
         {/* <div onClick={() => setShrink(!shrink)}>
           <MenuIcon />
         </div> */}
-        <h1>DEV 통합 CMS</h1>
+        <h1>통합 CMS</h1>
       </ItemBoxLeft>
       <ItemBoxRight>
         <FeedBackModal />

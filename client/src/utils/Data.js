@@ -8,6 +8,7 @@ import MovieFilterIcon from "@material-ui/icons/MovieFilter";
 import DateRangeIcon from "@material-ui/icons/DateRange";
 import EventNoteIcon from "@material-ui/icons/EventNote";
 import { v4 as uuidv4 } from "uuid";
+import StopRoundedIcon from "@material-ui/icons/StopRounded";
 
 export const navbarItem = [
   {
@@ -22,7 +23,9 @@ export const navbarItem = [
 
     icon: <VideocamIcon />,
     id: uuidv4(),
-    subLink: ["CP Present Condition"],
+    subLink: [
+      { link: "CP Present Condition", params: "CP.cp_present_condition" },
+    ],
   },
   {
     link: "Store",
@@ -30,7 +33,12 @@ export const navbarItem = [
 
     icon: <LanguageIcon />,
     id: uuidv4(),
-    subLink: ["Store Present Condition"],
+    subLink: [
+      {
+        link: "Store Present Condition",
+        params: "store.store_present_condition",
+      },
+    ],
   },
   {
     link: "Machine",
@@ -77,9 +85,13 @@ export const navbarItem = [
     icon: <DateRangeIcon />,
     id: uuidv4(),
     subLink: [
-      { link: "Event Banner", params: "appmanage.event_banner", id: uuidv4() },
-      { link: "Notice", params: "appmanage.notice", id: uuidv4() },
-      { link: "Artist", params: "appmanage.artist", id: uuidv4() },
+      {
+        link: "Event Banner",
+        params: "appmanage.event_banner",
+        icon: <StopRoundedIcon />,
+      },
+      { link: "Notice", params: "appmanage.notice", icon: <StopRoundedIcon /> },
+      { link: "Artist", params: "appmanage.artist", icon: <StopRoundedIcon /> },
     ],
   },
   {
@@ -89,6 +101,11 @@ export const navbarItem = [
     icon: <DateRangeIcon />,
     id: uuidv4(),
     subLink: ["Asset VOD", "Asset Image", "Asset File"],
+    subLink: [
+      { link: "Asset VOD", params: "asset_upload.event_banner" },
+      { link: "Asset Image", params: "asset_upload.asset_image" },
+      { link: "Asset File", params: "asset_upload.asset_file" },
+    ],
   },
   {
     link: "Statistics",
@@ -97,7 +114,19 @@ export const navbarItem = [
     icon: <DateRangeIcon />,
     id: uuidv4(),
 
-    subLink: ["Rack", "Login Statistics", "Content Statistics"],
+    subLink: [
+      { link: "Rank", params: "statistics.rank", icon: <StopRoundedIcon /> },
+      {
+        link: "Login Statistics",
+        params: "statistics.login_statistics",
+        icon: <StopRoundedIcon />,
+      },
+      {
+        link: "Content Statistics",
+        params: "statistics.content_statistics",
+        icon: <StopRoundedIcon />,
+      },
+    ],
   },
   {
     link: "Log Manage",

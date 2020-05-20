@@ -115,19 +115,15 @@ const Navbar = ({ history, shrink, category }) => {
       } else {
         const res = category.split(".");
         const link = navbarItem.filter((item) => item.params === res[0]);
-        setCurrentLink(category);
+        setCurrentLink(link[0].params);
 
         setRenderSubLink(link[0].id);
       }
     }
   }, [category]);
 
-  const handleClickLink = (params, id) => {
+  const handleClickLink = (params) => {
     history.push(`/dashboard/mbc/${params}`);
-  };
-
-  const test = () => {
-    //
   };
 
   return (
@@ -149,14 +145,12 @@ const Navbar = ({ history, shrink, category }) => {
                 renderSubLink === item.id &&
                 item.subLink.map((link) => (
                   <SubLink
+                    key={link.link}
                     selected={
                       currentLink === link.params ? `${primaryHover}` : null
                     }
                   >
-                    <li
-                      onClick={() => handleClickLink(link.params, item.id)}
-                      key={link.id}
-                    >
+                    <li onClick={() => handleClickLink(link.params, item.id)}>
                       <StopRoundedIcon />
                       <p>{link.link}</p>
                     </li>

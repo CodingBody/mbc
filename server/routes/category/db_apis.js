@@ -6,9 +6,7 @@ const {
   deleteQuery,
   updateQuery,
 } = require("./query");
-// !! this order
-
-// returns object that came
+const { checkSort } = require("../../common/helper");
 
 module.exports.create = async function (obj) {
   try {
@@ -41,25 +39,15 @@ module.exports.find = async function (req) {
   const params = req.params.params;
   let query = selectQuery;
   let param = params;
-  const sort = req.headers.sort;
   const binds = {};
   if (param !== null && param !== undefined) {
     // param is title here
     query += `\nWHERE title like '%${param}%'`;
   }
 
-  if (sort !== "undefined" && sort !== undefined && sort) {
-    const { column, direction, isNullLast } = JSON.parse(sort);
-    let direct;
-    if (direction === "ascending") {
-      direct = "ASC";
-    } else if (direction === "descending") {
-      direct = "DESC";
-    }
-    query += `\nORDER BY ${column} ${direct}`;
-  }
+  const query_after_update = checkSort(req, query);
 
-  const result = await database.simpleExecute(query, binds);
+  const result = await database.simpleExecute(query_after_update, binds);
   if (Array.isArray(result.rows)) {
     return result.rows;
   } else {

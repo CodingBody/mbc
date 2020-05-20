@@ -110,7 +110,7 @@ class AssetInput extends Component {
     const { category } = this.props;
     return (
       <React.Fragment>
-        <SubHeader showCreateButton={false} category={category} />
+        <SubHeader category={category} />
 
         <FileInput
           handleClickFileInput={this.handleClickFileInput}
