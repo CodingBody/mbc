@@ -1,7 +1,7 @@
 import React from "react";
 import SubHeader from "./../../header/SubHeader";
 import { SpaceAround } from "../../../styled-component/Layout";
-import PieChartStatistics from "./../../pieChart/PieChartStatistics";
+import PieChartStatistics from "./VODrank";
 import { connect } from "react-redux";
 
 const Rank = ({ category, records }) => {
@@ -13,17 +13,10 @@ const Rank = ({ category, records }) => {
           records={records}
           category={category}
           title="VOD Rank"
+          render="pie"
         />
-        <PieChartStatistics
-          records={records}
-          category={category}
-          title="VOD Rank"
-        />
-        <PieChartStatistics
-          records={records}
-          category={category}
-          title="VOD Rank"
-        />
+        <PieChartStatistics render="bar" records={records} title="VOD Rank" />
+        <PieChartStatistics render="line" records={records} title="VOD Rank" />
       </SpaceAround>
     </React.Fragment>
   );

@@ -28,9 +28,9 @@ const StaticTableComponent = ({ records }) => {
                   clLength={3}
                   key={uuid4()}
                 >
-                  <td>{record.TITLE}</td>
-                  <td>{record.COUNT}</td>
-                  <td>{record.LAST_WATCH}</td>
+                  <td>{record.name}</td>
+                  <td>{record.value}</td>
+                  <td>{record.last_watch}</td>
                 </TableBody>
               ))}
           </tbody>

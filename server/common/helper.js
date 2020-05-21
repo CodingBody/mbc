@@ -40,8 +40,48 @@ module.exports.checkSort = function (req, query) {
 };
 
 module.exports.checkDate = function (req, query) {
-  const startDate = req.headers.startDate;
-  const endDate = req.headers.endDate;
+  // if false, return error msg
+  const startDate = req.headers.start_date;
+  const endDate = req.headers.end_date;
+
+  if (startDate !== "undefined" && startDate !== undefined && startDate) {
+    if (endDate !== "undefined" && endDate !== undefined && endDate) {
+      const start = JSON.parse(startDate);
+      const end = JSON.parse(endDate);
+      query += `\nAND to_char(created,'yyyy-mm-dd') >= '${start}'`;
+      query += `\nAND to_char(created,'yyyy-mm-dd') <= '${end}'`;
+    }
+    return query;
+  } else {
+    return null;
+  }
+};
+
+module.exports.checkParams = function (req, query) {
+  let params = req.params.params;
+
+  let param = params;
+  if (!param && param === undefined) return query;
+  query += `\nWHERE title like '%${param}%'`;
 
   return query;
+};
+
+// this is for pieChart
+// !! is there a way to select record as lowercase key ?
+module.exports.mapRecords = function (rows) {
+  if (!rows) return;
+  const test = rows.map((row) => {
+    row.name = row.NAME;
+    row.value = row.COUNT;
+    row.last_watch = row.LAST_WATCH;
+
+    delete row.NAME;
+    delete row.COUNT;
+    delete row.LAST_WATCH;
+
+    return row;
+  });
+
+  return test;
 };

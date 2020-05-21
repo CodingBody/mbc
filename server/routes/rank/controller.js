@@ -1,36 +1,37 @@
 const database = require("../../services/database.js");
-// const selectQuery = `SELECT content_id "content_id",
-// targetdate "targetdate",
-// id "id"
-// FROM react.view_details`;
+const { checkDate, checkParams, mapRecords } = require("../../common/helper");
 
-const selectQuery = `SELECT CONTENT_ID,
-content_id title,
+const selectQuery = `SELECT content_id name,
 count(*) count,
 max(created) last_watch
 from view_details
-where LOGFLAG = 1    
-and to_char(created,'yyyy-mm-dd') >= '2020-05-01'
-and to_char(created,'yyyy-mm-dd') <= '2020-05-31'
-group by content_id
-order by count desc
-`;
+where LOGFLAG = 1`;
 
-const find = async (req) => {
+const find = async (req, res) => {
   const params = req.params.params;
+
   let query = selectQuery;
-  //   params stands for search
-  let param = params;
-  if (param !== null && param !== undefined) {
-    query += `\nWHERE title like '%${param}%'`;
+
+  let addedQuery = checkDate(req, query);
+  if (!addedQuery) {
+    return res.status(400).json({
+      errors: [
+        {
+          msg: "Bad Request !",
+        },
+      ],
+    });
   }
+
+  //   const filteredRes_1 = checkParams(req, query)
+
+  addedQuery += `\nGROUP BY content_id \nORDER BY count desc`;
 
   //   query_after_update stands for sorting
   //   const query_after_update = checkSort(req, query);
 
   const binds = {};
-  const result = await database.simpleExecute(query, binds);
-  console.log(result, "result");
+  const result = await database.simpleExecute(addedQuery, binds);
   if (Array.isArray(result.rows)) {
     return result.rows;
   } else {
@@ -39,11 +40,16 @@ const find = async (req) => {
 };
 
 module.exports.get = async function (req, res) {
-  rows = await find(req);
+  rows = await find(req, res);
+  if (rows.statusCode === 400) {
+    return;
+  }
 
-  if (rows.length > 0) {
-    res.status(200).json(rows);
+  const result = mapRecords(rows);
+
+  if (result.length > 0) {
+    res.status(200).json(result);
   } else {
-    res.status(200).json(rows);
+    res.status(200).json(result);
   }
 };

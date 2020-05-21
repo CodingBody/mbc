@@ -1,5 +1,9 @@
 import React from "react";
-import { SpaceBetween, FlexEnd } from "../../styled-component/Layout";
+import {
+  SpaceBetween,
+  FlexEnd,
+  SpaceAround,
+} from "../../styled-component/Layout";
 import {
   textPrimary,
   primaryDark,
@@ -23,7 +27,7 @@ const StatisticSearchBar = ({
   return (
     <React.Fragment>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <SpaceBetween mb={1} px={1}>
+        <SpaceAround mb={1} px={1}>
           <KeyboardDatePicker
             disableToolbar
             variant="inline"
@@ -49,10 +53,10 @@ const StatisticSearchBar = ({
               "aria-label": "change date",
             }}
           />
-        </SpaceBetween>
+        </SpaceAround>
         <FlexEnd pr={1}>
           <MuiButton
-            onClick={handleSubmit}
+            onClick={() => handleSubmit({ start: startDate, end: endDate })}
             startIcon={<YoutubeSearchedForIcon />}
             variant="contained"
             cr={textPrimary}

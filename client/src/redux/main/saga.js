@@ -73,6 +73,7 @@ export function* fetchDataFromDb({ payload }) {
     let formattedSort;
     let startDate;
     let endDate;
+
     const { params, category, columns } = payload;
     const columnNames = JSON.stringify(columns);
     if (payload.sort) {
@@ -81,8 +82,6 @@ export function* fetchDataFromDb({ payload }) {
     if (payload.startDate) {
       startDate = JSON.stringify(payload.startDate);
       endDate = JSON.stringify(payload.endDate);
-      console.log(startDate);
-      console.log(endDate, "d");
     }
 
     const config = {
@@ -95,8 +94,6 @@ export function* fetchDataFromDb({ payload }) {
       },
     };
 
-    console.log(config, "config");
-
     let ctg = category.toLowerCase();
     let res;
     if (params !== "" && params !== undefined) {
@@ -108,6 +105,7 @@ export function* fetchDataFromDb({ payload }) {
     const clLength = Object.keys(data[0]).length;
     if (category === "statistics.rank") {
       const rankRecord = data;
+
       yield put(rankFetchSuccess({ rankRecord }));
       yield put(loadingFinish());
 
