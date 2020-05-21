@@ -41,17 +41,49 @@ class AssetInput extends Component {
 
     for (let i = 0; i < files.length; i++) {
       if (files[i] !== null && files[i] !== undefined) {
-        const purposes = getFilePurpose(files[i].type);
+        const fileExist = fileList.filter(
+          (file) => file.name === files[i].name
+        );
+        if (fileExist.length > 0) {
+        } else {
+          const purposes = getFilePurpose(files[i].type);
 
-        files[i].purposes = purposes;
-        files[i].id = uuidv4();
-        files[i].selectedPurpose = undefined;
-        files[i].progress = 0;
+          files[i].purposes = purposes;
+          files[i].id = uuidv4();
+          files[i].selectedPurpose = undefined;
+          files[i].progress = 0;
 
-        fileList.push(files[i]);
+          fileList.push(files[i]);
+        }
       }
     }
     this.setState({ files: fileList });
+  };
+
+  handleClickFileInput = (e) => {
+    if (e.target.files) {
+      let files = e.target.files;
+      let fileList = [];
+      for (let i = 0; i < files.length; i++) {
+        if (files[i] !== null && files[i] !== undefined) {
+          if (fileExist.length > 0) {
+          } else {
+            const purposes = getFilePurpose(files[i].type);
+
+            files[i].purposes = purposes;
+            files[i].id = uuidv4();
+            files[i].selectedPurpose = undefined;
+            files[i].progress = 0;
+
+            fileList.push(files[i]);
+          }
+        }
+      }
+
+      this.setState({
+        files: [...this.state.files, ...fileList],
+      });
+    }
   };
 
   handleSelectChange = (e, file) => {
@@ -78,29 +110,6 @@ class AssetInput extends Component {
       insertFileToS3(user, files, this.getProgress);
     } else {
       alert("There is no file to upload !");
-    }
-  };
-
-  handleClickFileInput = (e) => {
-    if (e.target.files) {
-      let files = e.target.files;
-      let fileList = [];
-      for (let i = 0; i < files.length; i++) {
-        if (files[i] !== null && files[i] !== undefined) {
-          const purposes = getFilePurpose(files[i].type);
-
-          files[i].purposes = purposes;
-          files[i].id = uuidv4();
-          files[i].selectedPurpose = undefined;
-          files[i].progress = 0;
-
-          fileList.push(files[i]);
-        }
-      }
-
-      this.setState({
-        files: [...this.state.files, ...fileList],
-      });
     }
   };
 
