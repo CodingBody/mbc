@@ -60,7 +60,7 @@ const StatisticSearchBar = ({
             startIcon={<YoutubeSearchedForIcon />}
             variant="contained"
             cr={textPrimary}
-            bg={primaryDark}
+            bg="#fff"
             border={primaryHover}
             sz="1.2rem"
           >

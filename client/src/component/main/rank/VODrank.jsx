@@ -2,11 +2,11 @@ import React from "react";
 import { SpaceBetween } from "../../../styled-component/Layout";
 import { HeadTwo } from "../../../styled-component/Text";
 import { textPrimary } from "../../../styled-component/Variable";
-import { Paper } from "@material-ui/core/";
+import { Paper, Box } from "@material-ui/core/";
 import PieChart from "../../chart/PieChart";
 import { fetchRecordStart } from "../../../redux/main/actions";
 import { connect } from "react-redux";
-import SearchBar from "../../searchBar/StatisticSearchBar";
+import SearchBar from "../../searchBar/RankSearchBar";
 import StaticTableComponent from "../../table/StaticTableComponent";
 import { format, subMonths } from "date-fns";
 import BarChart from "../../chart/BarChart";
@@ -38,33 +38,35 @@ const PieChartStatistics = ({
 
   return (
     <React.Fragment>
-      <Paper>
-        <SpaceBetween
-          borderColor="secondary.main"
-          borderBottom={2}
-          color={textPrimary}
-          mb={3}
-          py={1}
-          px={2}
-        >
-          <HeadTwo sz="1.4rem">{title}</HeadTwo>
-        </SpaceBetween>
-        <SearchBar
-          startDate={startDate}
-          endDate={endDate}
-          handleEndDateChange={handleEndDateChange}
-          handleStartDateChange={handleStartDateChange}
-          handleSubmit={handleSubmit}
-        />
-        <StaticTableComponent records={records} />
-        {render === "line" ? (
-          <LineChart records={records} />
-        ) : render === "bar" ? (
-          <BarChart records={records} />
-        ) : (
-          <PieChart records={records} />
-        )}
-      </Paper>
+      <Box m={1}>
+        <Paper>
+          <SpaceBetween
+            borderColor="secondary.main"
+            borderBottom={2}
+            color={textPrimary}
+            mb={3}
+            py={1}
+            px={2}
+          >
+            <HeadTwo sz="1.4rem">{title}</HeadTwo>
+          </SpaceBetween>
+          <SearchBar
+            startDate={startDate}
+            endDate={endDate}
+            handleEndDateChange={handleEndDateChange}
+            handleStartDateChange={handleStartDateChange}
+            handleSubmit={handleSubmit}
+          />
+          <StaticTableComponent records={records} />
+          {render === "line" ? (
+            <LineChart records={records} />
+          ) : render === "bar" ? (
+            <BarChart records={records} />
+          ) : (
+            <PieChart records={records} />
+          )}
+        </Paper>
+      </Box>
     </React.Fragment>
   );
 };

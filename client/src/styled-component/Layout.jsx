@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Box } from "@material-ui/core";
-import { primaryHover } from "./Variable";
+import { tableBorder } from "./Variable";
 
 export const FlexStart = styled(Box)`
   display: flex;
@@ -26,7 +26,7 @@ export const SpaceBetween = styled(Box)`
 export const SpaceAround = styled(Box)`
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: ${(props) => (props.align ? props.align : "center")};
 
   background-color: ${(props) => props.bg};
   color: ${(props) => props.cr};
@@ -62,8 +62,8 @@ export const BasicForm = styled.form`
 `;
 
 export const FlexStartWithBorder = styled(FlexStart)`
-  border-top: 1px solid ${primaryHover};
-  border-right: 2px solid ${primaryHover};
-  border-left: 2px solid ${primaryHover};
-  border-bottom: 2px solid ${primaryHover};
+  border-top: 1px solid ${tableBorder};
+  border-right: 2px solid ${tableBorder};
+  border-left: 2px solid ${tableBorder};
+  border-bottom: 2px solid ${tableBorder};
 `;

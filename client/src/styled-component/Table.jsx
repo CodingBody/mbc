@@ -5,7 +5,7 @@ import {
   primary,
   primaryHover,
   primaryDark_2,
-  primaryDark,
+  tableBorder,
 } from "./Variable";
 
 export const SearchBarBox = styled.div`
@@ -31,10 +31,10 @@ export const TableContainer = styled.table`
 `;
 
 export const ColumnNames = styled.thead`
-  border-top: 2px solid ${primaryHover};
-  border-right: 2px solid ${primaryHover};
-  border-left: 2px solid ${primaryHover};
-  border-bottom: 1px solid ${primaryHover};
+  border-top: 2px solid ${tableBorder};
+  border-right: 2px solid ${tableBorder};
+  border-left: 2px solid ${tableBorder};
+  border-bottom: 1px solid ${tableBorder};
   tr {
     /* display: flex; */
     display: grid;

@@ -8,7 +8,7 @@ const Rank = ({ category, records }) => {
   return (
     <React.Fragment>
       <SubHeader category={category} />
-      <SpaceAround>
+      <SpaceAround align="flex-start">
         <PieChartStatistics
           records={records}
           category={category}

@@ -66,6 +66,9 @@ class AssetInput extends Component {
       let fileList = [];
       for (let i = 0; i < files.length; i++) {
         if (files[i] !== null && files[i] !== undefined) {
+          const fileExist = fileList.filter(
+            (file) => file.name === files[i].name
+          );
           if (fileExist.length > 0) {
           } else {
             const purposes = getFilePurpose(files[i].type);

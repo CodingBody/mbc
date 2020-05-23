@@ -6,8 +6,8 @@ import {
 } from "./../../styled-component/Table";
 import { v4 as uuid4 } from "uuid";
 import { FlexStartWithBorder } from "../../styled-component/Layout";
-import { primaryHover } from "../../styled-component/Variable";
 import { Box } from "@material-ui/core";
+import { tableBorder } from "./../../styled-component/Variable";
 const StaticTableComponent = ({ records }) => {
   return (
     <React.Fragment>
@@ -24,7 +24,7 @@ const StaticTableComponent = ({ records }) => {
             {records &&
               records.map((record) => (
                 <TableBody
-                  br={`1px solid ${primaryHover}`}
+                  br={`1px solid ${tableBorder}`}
                   clLength={3}
                   key={uuid4()}
                 >
