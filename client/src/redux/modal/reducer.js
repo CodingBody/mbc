@@ -5,6 +5,7 @@ const initialState = {
   openCreate: false,
   openEdit: false,
   openSort: false,
+  alert: null,
 };
 
 const modal = (state = initialState, action) => {
@@ -17,6 +18,11 @@ const modal = (state = initialState, action) => {
       return { ...state, openEdit: !state.openEdit };
     case modalActionTypes.TOGGLE_SORT_MODAL:
       return { ...state, openSort: !state.openSort };
+    case modalActionTypes.TOGGLE_ALERT_MODAL:
+      return {
+        ...state,
+        alert: action.payload,
+      };
     default:
       return state;
   }

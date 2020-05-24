@@ -11,6 +11,7 @@ import {
   showTable,
   rankFetchSuccess,
 } from "./actions";
+import { toggleAlertModal } from "../modal/actions";
 import axios from "axios";
 import { checkFormType } from "../helper";
 
@@ -31,10 +32,17 @@ export function* createRecord({ payload }) {
     // add switch statement
 
     const body = checkFormType({ form, category: ctg });
-    console.log(body, ctg, "body, ctg");
     const result = yield axios.post(`/api/${ctg}/`, body, config);
-    console.log(result, "success");
     if (!result.data) return;
+
+    yield put(
+      toggleAlertModal([
+        {
+          message: "created successfully",
+          alerttype: "success",
+        },
+      ])
+    );
 
     const recordInRedux = yield select(data);
     const record = result.data;
@@ -45,6 +53,7 @@ export function* createRecord({ payload }) {
 
       yield put(createRecordSuccess({ columnNames, record: res }));
       yield put(loadingFinish());
+
       yield put(showTable());
 
       return;
@@ -55,13 +64,14 @@ export function* createRecord({ payload }) {
 
       yield put(noRecordInRedux({ columnNames, record: res }));
       yield put(loadingFinish());
+
       yield put(showTable());
 
       return;
     }
   } catch (err) {
-    console.error(err);
     yield put(loadingFinish());
+    yield put(toggleAlertModal(err.response.data.errors));
   }
 }
 
@@ -131,6 +141,8 @@ export function* fetchDataFromDb({ payload }) {
     }
   } catch (err) {
     console.error(err);
+    yield put(toggleAlertModal(err.response.data.errors));
+
     yield put(loadingFinish());
   }
 }
@@ -153,9 +165,20 @@ export function* deleteRecord({ payload }) {
         }
       }
     }
+
+    yield put(
+      toggleAlertModal([
+        {
+          message: "deleted successfully",
+          alerttype: null,
+        },
+      ])
+    );
     yield put(loadingFinish());
   } catch (err) {
     console.log(err);
+    yield put(toggleAlertModal(err.response.data.errors));
+
     yield put(loadingFinish());
   }
 }
@@ -191,9 +214,20 @@ export function* updateRecord({ payload }) {
         }
       }
     }
+
+    yield put(
+      toggleAlertModal([
+        {
+          message: "updated successfully",
+          alerttype: "success",
+        },
+      ])
+    );
     yield put(loadingFinish());
   } catch (err) {
     console.log(err);
+    yield put(toggleAlertModal(err.response.data.errors));
+
     yield put(loadingFinish());
   }
 }

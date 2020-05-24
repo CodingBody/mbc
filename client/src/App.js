@@ -4,8 +4,24 @@ import Dashboard from "./layout/dashboard/Dashboard";
 import { Route } from "react-router-dom";
 import HelpModal from "./component/Modals/help/HelpModal";
 import { connect } from "react-redux";
+import { useSnackbar } from "notistack";
 
-function App({ user }) {
+function App({ alert }) {
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleClickVariant = (variant) => (message) => {
+    // variant could be success, error, warning, info, or default
+    enqueueSnackbar(message, { variant });
+  };
+
+  React.useEffect(() => {
+    if (alert !== null) {
+      if (alert.length > 0) {
+        alert.map((a) => handleClickVariant(a.alerttype)(a.message));
+      }
+    }
+  }, [alert]);
+
   return (
     <div>
       <Route path exact path="/" component={HomePage} />
@@ -18,13 +34,14 @@ function App({ user }) {
           </React.Fragment>
         )}
       />
+
       <HelpModal />
     </div>
   );
 }
 
 const mapStateToProps = (state) => ({
-  user: state.auth.user,
+  alert: state.modal.alert,
 });
 
 export default connect(mapStateToProps)(App);

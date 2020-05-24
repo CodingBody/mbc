@@ -44,8 +44,6 @@ const CreateModal = ({ loading, open, setOpen, create, category, record }) => {
     create({ form, category });
   };
 
-  console.log(form, "form");
-
   if (!form) return <React.Fragment> </React.Fragment>;
   return (
     <div>

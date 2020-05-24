@@ -13,7 +13,6 @@ const Container = styled(Box)`
 `;
 
 const Board = ({ category }) => {
-  console.log(category, "category");
   return <Container>{renderMain(category)}</Container>;
 };
 

@@ -73,7 +73,6 @@ export const renderForm = ({ category, form, handleChange }) => {
 
 export const removeLastItemInArr = (arr, clLength) => {
   if (arr) {
-    console.log(clLength === 5, "clLength");
     switch (clLength) {
       case 7:
         return arr.map((ar) => <th key={uuid4()}>{ar}</th>).slice(0, 6);

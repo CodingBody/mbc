@@ -13,7 +13,6 @@ import { MuiButton } from "../../../styled-component/Button";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import { FlexEnd, FlexCenter } from "../../../styled-component/Layout";
 import { connect } from "react-redux";
-import { uploadFileStart } from "./../../../redux/file/actions";
 import { insertFileToS3 } from "./insertFileToS3";
 
 class AssetInput extends Component {
@@ -93,7 +92,6 @@ class AssetInput extends Component {
     const { files } = this.state;
 
     for (let i = 0; i < files.length; i++) {
-      console.log(files[i].id === file.id, "hi");
       if (files[i].id === file.id) {
         files[i].selectedPurpose = e.target.value;
       }
@@ -107,7 +105,6 @@ class AssetInput extends Component {
   handleSubmit = () => {
     const { files } = this.state;
     const { user } = this.props;
-    console.log(user, "user");
 
     if (files.length !== 0) {
       insertFileToS3(user, files, this.getProgress);
@@ -118,7 +115,6 @@ class AssetInput extends Component {
 
   render() {
     const { files } = this.state;
-    console.log(files, "files");
     const { category } = this.props;
     return (
       <React.Fragment>
@@ -156,8 +152,4 @@ const mapStateToProps = (state) => ({
   user: state.auth.user,
 });
 
-const dispatchActionToProps = (dispatch) => ({
-  uploadFile: (file) => dispatch(uploadFileStart(file)),
-});
-
-export default connect(mapStateToProps, dispatchActionToProps)(AssetInput);
+export default connect(mapStateToProps)(AssetInput);

@@ -27,7 +27,6 @@ const Dashboard = ({ match, loading, clearTableOnRouteChange }) => {
 
   const [shrink, setShrink] = React.useState(false);
   if (!category) return <div>dd</div>;
-  console.log(category, "category");
   return (
     <Container shrink={shrink ? "shrink" : null}>
       <Header shrink={shrink} setShrink={setShrink} />

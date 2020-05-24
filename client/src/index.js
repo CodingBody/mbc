@@ -8,6 +8,7 @@ import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { StylesProvider } from "@material-ui/core/styles";
 import store from "./redux/Store";
 import { Provider } from "react-redux";
+import { SnackbarProvider } from "notistack";
 
 const theme = createMuiTheme({
   palette: {
@@ -41,15 +42,17 @@ const theme = createMuiTheme({
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <StylesProvider injectFirst>
-          <Router>
-            <App />
-          </Router>
-        </StylesProvider>
-      </ThemeProvider>
-    </Provider>
+    <SnackbarProvider maxSnack={3}>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <StylesProvider injectFirst>
+            <Router>
+              <App />
+            </Router>
+          </StylesProvider>
+        </ThemeProvider>
+      </Provider>
+    </SnackbarProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

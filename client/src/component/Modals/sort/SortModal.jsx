@@ -43,12 +43,10 @@ const SortModal = ({
   };
 
   const handleSubmit = (e) => {
-    console.log("caed");
     e.preventDefault();
     addSortToFetchInSaga({ params: input, category, columns, sort: state });
   };
 
-  console.log(state);
   return (
     <div>
       <Dialog

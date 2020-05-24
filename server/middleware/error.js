@@ -4,7 +4,8 @@ module.exports = function (err, req, res, next) {
   res.status(500).json({
     errors: [
       {
-        msg: "Server error",
+        message: "request failed, Server error",
+        alerttype: "warning",
       },
     ],
   });

@@ -4,6 +4,7 @@ export const modalActionTypes = {
   TOGGLE_EDIT_MODAL: "TOGGLE_EDIT_MODAL",
   TOGGLE_SORT_MODAL: "TOGGLE_SORT_MODAL",
   SET_DATA_TO_EDIT_MODAL: "SET_DATA_TO_EDIT_MODAL",
+  TOGGLE_ALERT_MODAL: "TOGGLE_ALERT_MODAL",
 };
 
 export const toggleHelpModal = () => ({
@@ -22,7 +23,12 @@ export const toggleSortModal = () => ({
   type: modalActionTypes.TOGGLE_SORT_MODAL,
 });
 
-export const setDataToEditModal = (data) => ({
+export const setDataToEditModal = (payload) => ({
   type: modalActionTypes.SET_DATA_TO_EDIT_MODAL,
-  payload: data,
+  payload: payload,
+});
+
+export const toggleAlertModal = (payload) => ({
+  type: modalActionTypes.TOGGLE_ALERT_MODAL,
+  payload: payload,
 });
