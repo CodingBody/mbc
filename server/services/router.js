@@ -20,16 +20,7 @@ const rank = require("../routes/rank/controller");
 // helper
 const tryCatch = require("../middleware/tryCatch");
 
-router
-  .route("/auth/login")
-  .post(
-    [
-      check("workspace_name", "workspace is required").not().isEmpty(),
-      check("name", "Please include a valid email").not().isEmpty(),
-      check("password", "Password is required").not().isEmpty(),
-    ],
-    tryCatch(loginAdmin)
-  );
+router.route("/auth/login").post(tryCatch(loginAdmin));
 
 router
   .route("/category/:params?")

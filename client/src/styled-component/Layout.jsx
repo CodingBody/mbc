@@ -36,6 +36,8 @@ export const SpaceAround = styled(Box)`
 export const FlexCenter = styled(Box)`
   display: flex;
   justify-content: center;
+  background-color: ${(props) => props.bg};
+
   flex-wrap: ${(props) => props.wrap};
 `;
 
@@ -52,6 +54,8 @@ export const Form = styled.form`
 export const ColumnDirection = styled(Box)`
   display: flex;
   flex-direction: column;
+  background-color: ${(props) => props.bg};
+
   align-items: space-between;
   justify-content: center;
   width: ${(props) => props.width};

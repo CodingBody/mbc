@@ -22,12 +22,10 @@ export function* logUserIn({ payload }) {
       history.push("/dashboard/mbc/home");
     }
   } catch (err) {
-    if (err.response.data) {
-      yield put(userLoginfailure(err.response.data));
-    }
+    console.log("-------------");
     if (err.response.data.errors) {
       const errors = err.response.data.errors;
-      yield put(userLoginfailure(errors));
+      alert(errors[0].message);
     }
   }
 }

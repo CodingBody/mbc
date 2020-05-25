@@ -6,9 +6,11 @@ import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import { withRouter } from "react-router-dom";
 import { Button } from "./../../styled-component/Button";
-import { HeadOne, HeadTwo } from "./../../styled-component/Text";
+import { HeadOne, HeadTwo, Text } from "./../../styled-component/Text";
 import { connect } from "react-redux";
 import { userLoginStart } from "../../redux/auth/actions";
+import { ColumnDirection } from "../../styled-component/Layout";
+import { TextFieldWithIcon, SelectField } from "./../../styled-component/Input";
 
 const Container = styled.div`
   height: 100vh;
@@ -19,16 +21,6 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-const FormContainer = styled.div`
-  width: 45rem;
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  padding: 20px;
 `;
 
 const TitleBox = styled.div`
@@ -53,54 +45,6 @@ const TitleBox = styled.div`
   }
   div:last-child {
     margin-bottom: 10px;
-  }
-`;
-
-const Form = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-`;
-
-const TextField = styled.div`
-  position: relative;
-
-  input {
-    width: 100%;
-    margin: 8px 0;
-    padding: 1rem 1rem 1rem 4rem;
-    background-color: #fafafa;
-    border: 2px solid #cacaca;
-    transition: opacity 3s ease-in-out;
-
-    :focus {
-      border: 2px solid #5a56c1d6;
-      outline: none;
-    }
-    :focus ~ svg {
-      color: #5a56c1d6;
-      opacity: 1;
-    }
-  }
-
-  svg {
-    font-size: 23px;
-    position: absolute;
-    top: 14px;
-    left: 8px;
-    opacity: 0.3;
-  }
-
-  select {
-    width: 100%;
-    margin: 10px 0;
-    padding: 10px 10px;
-    background-color: #fafafa;
-    border: 2px solid #cacaca;
-    :focus {
-      border: 2px solid #5a56c1d6;
-      outline: none;
-    }
   }
 `;
 
@@ -188,7 +132,7 @@ const HomePage = ({ history, login }) => {
 
   return (
     <Container>
-      <FormContainer>
+      <ColumnDirection width="45rem" bg="#fff" p={2}>
         <TitleBox>
           <div>
             <HeadOne sz="7rem" color="#15159ae0">
@@ -204,17 +148,18 @@ const HomePage = ({ history, login }) => {
             </HeadTwo>
           </div>
         </TitleBox>
+
         <form action="">
-          <Form>
-            <TextField>
+          <ColumnDirection>
+            <SelectField>
               <label htmlFor="Language">Language</label>
               <select id="Language">
                 <option value="english">English</option>
                 <option value="korean">Korean</option>
               </select>
-            </TextField>
+            </SelectField>
 
-            <TextField>
+            <TextFieldWithIcon>
               <input
                 placeholder="Service Name"
                 value={form.workspace_name}
@@ -224,8 +169,8 @@ const HomePage = ({ history, login }) => {
                 type="text"
               />
               <MenuBookIcon />
-            </TextField>
-            <TextField>
+            </TextFieldWithIcon>
+            <TextFieldWithIcon>
               <input
                 required
                 type="text"
@@ -235,8 +180,8 @@ const HomePage = ({ history, login }) => {
                 placeholder="User Name"
               />
               <PersonOutlineIcon />
-            </TextField>
-            <TextField>
+            </TextFieldWithIcon>
+            <TextFieldWithIcon>
               <input
                 placeholder="Password"
                 value={form.password}
@@ -246,7 +191,7 @@ const HomePage = ({ history, login }) => {
                 type="password"
               />
               <LockOpenIcon />
-            </TextField>
+            </TextFieldWithIcon>
             <CheckBox
               display={form.remember ? "block" : null}
               color={form.remember ? "#445ed0e6" : null}
@@ -261,7 +206,7 @@ const HomePage = ({ history, login }) => {
               <span onClick={handleCheck}></span>
               <label htmlFor="remember"> Remember username</label>
             </CheckBox>
-          </Form>
+          </ColumnDirection>
         </form>
         <Button onClick={handleSubmit} bg="#2c2c2c" color="#fff">
           Sign In
@@ -269,7 +214,7 @@ const HomePage = ({ history, login }) => {
         <Button bg="#fff" color="#000">
           Don't have any service? Sign Up
         </Button>
-      </FormContainer>
+      </ColumnDirection>
     </Container>
   );
 };

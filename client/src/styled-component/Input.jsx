@@ -58,3 +58,47 @@ export const FileInputField = styled(Box)`
 export const SelectInput = styled(FormControl)`
   width: 100%;
 `;
+
+export const TextFieldWithIcon = styled.div`
+  position: relative;
+
+  input {
+    width: 100%;
+    margin: 8px 0;
+    padding: 1rem 1rem 1rem 4rem;
+    background-color: #fafafa;
+    border: 2px solid #cacaca;
+    transition: opacity 3s ease-in-out;
+
+    :focus {
+      border: 2px solid #5a56c1d6;
+      outline: none;
+    }
+    :focus ~ svg {
+      color: #5a56c1d6;
+      opacity: 1;
+    }
+  }
+
+  svg {
+    font-size: 23px;
+    position: absolute;
+    top: 14px;
+    left: 8px;
+    opacity: 0.3;
+  }
+`;
+
+export const SelectField = styled(Box)`
+  select {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px 10px;
+    background-color: #fafafa;
+    border: 2px solid #cacaca;
+    :focus {
+      border: 2px solid #5a56c1d6;
+      outline: none;
+    }
+  }
+`;
