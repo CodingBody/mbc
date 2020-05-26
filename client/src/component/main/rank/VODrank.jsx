@@ -6,7 +6,7 @@ import { Paper, Box } from "@material-ui/core/";
 import PieChart from "../../chart/PieChart";
 import { fetchRecordStart } from "../../../redux/main/actions";
 import { connect } from "react-redux";
-import SearchBar from "../../searchBar/RankSearchBar";
+import SearchBar from "../../searchBar/DateSearchBar";
 import StaticTableComponent from "../../table/StaticTableComponent";
 import { format, subMonths } from "date-fns";
 import BarChart from "../../chart/BarChart";

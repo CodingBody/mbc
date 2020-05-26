@@ -4,7 +4,6 @@ import { authActionTypes, userLoginSuccess, userLoginfailure } from "./actions";
 
 // api
 export function* logUserIn({ payload }) {
-  console.log(payload, "payload");
   const { form, history } = payload;
 
   const config = {

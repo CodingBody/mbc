@@ -5,8 +5,6 @@ import { HeadTwo, Close } from "../../../styled-component/Text";
 import { connect } from "react-redux";
 import { toggleEditModal } from "../../../redux/modal/actions";
 import { MuiButton } from "../../../styled-component/Button";
-import AppUserForm from "../../form/AppUserForm";
-import CategoryForm from "./../../form/CategoryForm";
 import {
   deleteRecordStart,
   updateRecordStart,
@@ -16,6 +14,7 @@ import {
   SpaceBetween,
   ColumnDirection,
 } from "../../../styled-component/Layout";
+import { renderForm } from "../../../utils/Helper";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -69,12 +68,7 @@ const EditModal = ({
             <HeadTwo>Edit {category} </HeadTwo>
             <Close onClick={() => setOpen()}>x</Close>
           </SpaceBetween>
-
-          {category === "category" ? (
-            <CategoryForm form={form} handleChange={handleChange} />
-          ) : (
-            <AppUserForm handleChange={handleChange} form={form} />
-          )}
+          {category && renderForm({ category, form, handleChange })}
 
           <SpaceBetween p={2}>
             <div>

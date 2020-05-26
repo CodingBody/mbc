@@ -47,7 +47,7 @@ module.exports.find = async function (req) {
   if (Array.isArray(result.rows)) {
     return result.rows;
   } else {
-    console.log(result);
+    throw Error("something wrong in oracle");
   }
 };
 

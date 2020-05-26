@@ -3,7 +3,10 @@ import Dialog from "@material-ui/core/Dialog";
 import Slide from "@material-ui/core/Slide";
 import { HeadTwo, Close } from "../../../styled-component/Text";
 import { connect } from "react-redux";
-import { toggleCreateModal } from "../../../redux/modal/actions";
+import {
+  toggleCreateModal,
+  toggleSearchModal,
+} from "../../../redux/modal/actions";
 import { MuiButton } from "../../../styled-component/Button";
 import { createRecordStart } from "../../../redux/main/actions";
 import { renderForm } from "./../../../utils/Helper";
@@ -12,12 +15,21 @@ import {
   ColumnDirection,
 } from "../../../styled-component/Layout";
 import { textPrimary } from "./../../../styled-component/Variable";
+import ContentForm from "../../form/ContentForm";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-const CreateModal = ({ loading, open, setOpen, create, category, record }) => {
+const CreateModalBig = ({
+  loading,
+  open,
+  setOpen,
+  create,
+  category,
+  record,
+  toggleSearch,
+}) => {
   const [form, setForm] = React.useState(null);
   // const inputRef = useRef();
 
@@ -53,7 +65,12 @@ const CreateModal = ({ loading, open, setOpen, create, category, record }) => {
             <HeadTwo>Create {category}</HeadTwo>
             <Close onClick={() => setOpen()}>x</Close>
           </SpaceBetween>
-          {category && renderForm({ category, form, handleChange })}
+          <ContentForm
+            form={form}
+            handleChange={handleChange}
+            category={category}
+            setOpen={toggleSearch}
+          />
           <SpaceBetween p={2}>
             <MuiButton
               bg="inherit"
@@ -81,13 +98,14 @@ const CreateModal = ({ loading, open, setOpen, create, category, record }) => {
 };
 
 const mapStateToProps = (state) => ({
-  open: state.modal.openCreate,
+  open: state.modal.openCreate_big,
   record: state.main.create.record,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setOpen: () => dispatch(toggleCreateModal()),
+  toggleSearch: () => dispatch(toggleSearchModal()),
   create: (data) => dispatch(createRecordStart(data)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateModal);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateModalBig);

@@ -1,14 +1,6 @@
 import React from "react";
-import {
-  SpaceBetween,
-  FlexEnd,
-  SpaceAround,
-} from "../../styled-component/Layout";
-import {
-  textPrimary,
-  primaryDark,
-  primaryHover,
-} from "../../styled-component/Variable";
+import { FlexEnd, SpaceAround } from "../../styled-component/Layout";
+import { textPrimary, primaryHover } from "../../styled-component/Variable";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
@@ -17,7 +9,7 @@ import {
 import YoutubeSearchedForIcon from "@material-ui/icons/YoutubeSearchedFor";
 import { MuiButton } from "../../styled-component/Button";
 
-const StatisticSearchBar = ({
+const DateSearchBar = ({
   startDate,
   endDate,
   handleEndDateChange,
@@ -72,4 +64,4 @@ const StatisticSearchBar = ({
   );
 };
 
-export default StatisticSearchBar;
+export default DateSearchBar;

@@ -1,22 +1,19 @@
 const { create, find, update, deleteInOcl } = require("./db_apis.js");
 const { filterColumns } = require("../../common/helper");
-
-function getObjectFromRec(req) {
-  const obj = {
-    title: req.body.title,
-    priority: req.body.priority,
-    genre_list: req.body.genre_list,
-    usageyn: req.body.usageyn,
-  };
-
-  return obj;
-}
+const { createContent } = require("../../common/joi");
+const Joi = require("joi");
 
 module.exports.post = async function (req, res) {
-  let obj = getObjectFromRec(req);
+  const { error, value } = Joi.validate({ ...req.body }, createContent);
+  if (error) {
+    return res.status(400).json({
+      errors: [{ message: "Invalid Credentials", alerttype: "warning" }],
+    });
+  }
 
-  const result = await create(obj);
+  const result = await create(req.body);
 
+  //   returns object
   res.status(201).json(result);
 };
 
@@ -24,6 +21,7 @@ module.exports.get = async function (req, res) {
   // what to do if there a one row returned
   rows = await find(req);
   const columns = JSON.parse(req.headers.column_names);
+  //   if empty arr comes, it returns empty
   const result = filterColumns(columns, rows);
 
   if (rows.length > 0) {

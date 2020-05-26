@@ -90,12 +90,12 @@ export const TextFieldWithIcon = styled.div`
 `;
 
 export const SelectField = styled(Box)`
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px 10px;
+  background-color: #fafafa;
+  border: 2px solid #cacaca;
   select {
-    width: 100%;
-    margin: 10px 0;
-    padding: 10px 10px;
-    background-color: #fafafa;
-    border: 2px solid #cacaca;
     :focus {
       border: 2px solid #5a56c1d6;
       outline: none;

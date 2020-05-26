@@ -5,6 +5,7 @@ import { v4 as uuid4 } from "uuid";
 import TableSearch from "../component/main/tableSearch/TableSearch.jsx";
 import AssetInput from "./../component/main/assetInput/AssetInput";
 import Rank from "./../component/main/rank/Rank";
+import ContentForm from "./../component/form/ContentForm";
 
 // alter when number of columns has changed
 
@@ -65,7 +66,7 @@ export const renderForm = ({ category, form, handleChange }) => {
     case "appuser":
       return <AppUserForm form={form} handleChange={handleChange} />;
     case "content":
-      return <AppUserForm form={form} handleChange={handleChange} />;
+      return <ContentForm form={form} handleChange={handleChange} />;
     default:
       return;
   }
@@ -132,7 +133,7 @@ export const renderCells = (clLength) => {
   }
 };
 
-// !! fix appuser
+// @@ used in createmodal
 export const getFormFields = (category) => {
   switch (category) {
     case "category":
@@ -140,7 +141,7 @@ export const getFormFields = (category) => {
     case "appuser":
       return mapCNinAppUserToObj;
     case "content":
-      return mapCNinAppUserToObj;
+      return mapCNinContentToObj;
     case "program_table":
       return mapCNinAppUserToObj;
     default:
@@ -231,4 +232,27 @@ const mapCNinAppUserToObj = {
   status: "",
   sex: "",
   tag: "",
+};
+
+const mapCNinContentToObj = {
+  lang: "",
+  // select
+  cp_name: "",
+  title: "",
+  category: "",
+  // need to search category field
+  artist_list: "",
+  // select
+
+  genre_list: "",
+  // select
+
+  usageyn: "",
+  // select
+  story: "",
+  // multi
+  episode: "",
+  // num
+  priority: "",
+  // num
 };

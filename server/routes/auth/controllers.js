@@ -1,6 +1,6 @@
 const database = require("../../services/database.js");
 const { selectQuery } = require("./query.js");
-const { loginValidator } = require("./../../common/joi");
+const { login } = require("./../../common/joi");
 const Joi = require("joi");
 
 // @route POST api/auth
@@ -8,10 +8,8 @@ const Joi = require("joi");
 // @access Public
 
 const loginAdmin = async (req, res) => {
-  const { error, value } = Joi.validate({ ...req.body }, loginValidator);
+  const { error, value } = Joi.validate({ ...req.body }, login);
   if (error) {
-    console.log("calledd");
-    console.log(error.message);
     return res.status(400).json({
       errors: [{ message: "Invalid Credentials", alerttype: "warning" }],
     });

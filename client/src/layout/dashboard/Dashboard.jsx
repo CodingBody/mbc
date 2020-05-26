@@ -6,8 +6,10 @@ import Board from "./../../component/board/Board";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { clearTableOnRouteChange } from "../../redux/main/actions";
+import CreateModalBig from "../../component/Modals/create/CreateModal_big";
 import CreateModal from "../../component/Modals/create/CreateModal";
 import EditModal from "../../component/Modals/edit/EditModal";
+import SearchModal from "./../../component/Modals/search/SearchModal";
 
 const Container = styled.div`
   display: grid;
@@ -34,6 +36,7 @@ const Dashboard = ({ match, loading, clearTableOnRouteChange }) => {
       <Board category={category} />
       <CreateModal loading={loading} category={category} />
       <EditModal loading={loading} category={category} />
+      <SearchModal category={category} loading={loading} />
     </Container>
   );
 };

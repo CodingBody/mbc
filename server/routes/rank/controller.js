@@ -35,7 +35,7 @@ const find = async (req, res) => {
   if (Array.isArray(result.rows)) {
     return result.rows;
   } else {
-    console.log(result);
+    throw Error("something wrong in oracle");
   }
 };
 
@@ -50,6 +50,13 @@ module.exports.get = async function (req, res) {
   if (result.length > 0) {
     res.status(200).json(result);
   } else {
-    res.status(200).json(result);
+    return res.status(404).json({
+      errors: [
+        {
+          message: "not found any record",
+          alerttype: "warning",
+        },
+      ],
+    });
   }
 };

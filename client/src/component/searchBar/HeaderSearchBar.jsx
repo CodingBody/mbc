@@ -1,7 +1,6 @@
 import React from "react";
-import { BasicForm } from "./../../styled-component/Layout";
+import { BasicForm, FlexCenter } from "./../../styled-component/Layout";
 import { StdTextFieldTwo } from "../../styled-component/Input";
-import { FlexCenterWithAni } from "./../../styled-component/Animation";
 import { getSearchBarTitle } from "../../utils/Helper";
 
 const HeaderSearchBar = ({
@@ -11,8 +10,8 @@ const HeaderSearchBar = ({
   category,
 }) => {
   return (
-    <FlexCenterWithAni width="100%">
-      <BasicForm onSubmit={handleSearchSubmit} width="50%">
+    <FlexCenter width="100%">
+      <BasicForm onSubmit={handleSearchSubmit} width="70%">
         <StdTextFieldTwo
           onChange={handleSeachbarChange}
           value={input}
@@ -21,7 +20,7 @@ const HeaderSearchBar = ({
           fullWidth
         />
       </BasicForm>
-    </FlexCenterWithAni>
+    </FlexCenter>
   );
 };
 

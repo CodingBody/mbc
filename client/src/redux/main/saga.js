@@ -13,7 +13,8 @@ import {
 } from "./actions";
 import { toggleAlertModal } from "../modal/actions";
 import axios from "axios";
-import { checkFormType } from "../helper";
+import { checkHasSort } from "../helper";
+import { checkHasDate } from "./../helper";
 
 // @@ coming value: object
 export function* createRecord({ payload }) {
@@ -31,8 +32,8 @@ export function* createRecord({ payload }) {
     };
     // add switch statement
 
-    const body = checkFormType({ form, category: ctg });
-    const result = yield axios.post(`/api/${ctg}/`, body, config);
+    // const body = checkFormType({ form, category: ctg });
+    const result = yield axios.post(`/api/${ctg}/`, form, config);
     if (!result.data) return;
 
     yield put(
@@ -70,35 +71,35 @@ export function* createRecord({ payload }) {
       return;
     }
   } catch (err) {
+    if (err.response.data.errors) {
+      yield put(toggleAlertModal(err.response.data.errors));
+    }
+    if (err.response.staus === 404) {
+      yield put(
+        toggleAlertModal([
+          { message: "something wrong in server", type: "warning" },
+        ])
+      );
+    }
     yield put(loadingFinish());
-    yield put(toggleAlertModal(err.response.data.errors));
   }
 }
-
 // api
 // @@ coming value: array or object
 export function* fetchDataFromDb({ payload }) {
   try {
     yield put(loadingStart());
-    let formattedSort;
-    let startDate;
-    let endDate;
 
     const { params, category, columns } = payload;
-    const columnNames = JSON.stringify(columns);
-    if (payload.sort) {
-      formattedSort = JSON.stringify(payload.sort);
-    }
-    if (payload.startDate) {
-      startDate = JSON.stringify(payload.startDate);
-      endDate = JSON.stringify(payload.endDate);
-    }
+
+    const { sort } = checkHasSort(payload);
+    const { startDate, endDate } = checkHasDate(payload);
 
     const config = {
       headers: {
         "Content-Type": "application/json",
-        column_names: columnNames,
-        sort: formattedSort,
+        column_names: columns,
+        sort: sort,
         start_date: startDate,
         end_date: endDate,
       },
@@ -113,6 +114,8 @@ export function* fetchDataFromDb({ payload }) {
     }
     const data = res.data;
     const clLength = Object.keys(data[0]).length;
+
+    //  if rank, do only this block
     if (category === "statistics.rank") {
       const rankRecord = data;
 
@@ -140,9 +143,16 @@ export function* fetchDataFromDb({ payload }) {
       yield put(showTable());
     }
   } catch (err) {
-    console.error(err);
-    yield put(toggleAlertModal(err.response.data.errors));
-
+    if (err.response.data.errors) {
+      yield put(toggleAlertModal(err.response.data.errors));
+    }
+    if (err.response.staus === 404) {
+      yield put(
+        toggleAlertModal([
+          { message: "something wrong in server", type: "warning" },
+        ])
+      );
+    }
     yield put(loadingFinish());
   }
 }
@@ -176,9 +186,16 @@ export function* deleteRecord({ payload }) {
     );
     yield put(loadingFinish());
   } catch (err) {
-    console.log(err);
-    yield put(toggleAlertModal(err.response.data.errors));
-
+    if (err.response.data.errors) {
+      yield put(toggleAlertModal(err.response.data.errors));
+    }
+    if (err.response.staus === 404) {
+      yield put(
+        toggleAlertModal([
+          { message: "something wrong in server", type: "warning" },
+        ])
+      );
+    }
     yield put(loadingFinish());
   }
 }
@@ -195,12 +212,11 @@ export function* updateRecord({ payload }) {
           "Content-Type": "application/json",
         },
       };
-      const body = checkFormType({ category, form });
-      console.log(form, body, "form and body in saga");
+      // const body = checkFormType({ category, form });
 
       // $$ well done let's brag
 
-      const res = yield axios.put(`/api/${category}/${id}`, body, config);
+      const res = yield axios.put(`/api/${category}/${id}`, form, config);
       const data = res.data;
       const newRecord = Object.values(data);
       for (let i = 0; i < record.length; i++) {
@@ -225,9 +241,16 @@ export function* updateRecord({ payload }) {
     );
     yield put(loadingFinish());
   } catch (err) {
-    console.log(err);
-    yield put(toggleAlertModal(err.response.data.errors));
-
+    if (err.response.data.errors) {
+      yield put(toggleAlertModal(err.response.data.errors));
+    }
+    if (err.response.staus === 404) {
+      yield put(
+        toggleAlertModal([
+          { message: "something wrong in server", type: "warning" },
+        ])
+      );
+    }
     yield put(loadingFinish());
   }
 }

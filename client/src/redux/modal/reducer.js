@@ -5,7 +5,8 @@ const initialState = {
   openCreate: false,
   openEdit: false,
   openSort: false,
-  alert: null,
+  openSearch: false,
+  alert: [],
 };
 
 const modal = (state = initialState, action) => {
@@ -18,6 +19,8 @@ const modal = (state = initialState, action) => {
       return { ...state, openEdit: !state.openEdit };
     case modalActionTypes.TOGGLE_SORT_MODAL:
       return { ...state, openSort: !state.openSort };
+    case modalActionTypes.TOGGLE_SEARCH_MODAL:
+      return { ...state, openSearch: !state.openSearch };
     case modalActionTypes.TOGGLE_ALERT_MODAL:
       return {
         ...state,

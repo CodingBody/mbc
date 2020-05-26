@@ -49,6 +49,7 @@ const TableSearch = ({
   };
 
   const handleEditClick = (record, columnNames) => {
+    console.log("caelld,", record, columnNames);
     const formattedRecord = columnNames.reduce((acc, value) => {
       acc[value] = "";
       return acc;
@@ -65,8 +66,9 @@ const TableSearch = ({
 
   const handleClickCreate = (category) => {
     const obj = getFormFields(category);
+
     populateColumnNames(obj);
-    toggleCreate(obj);
+    toggleCreate();
   };
 
   const renderIcon = (category) => {
