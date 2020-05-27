@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { renderCells } from "../utils/Helper";
 import {
   textPrimary,
@@ -31,22 +31,36 @@ export const TableContainer = styled.table`
 `;
 
 export const ColumnNames = styled.thead`
-  border-top: 2px solid ${tableBorder};
+  /* border-top: 2px solid ${tableBorder};
   border-right: 2px solid ${tableBorder};
   border-left: 2px solid ${tableBorder};
-  border-bottom: 1px solid ${tableBorder};
+  border-bottom: 1px solid ${tableBorder}; */
   tr {
     /* display: flex; */
     display: grid;
     grid-template-columns: ${(props) => renderCells(props.clLength)};
   }
 
+  th:first-child {
+    color: ${textPrimary};
+    font-size: 1.2rem;
+    background: ${primary};
+    padding: 12px 0 12px 5px;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   th {
     color: ${textPrimary};
     font-size: 1.2rem;
     background: ${primary};
-    padding: 12px 0;
+    padding: 12px 0 12px 5px;
     flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: ${(props) => props.justify};
   }
 `;
 
@@ -64,6 +78,14 @@ export const ColumnNamesSecondary = styled.thead`
     background: ${primary};
     padding: 12px 0;
     flex-grow: 1;
+  }
+`;
+export const Test = styled.tbody`
+  tr:nth-child(even) {
+    background: #eee;
+  }
+  tr:nth-child(odd) {
+    background: #fff;
   }
 `;
 
@@ -85,7 +107,7 @@ export const TableBody = styled.tr`
   td {
     display: flex;
     align-items: center;
-    justify-content: ${(props) => props.flex};
+    justify-content: ${(props) => props.justify};
     font-size: 1.2rem;
     border: ${(props) => (props.br ? props.br : null)};
     padding: 12px 0 12px 5px;

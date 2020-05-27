@@ -9,7 +9,7 @@ import { clearTableOnRouteChange } from "../../redux/main/actions";
 import CreateModalBig from "../../component/Modals/create/CreateModal_big";
 import CreateModal from "../../component/Modals/create/CreateModal";
 import EditModal from "../../component/Modals/edit/EditModal";
-import SearchModal from "./../../component/Modals/search/SearchModal";
+import SearchPopup from "./../../component/popup/SearchPopup";
 
 const Container = styled.div`
   display: grid;
@@ -36,7 +36,7 @@ const Dashboard = ({ match, loading, clearTableOnRouteChange }) => {
       <Board category={category} />
       <CreateModal loading={loading} category={category} />
       <EditModal loading={loading} category={category} />
-      <SearchModal category={category} loading={loading} />
+      <SearchPopup loading={loading} category={category} />
     </Container>
   );
 };

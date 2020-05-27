@@ -6,6 +6,7 @@ export const FlexStart = styled(Box)`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  background-color: ${(props) => props.bg};
 `;
 
 export const FlexEnd = styled(Box)`

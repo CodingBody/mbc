@@ -36,6 +36,6 @@ router
   .post(tryCatch(content.post));
 // !! need to make delete and update
 
-router.route("/search/:params?").get(tryCatch(search));
+router.route("/search/:params?").get(tryCatch(search.get));
 
 module.exports = router;

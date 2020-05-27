@@ -97,7 +97,7 @@ export const removeLast = (arr, clLength) => {
   if (arr) {
     switch (clLength) {
       case 7:
-        return arr.map((ar) => <td key={uuid4()}>{ar}</td>).slice(0, 6);
+        return arr.map((ar) => <td key={uuid4()}> {ar}</td>).slice(0, 6);
       case 6:
         return arr.map((ar) => <td key={uuid4()}>{ar}</td>).slice(0, 5);
       case 5:

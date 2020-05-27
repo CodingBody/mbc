@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { TextField, Box } from "@material-ui/core/";
-import { FormControl } from "@material-ui/core";
+import { FormControl, Dialog } from "@material-ui/core";
 
 // on modal
 export const StdTextFieldOne = styled(TextField)`
@@ -12,6 +12,12 @@ export const StdTextFieldOne = styled(TextField)`
   }
   .MuiInputBase-input {
     font-size: 1.3rem;
+  }
+`;
+
+export const StdDialog = styled(Dialog)`
+  .MuiDialog-paperWidthSm {
+    max-width: ${(props) => props.maxwid};
   }
 `;
 

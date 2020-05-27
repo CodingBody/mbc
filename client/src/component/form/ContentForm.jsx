@@ -8,17 +8,17 @@ import { MuiButton } from "../../styled-component/Button";
 import { connect } from "react-redux";
 import {
   toggleSearchModal,
-  toggleCreateModal,
+  giveCategoryToPopup,
 } from "./../../redux/modal/actions";
 
 const ContentForm = ({
   handleChange,
   form,
   toggleSearchModal,
-  toggleCreateModal,
+  giveCategoryToPopup,
 }) => {
-  const handleClickSearch = () => {
-    toggleCreateModal();
+  const handleClickSearch = (category) => {
+    giveCategoryToPopup(category);
     toggleSearchModal();
   };
   return (
@@ -61,7 +61,7 @@ const ContentForm = ({
           value={form.cp_name}
         />
         <MuiButton
-          onClick={() => handleClickSearch()}
+          onClick={() => handleClickSearch("cp")}
           endIcon={<SearchIcon />}
           variant="contained"
           border={primaryHover}
@@ -84,6 +84,7 @@ const ContentForm = ({
           endIcon={<SearchIcon />}
           variant="contained"
           border={primaryHover}
+          onClick={() => handleClickSearch("category")}
           bg="#fff"
           sz="1.1rem"
         >
@@ -182,6 +183,6 @@ const ContentForm = ({
   );
 };
 
-export default connect(null, { toggleSearchModal, toggleCreateModal })(
+export default connect(null, { toggleSearchModal, giveCategoryToPopup })(
   ContentForm
 );

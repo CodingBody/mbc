@@ -7,7 +7,7 @@ module.exports.post = async function (req, res) {
   const { error, value } = Joi.validate({ ...req.body }, createContent);
   if (error) {
     return res.status(400).json({
-      errors: [{ message: "Invalid Credentials", alerttype: "warning" }],
+      errors: [{ message: "Bad request", alerttype: "warning" }],
     });
   }
 

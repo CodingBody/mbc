@@ -49,7 +49,6 @@ const TableSearch = ({
   };
 
   const handleEditClick = (record, columnNames) => {
-    console.log("caelld,", record, columnNames);
     const formattedRecord = columnNames.reduce((acc, value) => {
       acc[value] = "";
       return acc;

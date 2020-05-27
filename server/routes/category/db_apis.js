@@ -33,12 +33,17 @@ module.exports.create = async function (obj) {
 
 module.exports.find = async function (req) {
   const params = req.params.params;
+  console.log("---------------------------------------");
+
+  console.log(params, "params");
   let query = selectQuery;
-  let param = params;
+  console.log("---------------------------------------");
+
+  console.log(query, "query");
   const binds = {};
-  if (param !== null && param !== undefined) {
+  if (params !== null && params !== undefined) {
     // param is title here
-    query += `\nWHERE title like '%${param}%'`;
+    query += `\nWHERE title like '%${params}%'`;
   }
 
   const query_after_sort = checkSort(req, query);

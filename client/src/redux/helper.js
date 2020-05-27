@@ -25,3 +25,10 @@ export const checkHasDate = (payload) => {
 
   return { startDate, endDate };
 };
+
+export const addBooleanToArr = (arr) => {
+  for (let i = 0; i < arr.length; i++) {
+    arr[i].push(false);
+  }
+  return arr;
+};

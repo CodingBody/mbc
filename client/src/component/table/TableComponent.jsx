@@ -4,9 +4,10 @@ import {
   TableContainer,
   ColumnNames,
   TableBody,
+  Test,
 } from "../../styled-component/Table";
 import { removeLastItemInArr, removeLast } from "../../utils/Helper";
-import { FlexStartWithBorder, FlexCenter } from "../../styled-component/Layout";
+import { FlexStart, FlexCenter } from "../../styled-component/Layout";
 import { HeadThree } from "../../styled-component/Text";
 import { Box } from "@material-ui/core";
 import { MuiButton } from "../../styled-component/Button";
@@ -45,14 +46,10 @@ const TableComponent = ({
             {removeLastItemInArr(columnNames, clLength)}
           </tr>
         </ColumnNames>
-        <tbody>
+        <Test>
           {data &&
             data.map((record) => (
-              <TableBody
-                br={`1px solid ${primaryHover}`}
-                clLength={clLength}
-                key={uuid4()}
-              >
+              <TableBody clLength={clLength} key={uuid4()}>
                 <td>
                   <SdEditIcon
                     onClick={() => handleEditClick(record, columnNames)}
@@ -61,28 +58,31 @@ const TableComponent = ({
                 {removeLast(record, clLength)}
               </TableBody>
             ))}
-        </tbody>
+        </Test>
       </TableContainer>
-      <FlexStartWithBorder p={1.5}>
+      <FlexStart bg="#eee" p={1.5}>
         <HeadThree color={textPrimary}>{data.length} row selected</HeadThree>
         <FlexCenter ml={5}>
-          {columns.map((item) => (
-            <Box key={item.id} mx={1}>
-              <MuiButton
-                endIcon={<CheckBoxIco cr={item.fetch ? null : `${disabled}`} />}
-                variant="contained"
-                cr={item.fetch ? textPrimary : `${disabled}`}
-                bg={primaryDark}
-                border={primaryHover}
-                onClick={() => onClickColumn(item)}
-                sz="1.1rem"
-              >
-                {item.name}
-              </MuiButton>
-            </Box>
-          ))}
+          {columns &&
+            columns.map((item) => (
+              <Box key={item.id} mx={1}>
+                <MuiButton
+                  endIcon={
+                    <CheckBoxIco cr={item.fetch ? null : `${disabled}`} />
+                  }
+                  variant="contained"
+                  cr={item.fetch ? textPrimary : `${disabled}`}
+                  bg={primaryDark}
+                  border={primaryHover}
+                  onClick={() => onClickColumn(item)}
+                  sz="1.1rem"
+                >
+                  {item.name}
+                </MuiButton>
+              </Box>
+            ))}
         </FlexCenter>
-      </FlexStartWithBorder>
+      </FlexStart>
     </BasixAni>
   );
 };

@@ -27,7 +27,7 @@ module.exports.get = async function (req, res) {
   const result = filterColumns(columns, rows);
 
   if (rows.length > 0) {
-    res.status(200).json(result);
+    return res.status(200).json(result);
   } else {
     return res.status(404).json({
       errors: [

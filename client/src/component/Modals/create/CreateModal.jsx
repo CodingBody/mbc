@@ -12,6 +12,7 @@ import {
   ColumnDirection,
 } from "../../../styled-component/Layout";
 import { textPrimary } from "./../../../styled-component/Variable";
+import { StdDialog } from "../../../styled-component/Input";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
@@ -42,13 +43,14 @@ const CreateModal = ({ loading, open, setOpen, create, category, record }) => {
   if (!form) return <React.Fragment> </React.Fragment>;
   return (
     <div>
-      <Dialog
+      <StdDialog
         open={open}
         TransitionComponent={Transition}
         keepMounted
+        maxwid="1000px"
         onClose={() => setOpen()}
       >
-        <ColumnDirection width="49rem">
+        <ColumnDirection width="70rem">
           <SpaceBetween p={2} mt={1} mb={1} cr={textPrimary}>
             <HeadTwo>Create {category}</HeadTwo>
             <Close onClick={() => setOpen()}>x</Close>
@@ -75,7 +77,7 @@ const CreateModal = ({ loading, open, setOpen, create, category, record }) => {
             </MuiButton>
           </SpaceBetween>
         </ColumnDirection>
-      </Dialog>
+      </StdDialog>
     </div>
   );
 };

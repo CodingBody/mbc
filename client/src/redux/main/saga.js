@@ -89,16 +89,20 @@ export function* createRecord({ payload }) {
 export function* fetchDataFromDb({ payload }) {
   try {
     yield put(loadingStart());
+    let column_names;
 
     const { params, category, columns } = payload;
 
     const { sort } = checkHasSort(payload);
     const { startDate, endDate } = checkHasDate(payload);
-
+    if (columns !== undefined) {
+      // @@ remember array is not gonna converted to json by default
+      column_names = JSON.stringify(columns);
+    }
     const config = {
       headers: {
         "Content-Type": "application/json",
-        column_names: columns,
+        column_names: column_names,
         sort: sort,
         start_date: startDate,
         end_date: endDate,
@@ -108,8 +112,10 @@ export function* fetchDataFromDb({ payload }) {
     let ctg = category.toLowerCase();
     let res;
     if (params !== "" && params !== undefined) {
+      console.log(params, "params");
       res = yield axios.get(`/api/${ctg}/${params}`, config);
     } else {
+      console.log("no params");
       res = yield axios.get(`/api/${ctg}`, config);
     }
     const data = res.data;
@@ -125,23 +131,12 @@ export function* fetchDataFromDb({ payload }) {
       return;
     }
 
-    if (Array.isArray(data)) {
-      const columnNames = Object.keys(data[0]);
-      const record = data.map((d) => Object.values(d));
+    const columnNames = Object.keys(data[0]);
+    const record = data.map((d) => Object.values(d));
 
-      yield put(fetchRecordSuccess({ record, columnNames, clLength }));
-      yield put(loadingFinish());
-      yield put(showTable());
-    } else {
-      const columnNames = Object.keys(data);
-      const record = Object.values(data);
-
-      yield put(
-        fetchRecordSuccess({ record: [record], columnNames, clLength })
-      );
-      yield put(loadingFinish());
-      yield put(showTable());
-    }
+    yield put(fetchRecordSuccess({ record, columnNames, clLength }));
+    yield put(loadingFinish());
+    yield put(showTable());
   } catch (err) {
     if (err.response.data.errors) {
       yield put(toggleAlertModal(err.response.data.errors));

@@ -23,7 +23,14 @@ function* fetchDataFromDb({ payload }) {
       res = yield axios.get(`/api/search/`, config);
     }
 
-    // yield put(searchSuccess(res.data));
+    const data = res.data;
+
+    const clLength = Object.keys(data[0]).length;
+    const columnNames = Object.keys(data[0]);
+    const recordArray = data.map((d) => Object.values(d));
+
+    yield put(searchSuccess({ recordArray, columnNames, clLength }));
+    yield put(loadingFinish());
   } catch (err) {
     if (err.response.data.errors) {
       yield put(toggleAlertModal(err.response.data.errors));
@@ -42,7 +49,6 @@ function* fetchDataFromDb({ payload }) {
 
 // compose
 function* onSearchStart() {
-  console.log("called");
   yield takeLatest(contentActionTypes.SEARCH_START, fetchDataFromDb);
 }
 
